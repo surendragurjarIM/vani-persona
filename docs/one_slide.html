@@ -1,0 +1,54 @@
+<section id="vani" style="background:#F5F6F8;color:#151A22;font-family:'IBM Plex Sans', Arial, sans-serif;padding:64px 80px 104px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C26A12">Voice AI Hackathon 2.0 · PS04 Persona Design · built and running on Sarvam Voice Agents</p>
+<h1 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:60px;font-weight:700;line-height:1.05;color:#151A22">A VANI persona built from each seller's data, adapted live during the call</h1>
+</div>
+<div style="display:flex;flex-direction:row;gap:28px;flex:1">
+
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border:1px solid #D9DDE4;border-radius:16px;padding:28px">
+<p style="font-size:24px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#1F4FD1">1 · Sample persona spec</p>
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:32px;font-weight:700;line-height:1.15">Seller 98255184 · Morbi, Gujarat · wholesaler · 1.5–5 Cr</h3>
+<p style="font-size:24px;line-height:1.3;color:#4A5568">"Steady, formal Hindi · large wholesaler" → agent <b>VANI · Formal Hinglish</b></p>
+<table style="font-size:24px;color:#151A22">
+<tr><th style="width:30%">Setting</th><th style="width:70%">Value · why (evidence)</th></tr>
+<tr><td>Voice</td><td>Aditya, male, measured · formal B2B (informed guess)</td></tr>
+<tr><td>Pace</td><td>1.0× · slowing down gave no lift for large sellers</td></tr>
+<tr><td>Language</td><td>Hindi, 10% English · his own calls had 0% English</td></tr>
+<tr><td>Register</td><td>"aap + sir", formal · 1.5 Cr+ convert 8.8% vs 11.4% on generic pitch</td></tr>
+<tr><td>Opening</td><td>True reason: Morbi buyer enquiries for Bucket Pump</td></tr>
+<tr><td>Playbook #1</td><td>Accept the seller's time at once · audit: bot ignored "10 baje ke baad"</td></tr>
+<tr><td>Live</td><td>Rush switch at first hint · Gujarati voice (Bhavik) on switch</td></tr>
+</table>
+<p style="font-size:24px;line-height:1.3;color:#4A5568">Every one of 149,363 sellers gets a spec like this: value + reason + evidence ID + confidence. 9,002 distinct configurations; facts and prices never change.</p>
+</div>
+
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFFFF;border:1px solid #D9DDE4;border-radius:16px;padding:28px">
+<p style="font-size:24px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#0D7F74">2 · Past-call evidence behind it</p>
+<table style="font-size:24px;color:#151A22">
+<tr><th style="width:56%">Choice (269k calls, meeting-fix)</th><th style="width:22%">A vs B</th><th style="width:22%">Strength</th></tr>
+<tr><td>Name the seller's own action in the opening</td><td>29.0 vs 16.8%</td><td>strong</td></tr>
+<tr><td>Slower pitch (complete pitches)</td><td>33.3 vs 23.1%</td><td>strong</td></tr>
+<tr><td>1st call attempt vs 4th+</td><td>16.3 vs 4.3%</td><td>strong</td></tr>
+<tr><td>After interest: offer a slot</td><td>61.0 vs 27.2%</td><td>moderate</td></tr>
+<tr><td>After rush: offer a slot</td><td>30.1 vs 12.1%</td><td>moderate</td></tr>
+<tr><td>Bot mishandled a turn vs clean</td><td>23.2 vs 30.3%</td><td>strong</td></tr>
+<tr><td>Voice gender, regional language</td><td>no data</td><td>guess</td></tr>
+</table>
+<p style="font-size:24px;line-height:1.3;color:#4A5568">Wilson 95% CI, stratified by lead bucket; confounded results kept but not used. 6,448 audited "gaps" give the playbook and per-seller history.</p>
+<p style="font-size:24px;line-height:1.3"><b>Switch on the right turn</b>, live tool replayed on 290 audited calls: frustration 72% · rush 65% · confusion 34% · interest 30% · zero flapping.</p>
+</div>
+
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border:1px solid #D9DDE4;border-radius:16px;padding:28px">
+<p style="font-size:24px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#C26A12">3 · Workflow</p>
+<p style="font-size:24px;line-height:1.25;background:#E3F3F1;border-radius:10px;padding:10px 14px"><b>Data</b> · 149k sellers, 269k calls, 278k audited evaluations</p>
+<p style="font-size:24px;line-height:1.25;background:#E3F3F1;border-radius:10px;padding:10px 14px"><b>Persona generator</b> · 23 evidence-cited rules + manual overrides (top priority)</p>
+<p style="font-size:24px;line-height:1.25;background:#E8EEFC;border-radius:10px;padding:10px 14px"><b>Persona Service</b> · routes each seller to 1 of 6 voice agents + 17 variables (cohort / on-start hook / web SDK)</p>
+<p style="font-size:24px;line-height:1.25;background:#FBEFE1;border-radius:10px;padding:10px 14px"><b>Sarvam Voice Agents</b> · Saaras STT → platform LLM → Bulbul v4 voices, per-language voice on switch</p>
+<p style="font-size:24px;line-height:1.25;background:#FBEFE1;border-radius:10px;padding:10px 14px"><b>Live switch</b> · Python code tool on Sarvam: LLM guess + Hinglish lexicon, fixed priority, 2-turn cooldown → next-turn mode + switch log</p>
+<p style="font-size:24px;line-height:1.25;background:#E8EEFC;border-radius:10px;padding:10px 14px"><b>Learn</b> · call-end webhook → Board + review queue → next night's personas</p>
+<p style="font-size:24px;line-height:1.25;color:#4A5568">Offline rationale + detector tuning: sarvam-105b-conversations.</p>
+</div>
+</div>
+<p style="position:absolute;left:80px;bottom:44px;width:1760px;font-size:24px;color:#4A5568">Switch log written by the code tool on Sarvam: <b>turn 2 · confusion</b> "kya bola? samjha nahi" (LLM + keywords) → simpler words · <b>turn 3 · rush</b> "busy hoon… jaldi bolo" → one line, two slots · close: "kal shaam chhe baje, dukaan par"</p>
+<aside>One-slide summary for PS04. Left: a real generated persona spec for seller 98255184, each setting tied to seller data and an evidence ID. Middle: the past-call evidence (meeting-fix rates, 95% CI, stratified) and the signal detector's measured accuracy. Right: the workflow, from IndiaMART data through the persona generator and Persona Service into six Sarvam Voice Agents. Mid-call, a Python code tool running inside Sarvam decides each switch: it fuses the LLM's guess with the Hinglish lexicon mined from past calls, applies a fixed priority and a two-turn cooldown, changes language when needed, and writes a structured switch log that reaches the call results. A code tool sees the words, not the audio, so detection is text plus seller history. Call results flow back to improve tomorrow's personas. The footer shows the switch log from a Sarvam test chat with the Warm Hinglish agent.</aside>
+</section>

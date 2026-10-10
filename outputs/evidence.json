@@ -1,0 +1,5524 @@
+{
+ "generated_from": "PS07 dataset Apr-Sep 2026",
+ "baseline_mf": 0.1151,
+ "strength_rules": "strong    both arms n >= 500 and the 95% CI of the difference excludes 0\n  moderate  both arms n >= 100 and the CI excludes 0\n  weak      direction only (small n or CI includes 0)\n  informed_guess  no direct data; reasoning stated in `note`",
+ "records": [
+  {
+   "id": "EV-00",
+   "claim": "Baseline meeting-fix rate on answered bot calls",
+   "strength": "strong",
+   "rate": 0.1151,
+   "n": 269455,
+   "source": "bot_calls",
+   "used_by": [],
+   "usable": true
+  },
+  {
+   "id": "EV-01",
+   "claim": "Personalised-script trial fixes more meetings than the one-size main_vani script",
+   "segment": "all sellers",
+   "choice_a": "personalised script",
+   "choice_b": "main_vani script",
+   "outcome": "meeting_fixed",
+   "n_a": 452,
+   "n_b": 208605,
+   "rate_a": 0.1416,
+   "rate_b": 0.116,
+   "ci_a": [
+    0.1125,
+    0.1768
+   ],
+   "ci_b": [
+    0.1146,
+    0.1174
+   ],
+   "diff_pp": 3.16,
+   "diff_ci_pp": [
+    -0.04,
+    6.36
+   ],
+   "lift": 1.221,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "weak",
+   "source": "bot_calls",
+   "caveat": "Trial ran on a subset of dates; stratified by lead bucket.",
+   "used_by": [
+    "persona.overall"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-02",
+   "claim": "Meeting-fix rate collapses with repeated call attempts",
+   "segment": "all sellers",
+   "choice_a": "1st attempt",
+   "choice_b": "4th+ attempt",
+   "outcome": "meeting_fixed",
+   "n_a": 129449,
+   "n_b": 47806,
+   "rate_a": 0.1629,
+   "rate_b": 0.0428,
+   "ci_a": [
+    0.1609,
+    0.1649
+   ],
+   "ci_b": [
+    0.041,
+    0.0446
+   ],
+   "diff_pp": 11.84,
+   "diff_ci_pp": [
+    11.57,
+    12.11
+   ],
+   "lift": 3.805,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "tone.verbosity",
+    "live.thresholds"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-03",
+   "claim": "Sellers who earlier said 'call later' still convert on later calls at a different rate",
+   "segment": "sellers with 3+ prior answered calls",
+   "choice_a": "prior call-later",
+   "choice_b": "no prior call-later",
+   "outcome": "meeting_fixed",
+   "n_a": 28304,
+   "n_b": 29740,
+   "rate_a": 0.044,
+   "rate_b": 0.0256,
+   "ci_a": [
+    0.0416,
+    0.0464
+   ],
+   "ci_b": [
+    0.0238,
+    0.0274
+   ],
+   "diff_pp": 1.84,
+   "diff_ci_pp": [
+    1.54,
+    2.14
+   ],
+   "lift": 1.72,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "plan.escalation"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-04",
+   "claim": "A prior 'not interested' lowers the chance of a meeting on the next call",
+   "segment": "all sellers",
+   "choice_a": "prior not-interested",
+   "choice_b": "answered before, never NI",
+   "outcome": "meeting_fixed",
+   "n_a": 80863,
+   "n_b": 58463,
+   "rate_a": 0.0428,
+   "rate_b": 0.0835,
+   "ci_a": [
+    0.0414,
+    0.0442
+   ],
+   "ci_b": [
+    0.0812,
+    0.0857
+   ],
+   "diff_pp": -4.15,
+   "diff_ci_pp": [
+    -4.42,
+    -3.89
+   ],
+   "lift": 0.513,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "tone.empathy",
+    "plan.objections"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-05",
+   "claim": "Sellers who cut earlier calls short (<15s) rarely fix meetings: a long pitch won't reach them",
+   "segment": "all sellers",
+   "choice_a": "2+ prior calls <15s",
+   "choice_b": "prior calls, none <15s",
+   "outcome": "meeting_fixed",
+   "n_a": 39583,
+   "n_b": 24067,
+   "rate_a": 0.0204,
+   "rate_b": 0.0795,
+   "ci_a": [
+    0.0191,
+    0.0219
+   ],
+   "ci_b": [
+    0.0762,
+    0.083
+   ],
+   "diff_pp": -5.93,
+   "diff_ci_pp": [
+    -6.3,
+    -5.56
+   ],
+   "lift": 0.257,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "voice.pace",
+    "tone.verbosity"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-06",
+   "claim": "The generic pitch converts larger businesses (1.5Cr+) worse than micro sellers",
+   "segment": "all sellers",
+   "choice_a": "turnover 1.5Cr+",
+   "choice_b": "turnover 0-40L",
+   "outcome": "meeting_fixed",
+   "n_a": 37072,
+   "n_b": 161463,
+   "rate_a": 0.0882,
+   "rate_b": 0.114,
+   "ci_a": [
+    0.0853,
+    0.0911
+   ],
+   "ci_b": [
+    0.1124,
+    0.1155
+   ],
+   "diff_pp": -2.56,
+   "diff_ci_pp": [
+    -2.9,
+    -2.23
+   ],
+   "lift": 0.773,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "language.formality",
+    "plan.opening",
+    "voice.speaker"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-07",
+   "claim": "Limited companies / partnerships respond worse to the default informal pitch",
+   "segment": "all sellers",
+   "choice_a": "Ltd/Partnership",
+   "choice_b": "Proprietorship/other",
+   "outcome": "meeting_fixed",
+   "n_a": 43906,
+   "n_b": 225549,
+   "rate_a": 0.1024,
+   "rate_b": 0.1176,
+   "ci_a": [
+    0.0996,
+    0.1052
+   ],
+   "ci_b": [
+    0.1162,
+    0.1189
+   ],
+   "diff_pp": -1.47,
+   "diff_ci_pp": [
+    -1.78,
+    -1.15
+   ],
+   "lift": 0.871,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "language.formality"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-08a",
+   "claim": "Hindi-only VANI in Tamil Nadu vs the Hindi belt",
+   "segment": "all sellers",
+   "choice_a": "Tamil Nadu",
+   "choice_b": "Hindi belt",
+   "outcome": "meeting_fixed",
+   "n_a": 4163,
+   "n_b": 144593,
+   "rate_a": 0.136,
+   "rate_b": 0.1155,
+   "ci_a": [
+    0.1259,
+    0.1467
+   ],
+   "ci_b": [
+    0.1138,
+    0.1171
+   ],
+   "diff_pp": 1.95,
+   "diff_ci_pp": [
+    0.89,
+    3.0
+   ],
+   "lift": 1.178,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "Language mismatch is one of several possible reasons.",
+   "used_by": [
+    "language.primary",
+    "voice.accent"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-08b",
+   "claim": "Hindi-only VANI in West Bengal vs the Hindi belt",
+   "segment": "all sellers",
+   "choice_a": "West Bengal",
+   "choice_b": "Hindi belt",
+   "outcome": "meeting_fixed",
+   "n_a": 10976,
+   "n_b": 144593,
+   "rate_a": 0.1115,
+   "rate_b": 0.1155,
+   "ci_a": [
+    0.1058,
+    0.1175
+   ],
+   "ci_b": [
+    0.1138,
+    0.1171
+   ],
+   "diff_pp": -0.43,
+   "diff_ci_pp": [
+    -1.04,
+    0.18
+   ],
+   "lift": 0.966,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "weak",
+   "source": "bot_calls",
+   "caveat": "Language mismatch is one of several possible reasons.",
+   "used_by": [
+    "language.primary",
+    "voice.accent"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-08c",
+   "claim": "Hindi-only VANI in Gujarat vs the Hindi belt",
+   "segment": "all sellers",
+   "choice_a": "Gujarat",
+   "choice_b": "Hindi belt",
+   "outcome": "meeting_fixed",
+   "n_a": 51037,
+   "n_b": 144593,
+   "rate_a": 0.1152,
+   "rate_b": 0.1155,
+   "ci_a": [
+    0.1124,
+    0.118
+   ],
+   "ci_b": [
+    0.1138,
+    0.1171
+   ],
+   "diff_pp": 0.11,
+   "diff_ci_pp": [
+    -0.22,
+    0.43
+   ],
+   "lift": 0.997,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "weak",
+   "source": "bot_calls",
+   "caveat": "Language mismatch is one of several possible reasons.",
+   "used_by": [
+    "language.primary",
+    "voice.accent"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-08d",
+   "claim": "Hindi-only VANI in Maharashtra vs the Hindi belt",
+   "segment": "all sellers",
+   "choice_a": "Maharashtra",
+   "choice_b": "Hindi belt",
+   "outcome": "meeting_fixed",
+   "n_a": 38622,
+   "n_b": 144593,
+   "rate_a": 0.1127,
+   "rate_b": 0.1155,
+   "ci_a": [
+    0.1096,
+    0.1159
+   ],
+   "ci_b": [
+    0.1138,
+    0.1171
+   ],
+   "diff_pp": -0.26,
+   "diff_ci_pp": [
+    -0.61,
+    0.1
+   ],
+   "lift": 0.976,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "weak",
+   "source": "bot_calls",
+   "caveat": "Language mismatch is one of several possible reasons.",
+   "used_by": [
+    "language.primary",
+    "voice.accent"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-08e",
+   "claim": "Hindi-only VANI in Karnataka vs the Hindi belt",
+   "segment": "all sellers",
+   "choice_a": "Karnataka",
+   "choice_b": "Hindi belt",
+   "outcome": "meeting_fixed",
+   "n_a": 56,
+   "n_b": 144593,
+   "rate_a": 0.0714,
+   "rate_b": 0.1155,
+   "ci_a": [
+    0.0281,
+    0.1698
+   ],
+   "ci_b": [
+    0.1138,
+    0.1171
+   ],
+   "diff_pp": -5.54,
+   "diff_ci_pp": [
+    -11.52,
+    0.45
+   ],
+   "lift": 0.619,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "weak",
+   "source": "bot_calls",
+   "caveat": "Language mismatch is one of several possible reasons.",
+   "used_by": [
+    "language.primary",
+    "voice.accent"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-08f",
+   "claim": "Hindi-only VANI in Telangana/AP vs the Hindi belt",
+   "segment": "all sellers",
+   "choice_a": "Telangana/AP",
+   "choice_b": "Hindi belt",
+   "outcome": "meeting_fixed",
+   "n_a": 5463,
+   "n_b": 144593,
+   "rate_a": 0.1115,
+   "rate_b": 0.1155,
+   "ci_a": [
+    0.1034,
+    0.1201
+   ],
+   "ci_b": [
+    0.1138,
+    0.1171
+   ],
+   "diff_pp": -0.36,
+   "diff_ci_pp": [
+    -1.2,
+    0.49
+   ],
+   "lift": 0.966,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "weak",
+   "source": "bot_calls",
+   "caveat": "Language mismatch is one of several possible reasons.",
+   "used_by": [
+    "language.primary",
+    "voice.accent"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-09",
+   "claim": "Meeting-fix rate by lead bucket (drives which opening hook to use)",
+   "strength": "strong",
+   "source": "bot_calls",
+   "note": "",
+   "table": [
+    {
+     "redis_bucket": "NUR",
+     "n": 1524,
+     "mf_rate": 0.3117
+    },
+    {
+     "redis_bucket": "PAM",
+     "n": 10906,
+     "mf_rate": 0.16
+    },
+    {
+     "redis_bucket": "SCHD",
+     "n": 3264,
+     "mf_rate": 0.1428
+    },
+    {
+     "redis_bucket": "PUA",
+     "n": 85848,
+     "mf_rate": 0.1274
+    },
+    {
+     "redis_bucket": "OLP",
+     "n": 10177,
+     "mf_rate": 0.1139
+    },
+    {
+     "redis_bucket": "PANF",
+     "n": 939,
+     "mf_rate": 0.1054
+    },
+    {
+     "redis_bucket": "PIM",
+     "n": 93210,
+     "mf_rate": 0.1051
+    },
+    {
+     "redis_bucket": "UA",
+     "n": 60334,
+     "mf_rate": 0.1008
+    },
+    {
+     "redis_bucket": "PUT",
+     "n": 1622,
+     "mf_rate": 0.0715
+    },
+    {
+     "redis_bucket": "PNSR",
+     "n": 300,
+     "mf_rate": 0.06
+    },
+    {
+     "redis_bucket": "ENQR",
+     "n": 607,
+     "mf_rate": 0.0527
+    }
+   ],
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-10",
+   "claim": "Late-morning calls (11-12) fix far fewer meetings than early-morning / evening calls",
+   "segment": "all sellers",
+   "choice_a": "11:00-12:59",
+   "choice_b": "09-10 & 17-19",
+   "outcome": "meeting_fixed",
+   "n_a": 68497,
+   "n_b": 97604,
+   "rate_a": 0.0707,
+   "rate_b": 0.1323,
+   "ci_a": [
+    0.0688,
+    0.0726
+   ],
+   "ci_b": [
+    0.1301,
+    0.1344
+   ],
+   "diff_pp": -6.1,
+   "diff_ci_pp": [
+    -6.38,
+    -5.81
+   ],
+   "lift": 0.535,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "plan.escalation"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-11",
+   "claim": "Sellers receiving many buyer enquiries respond to an enquiry-led opening",
+   "segment": "all sellers",
+   "choice_a": "10+ enquiries in 90d",
+   "choice_b": "<3 enquiries in 90d",
+   "outcome": "meeting_fixed",
+   "n_a": 14772,
+   "n_b": 72791,
+   "rate_a": 0.0567,
+   "rate_b": 0.0917,
+   "ci_a": [
+    0.053,
+    0.0605
+   ],
+   "ci_b": [
+    0.0896,
+    0.0938
+   ],
+   "diff_pp": -3.34,
+   "diff_ci_pp": [
+    -3.78,
+    -2.91
+   ],
+   "lift": 0.618,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "plan.personalisation"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-12",
+   "claim": "Low catalogue-quality sellers have a concrete catalogue-improvement reason to meet",
+   "segment": "all sellers",
+   "choice_a": "CQS < 40",
+   "choice_b": "CQS >= 70",
+   "outcome": "meeting_fixed",
+   "n_a": 164269,
+   "n_b": 9323,
+   "rate_a": 0.1037,
+   "rate_b": 0.0718,
+   "ci_a": [
+    0.1022,
+    0.1051
+   ],
+   "ci_b": [
+    0.0667,
+    0.0772
+   ],
+   "diff_pp": 3.14,
+   "diff_ci_pp": [
+    2.59,
+    3.69
+   ],
+   "lift": 1.444,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "plan.personalisation"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-13",
+   "claim": "Sellers with no engagement history (new / dormant)",
+   "segment": "all sellers",
+   "choice_a": "no engagement data",
+   "choice_b": "engagement data",
+   "outcome": "meeting_fixed",
+   "n_a": 62378,
+   "n_b": 207077,
+   "rate_a": 0.1501,
+   "rate_b": 0.1045,
+   "ci_a": [
+    0.1474,
+    0.153
+   ],
+   "ci_b": [
+    0.1032,
+    0.1059
+   ],
+   "diff_pp": 4.43,
+   "diff_ci_pp": [
+    4.12,
+    4.75
+   ],
+   "lift": 1.436,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "confidence"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-14",
+   "claim": "Sellers who asked 'am I talking to a bot?' convert differently",
+   "segment": "all sellers",
+   "choice_a": "asked if bot",
+   "choice_b": "did not ask",
+   "outcome": "meeting_fixed",
+   "n_a": 351,
+   "n_b": 196762,
+   "rate_a": 0.1111,
+   "rate_b": 0.1057,
+   "ci_a": [
+    0.0824,
+    0.1483
+   ],
+   "ci_b": [
+    0.1044,
+    0.1071
+   ],
+   "diff_pp": 0.83,
+   "diff_ci_pp": [
+    -2.44,
+    4.1
+   ],
+   "lift": 1.051,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "weak",
+   "source": "bot_calls",
+   "caveat": "Seller-level flag covers Apr-Sep incl. the call itself (descriptive).",
+   "used_by": [
+    "plan.opening",
+    "guardrails.disclosure"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-15",
+   "claim": "Sellers already in touch with an IndiaMART executive",
+   "segment": "all sellers",
+   "choice_a": "in touch with exec",
+   "choice_b": "not in touch",
+   "outcome": "meeting_fixed",
+   "n_a": 15405,
+   "n_b": 181708,
+   "rate_a": 0.0813,
+   "rate_b": 0.1078,
+   "ci_a": [
+    0.0771,
+    0.0858
+   ],
+   "ci_b": [
+    0.1064,
+    0.1093
+   ],
+   "diff_pp": -2.6,
+   "diff_ci_pp": [
+    -3.05,
+    -2.14
+   ],
+   "lift": 0.754,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "Seller-level flag (descriptive).",
+   "used_by": [
+    "plan.escalation"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-16a",
+   "claim": "Retailers vs everyone else",
+   "segment": "all sellers",
+   "choice_a": "retailer",
+   "choice_b": "others",
+   "outcome": "meeting_fixed",
+   "n_a": 76010,
+   "n_b": 193445,
+   "rate_a": 0.1154,
+   "rate_b": 0.115,
+   "ci_a": [
+    0.1131,
+    0.1176
+   ],
+   "ci_b": [
+    0.1136,
+    0.1164
+   ],
+   "diff_pp": 0.05,
+   "diff_ci_pp": [
+    -0.22,
+    0.31
+   ],
+   "lift": 1.003,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "weak",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "tone.warmth"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-16b",
+   "claim": "Manufacturers vs everyone else",
+   "segment": "all sellers",
+   "choice_a": "manufacturer",
+   "choice_b": "others",
+   "outcome": "meeting_fixed",
+   "n_a": 63791,
+   "n_b": 205664,
+   "rate_a": 0.108,
+   "rate_b": 0.1173,
+   "ci_a": [
+    0.1056,
+    0.1104
+   ],
+   "ci_b": [
+    0.1159,
+    0.1187
+   ],
+   "diff_pp": -0.85,
+   "diff_ci_pp": [
+    -1.13,
+    -0.57
+   ],
+   "lift": 0.92,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "tone.warmth"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-16c",
+   "claim": "Wholesalers vs everyone else",
+   "segment": "all sellers",
+   "choice_a": "wholesaler",
+   "choice_b": "others",
+   "outcome": "meeting_fixed",
+   "n_a": 61822,
+   "n_b": 207633,
+   "rate_a": 0.0998,
+   "rate_b": 0.1197,
+   "ci_a": [
+    0.0974,
+    0.1022
+   ],
+   "ci_b": [
+    0.1183,
+    0.1211
+   ],
+   "diff_pp": -1.94,
+   "diff_ci_pp": [
+    -2.21,
+    -1.67
+   ],
+   "lift": 0.834,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "tone.warmth"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-16d",
+   "claim": "Services vs everyone else",
+   "segment": "all sellers",
+   "choice_a": "service",
+   "choice_b": "others",
+   "outcome": "meeting_fixed",
+   "n_a": 40648,
+   "n_b": 228807,
+   "rate_a": 0.1263,
+   "rate_b": 0.1131,
+   "ci_a": [
+    0.1231,
+    0.1296
+   ],
+   "ci_b": [
+    0.1118,
+    0.1144
+   ],
+   "diff_pp": 1.22,
+   "diff_ci_pp": [
+    0.87,
+    1.57
+   ],
+   "lift": 1.117,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "tone.warmth"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-17a",
+   "claim": "Sellers whose past objection was 'Seller Unavailability'",
+   "segment": "all sellers",
+   "choice_a": "past objection: unavailability",
+   "choice_b": "no recorded objection",
+   "outcome": "meeting_fixed",
+   "n_a": 4190,
+   "n_b": 131296,
+   "rate_a": 0.0652,
+   "rate_b": 0.0606,
+   "ci_a": [
+    0.0581,
+    0.073
+   ],
+   "ci_b": [
+    0.0593,
+    0.0619
+   ],
+   "diff_pp": 0.48,
+   "diff_ci_pp": [
+    -0.27,
+    1.24
+   ],
+   "lift": 1.076,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "weak",
+   "source": "bot_calls",
+   "caveat": "Seller-level aggregate (descriptive).",
+   "used_by": [
+    "plan.objections"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-17b",
+   "claim": "Sellers whose past objection was 'Explicit Disinterest'",
+   "segment": "all sellers",
+   "choice_a": "past objection: explicit_disinterest",
+   "choice_b": "no recorded objection",
+   "outcome": "meeting_fixed",
+   "n_a": 2212,
+   "n_b": 131296,
+   "rate_a": 0.0344,
+   "rate_b": 0.0606,
+   "ci_a": [
+    0.0275,
+    0.0428
+   ],
+   "ci_b": [
+    0.0593,
+    0.0619
+   ],
+   "diff_pp": -2.67,
+   "diff_ci_pp": [
+    -3.44,
+    -1.9
+   ],
+   "lift": 0.567,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "strong",
+   "source": "bot_calls",
+   "caveat": "Seller-level aggregate (descriptive).",
+   "used_by": [
+    "plan.objections"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-17c",
+   "claim": "Sellers whose past objection was 'Existing Engagement'",
+   "segment": "all sellers",
+   "choice_a": "past objection: existing_engagement",
+   "choice_b": "no recorded objection",
+   "outcome": "meeting_fixed",
+   "n_a": 1180,
+   "n_b": 131296,
+   "rate_a": 0.0644,
+   "rate_b": 0.0606,
+   "ci_a": [
+    0.0518,
+    0.0799
+   ],
+   "ci_b": [
+    0.0593,
+    0.0619
+   ],
+   "diff_pp": 0.19,
+   "diff_ci_pp": [
+    -1.21,
+    1.59
+   ],
+   "lift": 1.063,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "weak",
+   "source": "bot_calls",
+   "caveat": "Seller-level aggregate (descriptive).",
+   "used_by": [
+    "plan.objections"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-17d",
+   "claim": "Sellers whose past objection was 'Information / Trust'",
+   "segment": "all sellers",
+   "choice_a": "past objection: trust",
+   "choice_b": "no recorded objection",
+   "outcome": "meeting_fixed",
+   "n_a": 93,
+   "n_b": 131296,
+   "rate_a": 0.0215,
+   "rate_b": 0.0606,
+   "ci_a": [
+    0.0059,
+    0.0751
+   ],
+   "ci_b": [
+    0.0593,
+    0.0619
+   ],
+   "diff_pp": -3.71,
+   "diff_ci_pp": [
+    -6.72,
+    -0.7
+   ],
+   "lift": 0.355,
+   "stratified_by": [
+    "redis_bucket"
+   ],
+   "strength": "weak",
+   "source": "bot_calls",
+   "caveat": "Seller-level aggregate (descriptive).",
+   "used_by": [
+    "plan.objections"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_count",
+   "claim": "Opening hook 'enquiry_count' vs other hooks",
+   "segment": "all sellers",
+   "choice_a": "enquiry_count",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 1520,
+   "n_b": 7768,
+   "rate_a": 0.2493,
+   "rate_b": 0.2737,
+   "ci_a": [
+    0.2282,
+    0.2717
+   ],
+   "ci_b": [
+    0.2639,
+    0.2837
+   ],
+   "diff_pp": -0.96,
+   "diff_ci_pp": [
+    -3.67,
+    1.76
+   ],
+   "lift": 0.911,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "Only calls where the pitch was delivered; hook partly follows lead type, so stratified.",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_count.micro",
+   "claim": "Opening hook 'enquiry_count' for micro sellers",
+   "segment": "turnover_band=micro",
+   "choice_a": "enquiry_count",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 965,
+   "n_b": 4584,
+   "rate_a": 0.256,
+   "rate_b": 0.2616,
+   "ci_a": [
+    0.2294,
+    0.2844
+   ],
+   "ci_b": [
+    0.249,
+    0.2745
+   ],
+   "diff_pp": 1.45,
+   "diff_ci_pp": [
+    -1.97,
+    4.86
+   ],
+   "lift": 0.979,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_count.small",
+   "claim": "Opening hook 'enquiry_count' for small sellers",
+   "segment": "turnover_band=small",
+   "choice_a": "enquiry_count",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 237,
+   "n_b": 1086,
+   "rate_a": 0.2363,
+   "rate_b": 0.2376,
+   "ci_a": [
+    0.1867,
+    0.2943
+   ],
+   "ci_b": [
+    0.2132,
+    0.2638
+   ],
+   "diff_pp": -0.23,
+   "diff_ci_pp": [
+    -7.42,
+    6.96
+   ],
+   "lift": 0.995,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_count.large",
+   "claim": "Opening hook 'enquiry_count' for large sellers",
+   "segment": "turnover_band=large",
+   "choice_a": "enquiry_count",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 198,
+   "n_b": 907,
+   "rate_a": 0.2323,
+   "rate_b": 0.2503,
+   "ci_a": [
+    0.1789,
+    0.2959
+   ],
+   "ci_b": [
+    0.2232,
+    0.2795
+   ],
+   "diff_pp": -6.34,
+   "diff_ci_pp": [
+    -14.01,
+    1.34
+   ],
+   "lift": 0.928,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_count.retailer",
+   "claim": "Opening hook 'enquiry_count' for retailer sellers",
+   "segment": "biz_kind=retailer",
+   "choice_a": "enquiry_count",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 396,
+   "n_b": 2164,
+   "rate_a": 0.2601,
+   "rate_b": 0.2616,
+   "ci_a": [
+    0.2193,
+    0.3055
+   ],
+   "ci_b": [
+    0.2435,
+    0.2805
+   ],
+   "diff_pp": 3.16,
+   "diff_ci_pp": [
+    -2.36,
+    8.68
+   ],
+   "lift": 0.994,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_count.manufacturer",
+   "claim": "Opening hook 'enquiry_count' for manufacturer sellers",
+   "segment": "biz_kind=manufacturer",
+   "choice_a": "enquiry_count",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 410,
+   "n_b": 1910,
+   "rate_a": 0.2585,
+   "rate_b": 0.2639,
+   "ci_a": [
+    0.2185,
+    0.303
+   ],
+   "ci_b": [
+    0.2446,
+    0.2841
+   ],
+   "diff_pp": 1.6,
+   "diff_ci_pp": [
+    -3.79,
+    6.99
+   ],
+   "lift": 0.98,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_count.wholesaler",
+   "claim": "Opening hook 'enquiry_count' for wholesaler sellers",
+   "segment": "biz_kind=wholesaler",
+   "choice_a": "enquiry_count",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 314,
+   "n_b": 1538,
+   "rate_a": 0.2229,
+   "rate_b": 0.2523,
+   "ci_a": [
+    0.1804,
+    0.2722
+   ],
+   "ci_b": [
+    0.2312,
+    0.2746
+   ],
+   "diff_pp": -3.67,
+   "diff_ci_pp": [
+    -9.73,
+    2.4
+   ],
+   "lift": 0.884,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_count.service",
+   "claim": "Opening hook 'enquiry_count' for service sellers",
+   "segment": "biz_kind=service",
+   "choice_a": "enquiry_count",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 239,
+   "n_b": 1230,
+   "rate_a": 0.2636,
+   "rate_b": 0.3114,
+   "ci_a": [
+    0.2118,
+    0.3229
+   ],
+   "ci_b": [
+    0.2861,
+    0.3378
+   ],
+   "diff_pp": -4.52,
+   "diff_ci_pp": [
+    -11.39,
+    2.35
+   ],
+   "lift": 0.847,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_generic",
+   "claim": "Opening hook 'enquiry_generic' vs other hooks",
+   "segment": "all sellers",
+   "choice_a": "enquiry_generic",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 745,
+   "n_b": 8543,
+   "rate_a": 0.2443,
+   "rate_b": 0.2719,
+   "ci_a": [
+    0.2148,
+    0.2764
+   ],
+   "ci_b": [
+    0.2626,
+    0.2815
+   ],
+   "diff_pp": -1.13,
+   "diff_ci_pp": [
+    -4.53,
+    2.27
+   ],
+   "lift": 0.898,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "Only calls where the pitch was delivered; hook partly follows lead type, so stratified.",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_generic.micro",
+   "claim": "Opening hook 'enquiry_generic' for micro sellers",
+   "segment": "turnover_band=micro",
+   "choice_a": "enquiry_generic",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 445,
+   "n_b": 5104,
+   "rate_a": 0.2135,
+   "rate_b": 0.2647,
+   "ci_a": [
+    0.1779,
+    0.2539
+   ],
+   "ci_b": [
+    0.2528,
+    0.277
+   ],
+   "diff_pp": -4.06,
+   "diff_ci_pp": [
+    -8.36,
+    0.23
+   ],
+   "lift": 0.807,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_generic.small",
+   "claim": "Opening hook 'enquiry_generic' for small sellers",
+   "segment": "turnover_band=small",
+   "choice_a": "enquiry_generic",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 114,
+   "n_b": 1209,
+   "rate_a": 0.2632,
+   "rate_b": 0.2349,
+   "ci_a": [
+    0.191,
+    0.3508
+   ],
+   "ci_b": [
+    0.2119,
+    0.2596
+   ],
+   "diff_pp": 6.32,
+   "diff_ci_pp": [
+    -3.53,
+    16.16
+   ],
+   "lift": 1.12,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_generic.large",
+   "claim": "Opening hook 'enquiry_generic' for large sellers",
+   "segment": "turnover_band=large",
+   "choice_a": "enquiry_generic",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 118,
+   "n_b": 987,
+   "rate_a": 0.2458,
+   "rate_b": 0.2472,
+   "ci_a": [
+    0.1769,
+    0.3306
+   ],
+   "ci_b": [
+    0.2213,
+    0.2751
+   ],
+   "diff_pp": 0.0,
+   "diff_ci_pp": [
+    -8.88,
+    8.89
+   ],
+   "lift": 0.994,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_generic.retailer",
+   "claim": "Opening hook 'enquiry_generic' for retailer sellers",
+   "segment": "biz_kind=retailer",
+   "choice_a": "enquiry_generic",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 197,
+   "n_b": 2363,
+   "rate_a": 0.1675,
+   "rate_b": 0.2691,
+   "ci_a": [
+    0.1218,
+    0.2259
+   ],
+   "ci_b": [
+    0.2517,
+    0.2874
+   ],
+   "diff_pp": -7.5,
+   "diff_ci_pp": [
+    -13.63,
+    -1.38
+   ],
+   "lift": 0.622,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.enquiry_generic.manufacturer",
+   "claim": "Opening hook 'enquiry_generic' for manufacturer sellers",
+   "segment": "biz_kind=manufacturer",
+   "choice_a": "enquiry_generic",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 172,
+   "n_b": 2148,
+   "rate_a": 0.2616,
+   "rate_b": 0.263,
+   "ci_a": [
+    0.2017,
+    0.332
+   ],
+   "ci_b": [
+    0.2449,
+    0.2821
+   ],
+   "diff_pp": 3.13,
+   "diff_ci_pp": [
+    -4.66,
+    10.91
+   ],
+   "lift": 0.995,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_generic.wholesaler",
+   "claim": "Opening hook 'enquiry_generic' for wholesaler sellers",
+   "segment": "biz_kind=wholesaler",
+   "choice_a": "enquiry_generic",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 183,
+   "n_b": 1669,
+   "rate_a": 0.2404,
+   "rate_b": 0.2481,
+   "ci_a": [
+    0.1843,
+    0.3073
+   ],
+   "ci_b": [
+    0.2279,
+    0.2693
+   ],
+   "diff_pp": 0.66,
+   "diff_ci_pp": [
+    -6.56,
+    7.88
+   ],
+   "lift": 0.969,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.enquiry_generic.service",
+   "claim": "Opening hook 'enquiry_generic' for service sellers",
+   "segment": "biz_kind=service",
+   "choice_a": "enquiry_generic",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 117,
+   "n_b": 1352,
+   "rate_a": 0.265,
+   "rate_b": 0.307,
+   "ci_a": [
+    0.1934,
+    0.3515
+   ],
+   "ci_b": [
+    0.2829,
+    0.3321
+   ],
+   "diff_pp": -2.2,
+   "diff_ci_pp": [
+    -11.69,
+    7.29
+   ],
+   "lift": 0.863,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.paid_services",
+   "claim": "Opening hook 'paid_services' vs other hooks",
+   "segment": "all sellers",
+   "choice_a": "paid_services",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 2500,
+   "n_b": 6788,
+   "rate_a": 0.294,
+   "rate_b": 0.2608,
+   "ci_a": [
+    0.2765,
+    0.3122
+   ],
+   "ci_b": [
+    0.2504,
+    0.2713
+   ],
+   "diff_pp": 10.53,
+   "diff_ci_pp": [
+    7.5,
+    13.55
+   ],
+   "lift": 1.127,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Only calls where the pitch was delivered; hook partly follows lead type, so stratified.",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.paid_services.micro",
+   "claim": "Opening hook 'paid_services' for micro sellers",
+   "segment": "turnover_band=micro",
+   "choice_a": "paid_services",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 1437,
+   "n_b": 4112,
+   "rate_a": 0.2853,
+   "rate_b": 0.2519,
+   "ci_a": [
+    0.2626,
+    0.3092
+   ],
+   "ci_b": [
+    0.2389,
+    0.2654
+   ],
+   "diff_pp": 11.01,
+   "diff_ci_pp": [
+    7.14,
+    14.89
+   ],
+   "lift": 1.132,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.paid_services.small",
+   "claim": "Opening hook 'paid_services' for small sellers",
+   "segment": "turnover_band=small",
+   "choice_a": "paid_services",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 317,
+   "n_b": 1006,
+   "rate_a": 0.2744,
+   "rate_b": 0.2256,
+   "ci_a": [
+    0.2282,
+    0.3261
+   ],
+   "ci_b": [
+    0.2009,
+    0.2525
+   ],
+   "diff_pp": 8.41,
+   "diff_ci_pp": [
+    -0.3,
+    17.13
+   ],
+   "lift": 1.216,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.paid_services.large",
+   "claim": "Opening hook 'paid_services' for large sellers",
+   "segment": "turnover_band=large",
+   "choice_a": "paid_services",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 219,
+   "n_b": 886,
+   "rate_a": 0.2557,
+   "rate_b": 0.2449,
+   "ci_a": [
+    0.2025,
+    0.3174
+   ],
+   "ci_b": [
+    0.2177,
+    0.2743
+   ],
+   "diff_pp": 9.92,
+   "diff_ci_pp": [
+    0.41,
+    19.44
+   ],
+   "lift": 1.044,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.paid_services.retailer",
+   "claim": "Opening hook 'paid_services' for retailer sellers",
+   "segment": "biz_kind=retailer",
+   "choice_a": "paid_services",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 700,
+   "n_b": 1860,
+   "rate_a": 0.2871,
+   "rate_b": 0.2516,
+   "ci_a": [
+    0.2549,
+    0.3217
+   ],
+   "ci_b": [
+    0.2324,
+    0.2718
+   ],
+   "diff_pp": 10.76,
+   "diff_ci_pp": [
+    5.13,
+    16.39
+   ],
+   "lift": 1.141,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.paid_services.manufacturer",
+   "claim": "Opening hook 'paid_services' for manufacturer sellers",
+   "segment": "biz_kind=manufacturer",
+   "choice_a": "paid_services",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 637,
+   "n_b": 1683,
+   "rate_a": 0.3014,
+   "rate_b": 0.2484,
+   "ci_a": [
+    0.2671,
+    0.3382
+   ],
+   "ci_b": [
+    0.2283,
+    0.2696
+   ],
+   "diff_pp": 10.22,
+   "diff_ci_pp": [
+    4.25,
+    16.19
+   ],
+   "lift": 1.214,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.paid_services.wholesaler",
+   "claim": "Opening hook 'paid_services' for wholesaler sellers",
+   "segment": "biz_kind=wholesaler",
+   "choice_a": "paid_services",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 442,
+   "n_b": 1410,
+   "rate_a": 0.2602,
+   "rate_b": 0.2433,
+   "ci_a": [
+    0.2215,
+    0.303
+   ],
+   "ci_b": [
+    0.2216,
+    0.2663
+   ],
+   "diff_pp": 8.11,
+   "diff_ci_pp": [
+    1.24,
+    14.98
+   ],
+   "lift": 1.07,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.paid_services.service",
+   "claim": "Opening hook 'paid_services' for service sellers",
+   "segment": "biz_kind=service",
+   "choice_a": "paid_services",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 348,
+   "n_b": 1121,
+   "rate_a": 0.3362,
+   "rate_b": 0.2935,
+   "ci_a": [
+    0.2886,
+    0.3874
+   ],
+   "ci_b": [
+    0.2676,
+    0.3208
+   ],
+   "diff_pp": 14.14,
+   "diff_ci_pp": [
+    5.43,
+    22.85
+   ],
+   "lift": 1.146,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.buylead",
+   "claim": "Opening hook 'buylead' vs other hooks",
+   "segment": "all sellers",
+   "choice_a": "buylead",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 2093,
+   "n_b": 7195,
+   "rate_a": 0.3086,
+   "rate_b": 0.2584,
+   "ci_a": [
+    0.2892,
+    0.3288
+   ],
+   "ci_b": [
+    0.2484,
+    0.2686
+   ],
+   "diff_pp": 11.01,
+   "diff_ci_pp": [
+    7.9,
+    14.12
+   ],
+   "lift": 1.195,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Only calls where the pitch was delivered; hook partly follows lead type, so stratified.",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.buylead.micro",
+   "claim": "Opening hook 'buylead' for micro sellers",
+   "segment": "turnover_band=micro",
+   "choice_a": "buylead",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 1240,
+   "n_b": 4309,
+   "rate_a": 0.3,
+   "rate_b": 0.2492,
+   "ci_a": [
+    0.2751,
+    0.3261
+   ],
+   "ci_b": [
+    0.2366,
+    0.2624
+   ],
+   "diff_pp": 11.75,
+   "diff_ci_pp": [
+    7.84,
+    15.66
+   ],
+   "lift": 1.204,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.buylead.small",
+   "claim": "Opening hook 'buylead' for small sellers",
+   "segment": "turnover_band=small",
+   "choice_a": "buylead",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 300,
+   "n_b": 1023,
+   "rate_a": 0.24,
+   "rate_b": 0.2366,
+   "ci_a": [
+    0.1952,
+    0.2914
+   ],
+   "ci_b": [
+    0.2115,
+    0.2636
+   ],
+   "diff_pp": 4.22,
+   "diff_ci_pp": [
+    -3.54,
+    11.98
+   ],
+   "lift": 1.015,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.buylead.large",
+   "claim": "Opening hook 'buylead' for large sellers",
+   "segment": "turnover_band=large",
+   "choice_a": "buylead",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 267,
+   "n_b": 838,
+   "rate_a": 0.2996,
+   "rate_b": 0.2303,
+   "ci_a": [
+    0.2478,
+    0.3571
+   ],
+   "ci_b": [
+    0.2031,
+    0.26
+   ],
+   "diff_pp": 14.8,
+   "diff_ci_pp": [
+    6.49,
+    23.11
+   ],
+   "lift": 1.301,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.buylead.retailer",
+   "claim": "Opening hook 'buylead' for retailer sellers",
+   "segment": "biz_kind=retailer",
+   "choice_a": "buylead",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 561,
+   "n_b": 1999,
+   "rate_a": 0.2959,
+   "rate_b": 0.2516,
+   "ci_a": [
+    0.2596,
+    0.335
+   ],
+   "ci_b": [
+    0.2331,
+    0.2711
+   ],
+   "diff_pp": 7.66,
+   "diff_ci_pp": [
+    1.49,
+    13.84
+   ],
+   "lift": 1.176,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.buylead.manufacturer",
+   "claim": "Opening hook 'buylead' for manufacturer sellers",
+   "segment": "biz_kind=manufacturer",
+   "choice_a": "buylead",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 477,
+   "n_b": 1843,
+   "rate_a": 0.3019,
+   "rate_b": 0.2528,
+   "ci_a": [
+    0.2624,
+    0.3445
+   ],
+   "ci_b": [
+    0.2335,
+    0.2732
+   ],
+   "diff_pp": 13.26,
+   "diff_ci_pp": [
+    7.16,
+    19.36
+   ],
+   "lift": 1.194,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.buylead.wholesaler",
+   "claim": "Opening hook 'buylead' for wholesaler sellers",
+   "segment": "biz_kind=wholesaler",
+   "choice_a": "buylead",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 435,
+   "n_b": 1417,
+   "rate_a": 0.269,
+   "rate_b": 0.2406,
+   "ci_a": [
+    0.2295,
+    0.3125
+   ],
+   "ci_b": [
+    0.2191,
+    0.2636
+   ],
+   "diff_pp": 7.06,
+   "diff_ci_pp": [
+    0.21,
+    13.91
+   ],
+   "lift": 1.118,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.buylead.service",
+   "claim": "Opening hook 'buylead' for service sellers",
+   "segment": "biz_kind=service",
+   "choice_a": "buylead",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 384,
+   "n_b": 1085,
+   "rate_a": 0.3698,
+   "rate_b": 0.2802,
+   "ci_a": [
+    0.323,
+    0.4191
+   ],
+   "ci_b": [
+    0.2543,
+    0.3076
+   ],
+   "diff_pp": 20.71,
+   "diff_ci_pp": [
+    13.59,
+    27.83
+   ],
+   "lift": 1.32,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.profile_visibility",
+   "claim": "Opening hook 'profile_visibility' vs other hooks",
+   "segment": "all sellers",
+   "choice_a": "profile_visibility",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 1015,
+   "n_b": 8273,
+   "rate_a": 0.2778,
+   "rate_b": 0.2687,
+   "ci_a": [
+    0.2512,
+    0.3062
+   ],
+   "ci_b": [
+    0.2593,
+    0.2784
+   ],
+   "diff_pp": -6.05,
+   "diff_ci_pp": [
+    -9.09,
+    -3.01
+   ],
+   "lift": 1.034,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Only calls where the pitch was delivered; hook partly follows lead type, so stratified.",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.profile_visibility.micro",
+   "claim": "Opening hook 'profile_visibility' for micro sellers",
+   "segment": "turnover_band=micro",
+   "choice_a": "profile_visibility",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 597,
+   "n_b": 4952,
+   "rate_a": 0.268,
+   "rate_b": 0.2597,
+   "ci_a": [
+    0.234,
+    0.3049
+   ],
+   "ci_b": [
+    0.2477,
+    0.2721
+   ],
+   "diff_pp": -5.24,
+   "diff_ci_pp": [
+    -9.07,
+    -1.4
+   ],
+   "lift": 1.032,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.profile_visibility.small",
+   "claim": "Opening hook 'profile_visibility' for small sellers",
+   "segment": "turnover_band=small",
+   "choice_a": "profile_visibility",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 142,
+   "n_b": 1181,
+   "rate_a": 0.2042,
+   "rate_b": 0.2413,
+   "ci_a": [
+    0.1461,
+    0.2779
+   ],
+   "ci_b": [
+    0.2178,
+    0.2665
+   ],
+   "diff_pp": -7.67,
+   "diff_ci_pp": [
+    -15.78,
+    0.43
+   ],
+   "lift": 0.846,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.profile_visibility.large",
+   "claim": "Opening hook 'profile_visibility' for large sellers",
+   "segment": "turnover_band=large",
+   "choice_a": "profile_visibility",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 122,
+   "n_b": 983,
+   "rate_a": 0.2049,
+   "rate_b": 0.2523,
+   "ci_a": [
+    0.1428,
+    0.285
+   ],
+   "ci_b": [
+    0.2261,
+    0.2804
+   ],
+   "diff_pp": -2.11,
+   "diff_ci_pp": [
+    -11.55,
+    7.32
+   ],
+   "lift": 0.812,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.profile_visibility.retailer",
+   "claim": "Opening hook 'profile_visibility' for retailer sellers",
+   "segment": "biz_kind=retailer",
+   "choice_a": "profile_visibility",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 305,
+   "n_b": 2255,
+   "rate_a": 0.2525,
+   "rate_b": 0.2625,
+   "ci_a": [
+    0.207,
+    0.3041
+   ],
+   "ci_b": [
+    0.2448,
+    0.2811
+   ],
+   "diff_pp": -4.61,
+   "diff_ci_pp": [
+    -10.24,
+    1.02
+   ],
+   "lift": 0.962,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.profile_visibility.manufacturer",
+   "claim": "Opening hook 'profile_visibility' for manufacturer sellers",
+   "segment": "biz_kind=manufacturer",
+   "choice_a": "profile_visibility",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 248,
+   "n_b": 2072,
+   "rate_a": 0.2339,
+   "rate_b": 0.2664,
+   "ci_a": [
+    0.1855,
+    0.2904
+   ],
+   "ci_b": [
+    0.2478,
+    0.2859
+   ],
+   "diff_pp": -10.72,
+   "diff_ci_pp": [
+    -16.69,
+    -4.74
+   ],
+   "lift": 0.878,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.profile_visibility.wholesaler",
+   "claim": "Opening hook 'profile_visibility' for wholesaler sellers",
+   "segment": "biz_kind=wholesaler",
+   "choice_a": "profile_visibility",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 190,
+   "n_b": 1662,
+   "rate_a": 0.3,
+   "rate_b": 0.2413,
+   "ci_a": [
+    0.2393,
+    0.3686
+   ],
+   "ci_b": [
+    0.2213,
+    0.2624
+   ],
+   "diff_pp": -0.88,
+   "diff_ci_pp": [
+    -8.25,
+    6.49
+   ],
+   "lift": 1.243,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.profile_visibility.service",
+   "claim": "Opening hook 'profile_visibility' for service sellers",
+   "segment": "biz_kind=service",
+   "choice_a": "profile_visibility",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 158,
+   "n_b": 1311,
+   "rate_a": 0.3101,
+   "rate_b": 0.3028,
+   "ci_a": [
+    0.2432,
+    0.386
+   ],
+   "ci_b": [
+    0.2786,
+    0.3282
+   ],
+   "diff_pp": -8.29,
+   "diff_ci_pp": [
+    -16.37,
+    -0.21
+   ],
+   "lift": 1.024,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.catalogue",
+   "claim": "Opening hook 'catalogue' vs other hooks",
+   "segment": "all sellers",
+   "choice_a": "catalogue",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 388,
+   "n_b": 8900,
+   "rate_a": 0.2242,
+   "rate_b": 0.2717,
+   "ci_a": [
+    0.1855,
+    0.2683
+   ],
+   "ci_b": [
+    0.2625,
+    0.281
+   ],
+   "diff_pp": -3.28,
+   "diff_ci_pp": [
+    -7.68,
+    1.12
+   ],
+   "lift": 0.825,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "Only calls where the pitch was delivered; hook partly follows lead type, so stratified.",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.catalogue.micro",
+   "claim": "Opening hook 'catalogue' for micro sellers",
+   "segment": "turnover_band=micro",
+   "choice_a": "catalogue",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 258,
+   "n_b": 5291,
+   "rate_a": 0.2016,
+   "rate_b": 0.2635,
+   "ci_a": [
+    0.1571,
+    0.2547
+   ],
+   "ci_b": [
+    0.2518,
+    0.2755
+   ],
+   "diff_pp": -5.0,
+   "diff_ci_pp": [
+    -10.2,
+    0.19
+   ],
+   "lift": 0.765,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.catalogue.retailer",
+   "claim": "Opening hook 'catalogue' for retailer sellers",
+   "segment": "biz_kind=retailer",
+   "choice_a": "catalogue",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 121,
+   "n_b": 2439,
+   "rate_a": 0.2314,
+   "rate_b": 0.2628,
+   "ci_a": [
+    0.1652,
+    0.3141
+   ],
+   "ci_b": [
+    0.2457,
+    0.2806
+   ],
+   "diff_pp": -1.75,
+   "diff_ci_pp": [
+    -10.15,
+    6.65
+   ],
+   "lift": 0.88,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.catalogue.manufacturer",
+   "claim": "Opening hook 'catalogue' for manufacturer sellers",
+   "segment": "biz_kind=manufacturer",
+   "choice_a": "catalogue",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 94,
+   "n_b": 2226,
+   "rate_a": 0.117,
+   "rate_b": 0.2691,
+   "ci_a": [
+    0.0666,
+    0.1975
+   ],
+   "ci_b": [
+    0.2511,
+    0.2879
+   ],
+   "diff_pp": -14.15,
+   "diff_ci_pp": [
+    -21.55,
+    -6.75
+   ],
+   "lift": 0.435,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.catalogue.wholesaler",
+   "claim": "Opening hook 'catalogue' for wholesaler sellers",
+   "segment": "biz_kind=wholesaler",
+   "choice_a": "catalogue",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 79,
+   "n_b": 1773,
+   "rate_a": 0.2532,
+   "rate_b": 0.247,
+   "ci_a": [
+    0.1703,
+    0.3589
+   ],
+   "ci_b": [
+    0.2275,
+    0.2676
+   ],
+   "diff_pp": 2.14,
+   "diff_ci_pp": [
+    -8.51,
+    12.78
+   ],
+   "lift": 1.025,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.catalogue.service",
+   "claim": "Opening hook 'catalogue' for service sellers",
+   "segment": "biz_kind=service",
+   "choice_a": "catalogue",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 60,
+   "n_b": 1409,
+   "rate_a": 0.3,
+   "rate_b": 0.3038,
+   "ci_a": [
+    0.199,
+    0.4251
+   ],
+   "ci_b": [
+    0.2803,
+    0.3283
+   ],
+   "diff_pp": 6.3,
+   "diff_ci_pp": [
+    -7.19,
+    19.78
+   ],
+   "lift": 0.988,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20.last_met",
+   "claim": "Opening hook 'last_met' vs other hooks",
+   "segment": "all sellers",
+   "choice_a": "last_met",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 975,
+   "n_b": 8313,
+   "rate_a": 0.1795,
+   "rate_b": 0.2803,
+   "ci_a": [
+    0.1567,
+    0.2048
+   ],
+   "ci_b": [
+    0.2707,
+    0.29
+   ],
+   "diff_pp": -9.36,
+   "diff_ci_pp": [
+    -12.01,
+    -6.71
+   ],
+   "lift": 0.64,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Only calls where the pitch was delivered; hook partly follows lead type, so stratified.",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.last_met.micro",
+   "claim": "Opening hook 'last_met' for micro sellers",
+   "segment": "turnover_band=micro",
+   "choice_a": "last_met",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 590,
+   "n_b": 4959,
+   "rate_a": 0.1746,
+   "rate_b": 0.2708,
+   "ci_a": [
+    0.1461,
+    0.2073
+   ],
+   "ci_b": [
+    0.2586,
+    0.2834
+   ],
+   "diff_pp": -9.42,
+   "diff_ci_pp": [
+    -12.81,
+    -6.04
+   ],
+   "lift": 0.645,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.last_met.small",
+   "claim": "Opening hook 'last_met' for small sellers",
+   "segment": "turnover_band=small",
+   "choice_a": "last_met",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 153,
+   "n_b": 1170,
+   "rate_a": 0.1438,
+   "rate_b": 0.2496,
+   "ci_a": [
+    0.0969,
+    0.2081
+   ],
+   "ci_b": [
+    0.2256,
+    0.2752
+   ],
+   "diff_pp": -10.08,
+   "diff_ci_pp": [
+    -16.41,
+    -3.74
+   ],
+   "lift": 0.576,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.last_met.large",
+   "claim": "Opening hook 'last_met' for large sellers",
+   "segment": "turnover_band=large",
+   "choice_a": "last_met",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 116,
+   "n_b": 989,
+   "rate_a": 0.181,
+   "rate_b": 0.2548,
+   "ci_a": [
+    0.1216,
+    0.261
+   ],
+   "ci_b": [
+    0.2286,
+    0.2829
+   ],
+   "diff_pp": -8.34,
+   "diff_ci_pp": [
+    -16.14,
+    -0.55
+   ],
+   "lift": 0.71,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.last_met.retailer",
+   "claim": "Opening hook 'last_met' for retailer sellers",
+   "segment": "biz_kind=retailer",
+   "choice_a": "last_met",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 268,
+   "n_b": 2292,
+   "rate_a": 0.2127,
+   "rate_b": 0.267,
+   "ci_a": [
+    0.1679,
+    0.2656
+   ],
+   "ci_b": [
+    0.2493,
+    0.2855
+   ],
+   "diff_pp": -6.27,
+   "diff_ci_pp": [
+    -11.5,
+    -1.05
+   ],
+   "lift": 0.797,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.last_met.manufacturer",
+   "claim": "Opening hook 'last_met' for manufacturer sellers",
+   "segment": "biz_kind=manufacturer",
+   "choice_a": "last_met",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 267,
+   "n_b": 2053,
+   "rate_a": 0.1685,
+   "rate_b": 0.2752,
+   "ci_a": [
+    0.1284,
+    0.2181
+   ],
+   "ci_b": [
+    0.2563,
+    0.2949
+   ],
+   "diff_pp": -10.12,
+   "diff_ci_pp": [
+    -15.21,
+    -5.02
+   ],
+   "lift": 0.612,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.last_met.wholesaler",
+   "claim": "Opening hook 'last_met' for wholesaler sellers",
+   "segment": "biz_kind=wholesaler",
+   "choice_a": "last_met",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 197,
+   "n_b": 1655,
+   "rate_a": 0.1624,
+   "rate_b": 0.2574,
+   "ci_a": [
+    0.1175,
+    0.2203
+   ],
+   "ci_b": [
+    0.2369,
+    0.279
+   ],
+   "diff_pp": -7.65,
+   "diff_ci_pp": [
+    -13.62,
+    -1.68
+   ],
+   "lift": 0.631,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.last_met.service",
+   "claim": "Opening hook 'last_met' for service sellers",
+   "segment": "biz_kind=service",
+   "choice_a": "last_met",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 156,
+   "n_b": 1313,
+   "rate_a": 0.1538,
+   "rate_b": 0.3214,
+   "ci_a": [
+    0.1056,
+    0.2187
+   ],
+   "ci_b": [
+    0.2967,
+    0.3472
+   ],
+   "diff_pp": -15.48,
+   "diff_ci_pp": [
+    -21.93,
+    -9.03
+   ],
+   "lift": 0.479,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20.demo_booked",
+   "claim": "Opening hook 'demo_booked' vs other hooks",
+   "segment": "all sellers",
+   "choice_a": "demo_booked",
+   "choice_b": "other hooks",
+   "outcome": "meeting_fixed",
+   "n_a": 52,
+   "n_b": 9236,
+   "rate_a": 0.3654,
+   "rate_b": 0.2692,
+   "ci_a": [
+    0.248,
+    0.5013
+   ],
+   "ci_b": [
+    0.2602,
+    0.2783
+   ],
+   "diff_pp": 38.3,
+   "diff_ci_pp": [
+    24.4,
+    52.2
+   ],
+   "lift": 1.357,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "Only calls where the pitch was delivered; hook partly follows lead type, so stratified.",
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": false,
+   "confound": "n=52; too small."
+  },
+  {
+   "id": "EV-20b.UA.enquiry_count",
+   "claim": "Within lead bucket UA: framing 'enquiry_count' vs other framings",
+   "segment": "redis_bucket=UA",
+   "choice_a": "enquiry_count",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 1115,
+   "n_b": 1290,
+   "rate_a": 0.261,
+   "rate_b": 0.2488,
+   "ci_a": [
+    0.2361,
+    0.2876
+   ],
+   "ci_b": [
+    0.226,
+    0.2732
+   ],
+   "diff_pp": 2.77,
+   "diff_ci_pp": [
+    -0.87,
+    6.42
+   ],
+   "lift": 1.049,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20b.UA.enquiry_generic",
+   "claim": "Within lead bucket UA: framing 'enquiry_generic' vs other framings",
+   "segment": "redis_bucket=UA",
+   "choice_a": "enquiry_generic",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 528,
+   "n_b": 1877,
+   "rate_a": 0.2652,
+   "rate_b": 0.2515,
+   "ci_a": [
+    0.2293,
+    0.3044
+   ],
+   "ci_b": [
+    0.2324,
+    0.2716
+   ],
+   "diff_pp": 1.9,
+   "diff_ci_pp": [
+    -2.34,
+    6.15
+   ],
+   "lift": 1.054,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20b.UA.profile_visibility",
+   "claim": "Within lead bucket UA: framing 'profile_visibility' vs other framings",
+   "segment": "redis_bucket=UA",
+   "choice_a": "profile_visibility",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 386,
+   "n_b": 2019,
+   "rate_a": 0.2617,
+   "rate_b": 0.2531,
+   "ci_a": [
+    0.2203,
+    0.3077
+   ],
+   "ci_b": [
+    0.2346,
+    0.2725
+   ],
+   "diff_pp": -2.78,
+   "diff_ci_pp": [
+    -8.36,
+    2.81
+   ],
+   "lift": 1.034,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20b.UA.last_met",
+   "claim": "Within lead bucket UA: framing 'last_met' vs other framings",
+   "segment": "redis_bucket=UA",
+   "choice_a": "last_met",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 234,
+   "n_b": 2171,
+   "rate_a": 0.2094,
+   "rate_b": 0.2593,
+   "ci_a": [
+    0.1622,
+    0.266
+   ],
+   "ci_b": [
+    0.2413,
+    0.2782
+   ],
+   "diff_pp": -6.0,
+   "diff_ci_pp": [
+    -11.63,
+    -0.38
+   ],
+   "lift": 0.807,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20b.UA.catalogue",
+   "claim": "Within lead bucket UA: framing 'catalogue' vs other framings",
+   "segment": "redis_bucket=UA",
+   "choice_a": "catalogue",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 134,
+   "n_b": 2271,
+   "rate_a": 0.2164,
+   "rate_b": 0.2567,
+   "ci_a": [
+    0.1551,
+    0.2935
+   ],
+   "ci_b": [
+    0.2392,
+    0.2751
+   ],
+   "diff_pp": -2.7,
+   "diff_ci_pp": [
+    -10.11,
+    4.71
+   ],
+   "lift": 0.843,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20b.PUA.buylead",
+   "claim": "Within lead bucket PUA: framing 'buylead' vs other framings",
+   "segment": "redis_bucket=PUA",
+   "choice_a": "buylead",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 1841,
+   "n_b": 963,
+   "rate_a": 0.3118,
+   "rate_b": 0.1952,
+   "ci_a": [
+    0.291,
+    0.3333
+   ],
+   "ci_b": [
+    0.1714,
+    0.2214
+   ],
+   "diff_pp": 11.66,
+   "diff_ci_pp": [
+    8.38,
+    14.93
+   ],
+   "lift": 1.597,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20b.PUA.last_met",
+   "claim": "Within lead bucket PUA: framing 'last_met' vs other framings",
+   "segment": "redis_bucket=PUA",
+   "choice_a": "last_met",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 306,
+   "n_b": 2498,
+   "rate_a": 0.1732,
+   "rate_b": 0.2838,
+   "ci_a": [
+    0.1349,
+    0.2196
+   ],
+   "ci_b": [
+    0.2665,
+    0.3018
+   ],
+   "diff_pp": -10.22,
+   "diff_ci_pp": [
+    -14.86,
+    -5.58
+   ],
+   "lift": 0.61,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20b.PUA.profile_visibility",
+   "claim": "Within lead bucket PUA: framing 'profile_visibility' vs other framings",
+   "segment": "redis_bucket=PUA",
+   "choice_a": "profile_visibility",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 252,
+   "n_b": 2552,
+   "rate_a": 0.1905,
+   "rate_b": 0.2798,
+   "ci_a": [
+    0.1468,
+    0.2435
+   ],
+   "ci_b": [
+    0.2627,
+    0.2975
+   ],
+   "diff_pp": -11.02,
+   "diff_ci_pp": [
+    -16.17,
+    -5.88
+   ],
+   "lift": 0.681,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20b.PUA.enquiry_count",
+   "claim": "Within lead bucket PUA: framing 'enquiry_count' vs other framings",
+   "segment": "redis_bucket=PUA",
+   "choice_a": "enquiry_count",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 180,
+   "n_b": 2624,
+   "rate_a": 0.2167,
+   "rate_b": 0.2755,
+   "ci_a": [
+    0.1627,
+    0.2824
+   ],
+   "ci_b": [
+    0.2588,
+    0.2929
+   ],
+   "diff_pp": -7.16,
+   "diff_ci_pp": [
+    -13.27,
+    -1.05
+   ],
+   "lift": 0.786,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20b.PUA.catalogue",
+   "claim": "Within lead bucket PUA: framing 'catalogue' vs other framings",
+   "segment": "redis_bucket=PUA",
+   "choice_a": "catalogue",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 115,
+   "n_b": 2689,
+   "rate_a": 0.2174,
+   "rate_b": 0.2741,
+   "ci_a": [
+    0.1518,
+    0.3012
+   ],
+   "ci_b": [
+    0.2576,
+    0.2913
+   ],
+   "diff_pp": -3.9,
+   "diff_ci_pp": [
+    -11.71,
+    3.91
+   ],
+   "lift": 0.793,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20b.PUA.enquiry_generic",
+   "claim": "Within lead bucket PUA: framing 'enquiry_generic' vs other framings",
+   "segment": "redis_bucket=PUA",
+   "choice_a": "enquiry_generic",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 103,
+   "n_b": 2701,
+   "rate_a": 0.2233,
+   "rate_b": 0.2736,
+   "ci_a": [
+    0.1537,
+    0.3128
+   ],
+   "ci_b": [
+    0.2571,
+    0.2907
+   ],
+   "diff_pp": -4.41,
+   "diff_ci_pp": [
+    -12.74,
+    3.91
+   ],
+   "lift": 0.816,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20b.PIM.paid_services",
+   "claim": "Within lead bucket PIM: framing 'paid_services' vs other framings",
+   "segment": "redis_bucket=PIM",
+   "choice_a": "paid_services",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 2215,
+   "n_b": 846,
+   "rate_a": 0.2903,
+   "rate_b": 0.1678,
+   "ci_a": [
+    0.2718,
+    0.3095
+   ],
+   "ci_b": [
+    0.1442,
+    0.1945
+   ],
+   "diff_pp": 11.25,
+   "diff_ci_pp": [
+    8.09,
+    14.42
+   ],
+   "lift": 1.729,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20b.PIM.last_met",
+   "claim": "Within lead bucket PIM: framing 'last_met' vs other framings",
+   "segment": "redis_bucket=PIM",
+   "choice_a": "last_met",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 354,
+   "n_b": 2707,
+   "rate_a": 0.161,
+   "rate_b": 0.2689,
+   "ci_a": [
+    0.1264,
+    0.2029
+   ],
+   "ci_b": [
+    0.2526,
+    0.286
+   ],
+   "diff_pp": -10.25,
+   "diff_ci_pp": [
+    -14.46,
+    -6.04
+   ],
+   "lift": 0.599,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20b.PIM.profile_visibility",
+   "claim": "Within lead bucket PIM: framing 'profile_visibility' vs other framings",
+   "segment": "redis_bucket=PIM",
+   "choice_a": "profile_visibility",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 182,
+   "n_b": 2879,
+   "rate_a": 0.1593,
+   "rate_b": 0.2626,
+   "ci_a": [
+    0.1133,
+    0.2195
+   ],
+   "ci_b": [
+    0.2468,
+    0.279
+   ],
+   "diff_pp": -9.18,
+   "diff_ci_pp": [
+    -14.59,
+    -3.77
+   ],
+   "lift": 0.607,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20b.PIM.enquiry_count",
+   "claim": "Within lead bucket PIM: framing 'enquiry_count' vs other framings",
+   "segment": "redis_bucket=PIM",
+   "choice_a": "enquiry_count",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 158,
+   "n_b": 2903,
+   "rate_a": 0.1962,
+   "rate_b": 0.2597,
+   "ci_a": [
+    0.1418,
+    0.265
+   ],
+   "ci_b": [
+    0.2441,
+    0.276
+   ],
+   "diff_pp": -6.36,
+   "diff_ci_pp": [
+    -12.59,
+    -0.13
+   ],
+   "lift": 0.755,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-20b.PIM.catalogue",
+   "claim": "Within lead bucket PIM: framing 'catalogue' vs other framings",
+   "segment": "redis_bucket=PIM",
+   "choice_a": "catalogue",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 80,
+   "n_b": 2981,
+   "rate_a": 0.1875,
+   "rate_b": 0.2583,
+   "ci_a": [
+    0.1171,
+    0.2866
+   ],
+   "ci_b": [
+    0.2429,
+    0.2743
+   ],
+   "diff_pp": -4.27,
+   "diff_ci_pp": [
+    -13.06,
+    4.51
+   ],
+   "lift": 0.726,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20b.PIM.enquiry_generic",
+   "claim": "Within lead bucket PIM: framing 'enquiry_generic' vs other framings",
+   "segment": "redis_bucket=PIM",
+   "choice_a": "enquiry_generic",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 72,
+   "n_b": 2989,
+   "rate_a": 0.1389,
+   "rate_b": 0.2593,
+   "ci_a": [
+    0.0772,
+    0.2371
+   ],
+   "ci_b": [
+    0.2439,
+    0.2753
+   ],
+   "diff_pp": -9.68,
+   "diff_ci_pp": [
+    -17.39,
+    -1.96
+   ],
+   "lift": 0.536,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-20b.OLP.buylead",
+   "claim": "Within lead bucket OLP: framing 'buylead' vs other framings",
+   "segment": "redis_bucket=OLP",
+   "choice_a": "buylead",
+   "choice_b": "other framings",
+   "outcome": "meeting_fixed",
+   "n_a": 246,
+   "n_b": 120,
+   "rate_a": 0.2886,
+   "rate_b": 0.2333,
+   "ci_a": [
+    0.2356,
+    0.3481
+   ],
+   "ci_b": [
+    0.1667,
+    0.3166
+   ],
+   "diff_pp": 5.6,
+   "diff_ci_pp": [
+    -4.37,
+    15.58
+   ],
+   "lift": 1.237,
+   "stratified_by": [
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening_hook"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-21",
+   "claim": "A short first pitch (<=10s) beats a long one (>14s)",
+   "segment": "all sellers",
+   "choice_a": "pitch <= 10s",
+   "choice_b": "pitch > 14s",
+   "outcome": "meeting_fixed",
+   "n_a": 2718,
+   "n_b": 4204,
+   "rate_a": 0.1887,
+   "rate_b": 0.3311,
+   "ci_a": [
+    0.1745,
+    0.2039
+   ],
+   "ci_b": [
+    0.317,
+    0.3455
+   ],
+   "diff_pp": -12.79,
+   "diff_ci_pp": [
+    -14.89,
+    -10.69
+   ],
+   "lift": 0.57,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "tone.verbosity"
+   ],
+   "usable": false,
+   "confound": "Survivorship: a pitch only runs long when the seller lets it finish; hang-ups truncate it."
+  },
+  {
+   "id": "EV-21b",
+   "claim": "Short pitch matters more for repeat-called sellers",
+   "segment": "attempt >= 3",
+   "choice_a": "pitch <= 10s",
+   "choice_b": "pitch > 14s",
+   "outcome": "meeting_fixed",
+   "n_a": 1106,
+   "n_b": 439,
+   "rate_a": 0.1655,
+   "rate_b": 0.3212,
+   "ci_a": [
+    0.1447,
+    0.1885
+   ],
+   "ci_b": [
+    0.2792,
+    0.3663
+   ],
+   "diff_pp": -14.97,
+   "diff_ci_pp": [
+    -20.21,
+    -9.73
+   ],
+   "lift": 0.515,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "tone.verbosity"
+   ],
+   "usable": false,
+   "confound": "Same survivorship as EV-21."
+  },
+  {
+   "id": "EV-22",
+   "claim": "Slower bot delivery (<= 2.90 words/s) vs faster (>= 3.44)",
+   "segment": "all sellers",
+   "choice_a": "slow pace",
+   "choice_b": "fast pace",
+   "outcome": "meeting_fixed",
+   "n_a": 2285,
+   "n_b": 2285,
+   "rate_a": 0.3737,
+   "rate_b": 0.1781,
+   "ci_a": [
+    0.3541,
+    0.3938
+   ],
+   "ci_b": [
+    0.163,
+    0.1943
+   ],
+   "diff_pp": 15.98,
+   "diff_ci_pp": [
+    13.2,
+    18.76
+   ],
+   "lift": 2.098,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Pace varies little in the current bot (one TTS setting); weak contrast expected.",
+   "used_by": [
+    "voice.pace"
+   ],
+   "usable": false,
+   "confound": "Whole-call pace mixes pitch with short confirmation turns typical of successful calls; see EV-22p."
+  },
+  {
+   "id": "EV-22.micro",
+   "claim": "Pace effect for micro sellers",
+   "segment": "turnover=micro",
+   "choice_a": "slow pace",
+   "choice_b": "fast pace",
+   "outcome": "meeting_fixed",
+   "n_a": 1332,
+   "n_b": 1370,
+   "rate_a": 0.3544,
+   "rate_b": 0.1737,
+   "ci_a": [
+    0.3291,
+    0.3804
+   ],
+   "ci_b": [
+    0.1546,
+    0.1947
+   ],
+   "diff_pp": 14.39,
+   "diff_ci_pp": [
+    10.79,
+    17.99
+   ],
+   "lift": 2.04,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "voice.pace"
+   ],
+   "usable": false,
+   "confound": "See EV-22."
+  },
+  {
+   "id": "EV-22.large",
+   "claim": "Pace effect for large sellers",
+   "segment": "turnover=large",
+   "choice_a": "slow pace",
+   "choice_b": "fast pace",
+   "outcome": "meeting_fixed",
+   "n_a": 252,
+   "n_b": 285,
+   "rate_a": 0.3571,
+   "rate_b": 0.1614,
+   "ci_a": [
+    0.3005,
+    0.418
+   ],
+   "ci_b": [
+    0.1232,
+    0.2086
+   ],
+   "diff_pp": 18.04,
+   "diff_ci_pp": [
+    9.37,
+    26.7
+   ],
+   "lift": 2.213,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "voice.pace"
+   ],
+   "usable": false,
+   "confound": "See EV-22."
+  },
+  {
+   "id": "EV-22p",
+   "claim": "Pitch delivered slower (<= 3.15 words/s) vs faster (>= 3.69), complete pitches only",
+   "segment": "all sellers",
+   "choice_a": "slower pitch",
+   "choice_b": "faster pitch",
+   "outcome": "meeting_fixed",
+   "n_a": 2163,
+   "n_b": 2163,
+   "rate_a": 0.3329,
+   "rate_b": 0.2307,
+   "ci_a": [
+    0.3133,
+    0.353
+   ],
+   "ci_b": [
+    0.2134,
+    0.2489
+   ],
+   "diff_pp": 6.98,
+   "diff_ci_pp": [
+    3.89,
+    10.08
+   ],
+   "lift": 1.443,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version",
+    "opening_hook"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Pace differences come from TTS/script variation, not a designed test.",
+   "used_by": [
+    "voice.pace"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-22p.micro",
+   "claim": "Pitch pace effect for micro sellers",
+   "segment": "turnover=micro",
+   "choice_a": "slower pitch",
+   "choice_b": "faster pitch",
+   "outcome": "meeting_fixed",
+   "n_a": 1290,
+   "n_b": 1308,
+   "rate_a": 0.3209,
+   "rate_b": 0.2164,
+   "ci_a": [
+    0.296,
+    0.3469
+   ],
+   "ci_b": [
+    0.1949,
+    0.2395
+   ],
+   "diff_pp": 8.61,
+   "diff_ci_pp": [
+    4.56,
+    12.66
+   ],
+   "lift": 1.483,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version",
+    "opening_hook"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "voice.pace"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-22p.small",
+   "claim": "Pitch pace effect for small sellers",
+   "segment": "turnover=small",
+   "choice_a": "slower pitch",
+   "choice_b": "faster pitch",
+   "outcome": "meeting_fixed",
+   "n_a": 300,
+   "n_b": 313,
+   "rate_a": 0.3167,
+   "rate_b": 0.2013,
+   "ci_a": [
+    0.2666,
+    0.3713
+   ],
+   "ci_b": [
+    0.1606,
+    0.2492
+   ],
+   "diff_pp": 10.81,
+   "diff_ci_pp": [
+    1.72,
+    19.91
+   ],
+   "lift": 1.573,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version",
+    "opening_hook"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "voice.pace"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-22p.large",
+   "claim": "Pitch pace effect for large sellers",
+   "segment": "turnover=large",
+   "choice_a": "slower pitch",
+   "choice_b": "faster pitch",
+   "outcome": "meeting_fixed",
+   "n_a": 245,
+   "n_b": 257,
+   "rate_a": 0.2816,
+   "rate_b": 0.249,
+   "ci_a": [
+    0.229,
+    0.341
+   ],
+   "ci_b": [
+    0.2001,
+    0.3053
+   ],
+   "diff_pp": -6.01,
+   "diff_ci_pp": [
+    -16.34,
+    4.33
+   ],
+   "lift": 1.131,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version",
+    "opening_hook"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "voice.pace"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-22p.retailer",
+   "claim": "Pitch pace effect for retailers",
+   "segment": "biz_kind=retailer",
+   "choice_a": "slower pitch",
+   "choice_b": "faster pitch",
+   "outcome": "meeting_fixed",
+   "n_a": 622,
+   "n_b": 579,
+   "rate_a": 0.3023,
+   "rate_b": 0.2228,
+   "ci_a": [
+    0.2675,
+    0.3395
+   ],
+   "ci_b": [
+    0.1908,
+    0.2585
+   ],
+   "diff_pp": 4.53,
+   "diff_ci_pp": [
+    -1.36,
+    10.43
+   ],
+   "lift": 1.357,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version",
+    "opening_hook"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "voice.pace"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-22p.manufacturer",
+   "claim": "Pitch pace effect for manufacturers",
+   "segment": "biz_kind=manufacturer",
+   "choice_a": "slower pitch",
+   "choice_b": "faster pitch",
+   "outcome": "meeting_fixed",
+   "n_a": 494,
+   "n_b": 566,
+   "rate_a": 0.3401,
+   "rate_b": 0.242,
+   "ci_a": [
+    0.2997,
+    0.3829
+   ],
+   "ci_b": [
+    0.2086,
+    0.279
+   ],
+   "diff_pp": 11.02,
+   "diff_ci_pp": [
+    3.98,
+    18.06
+   ],
+   "lift": 1.405,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version",
+    "opening_hook"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "voice.pace"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-22p.wholesaler",
+   "claim": "Pitch pace effect for wholesalers",
+   "segment": "biz_kind=wholesaler",
+   "choice_a": "slower pitch",
+   "choice_b": "faster pitch",
+   "outcome": "meeting_fixed",
+   "n_a": 408,
+   "n_b": 440,
+   "rate_a": 0.3186,
+   "rate_b": 0.2205,
+   "ci_a": [
+    0.2753,
+    0.3654
+   ],
+   "ci_b": [
+    0.1842,
+    0.2615
+   ],
+   "diff_pp": 9.56,
+   "diff_ci_pp": [
+    1.96,
+    17.15
+   ],
+   "lift": 1.445,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version",
+    "opening_hook"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "voice.pace"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-22p.service",
+   "claim": "Pitch pace effect for services",
+   "segment": "biz_kind=service",
+   "choice_a": "slower pitch",
+   "choice_b": "faster pitch",
+   "outcome": "meeting_fixed",
+   "n_a": 372,
+   "n_b": 340,
+   "rate_a": 0.3656,
+   "rate_b": 0.2206,
+   "ci_a": [
+    0.3183,
+    0.4157
+   ],
+   "ci_b": [
+    0.1798,
+    0.2676
+   ],
+   "diff_pp": 9.32,
+   "diff_ci_pp": [
+    -0.63,
+    19.27
+   ],
+   "lift": 1.657,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version",
+    "opening_hook"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "voice.pace"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-23",
+   "claim": "Seller English share by segment (from what sellers actually said)",
+   "strength": "moderate",
+   "source": "call_turns",
+   "note": "",
+   "table": [
+    {
+     "turnover_band": "micro",
+     "region": "south_ta",
+     "n": 134,
+     "seller_en_share": 0.3566
+    },
+    {
+     "turnover_band": "micro",
+     "region": "south_te",
+     "n": 163,
+     "seller_en_share": 0.2217
+    },
+    {
+     "turnover_band": "small",
+     "region": "south_te",
+     "n": 45,
+     "seller_en_share": 0.2055
+    },
+    {
+     "turnover_band": "unknown",
+     "region": "west_mh",
+     "n": 249,
+     "seller_en_share": 0.1783
+    },
+    {
+     "turnover_band": "large",
+     "region": "north_pa",
+     "n": 91,
+     "seller_en_share": 0.1727
+    },
+    {
+     "turnover_band": "large",
+     "region": "south_te",
+     "n": 47,
+     "seller_en_share": 0.168
+    },
+    {
+     "turnover_band": "large",
+     "region": "west_mh",
+     "n": 264,
+     "seller_en_share": 0.1626
+    },
+    {
+     "turnover_band": "small",
+     "region": "north_pa",
+     "n": 108,
+     "seller_en_share": 0.162
+    },
+    {
+     "turnover_band": "small",
+     "region": "west_mh",
+     "n": 343,
+     "seller_en_share": 0.156
+    },
+    {
+     "turnover_band": "micro",
+     "region": "west_mh",
+     "n": 1079,
+     "seller_en_share": 0.1527
+    },
+    {
+     "turnover_band": "unknown",
+     "region": "west_gu",
+     "n": 357,
+     "seller_en_share": 0.1467
+    },
+    {
+     "turnover_band": "small",
+     "region": "hindi_belt",
+     "n": 808,
+     "seller_en_share": 0.1436
+    },
+    {
+     "turnover_band": "large",
+     "region": "hindi_belt",
+     "n": 608,
+     "seller_en_share": 0.1432
+    },
+    {
+     "turnover_band": "large",
+     "region": "west_gu",
+     "n": 373,
+     "seller_en_share": 0.1401
+    },
+    {
+     "turnover_band": "micro",
+     "region": "north_pa",
+     "n": 217,
+     "seller_en_share": 0.1384
+    },
+    {
+     "turnover_band": "micro",
+     "region": "hindi_belt",
+     "n": 3727,
+     "seller_en_share": 0.1383
+    },
+    {
+     "turnover_band": "unknown",
+     "region": "hindi_belt",
+     "n": 851,
+     "seller_en_share": 0.1343
+    },
+    {
+     "turnover_band": "micro",
+     "region": "east_od",
+     "n": 112,
+     "seller_en_share": 0.1303
+    },
+    {
+     "turnover_band": "large",
+     "region": "east_bn",
+     "n": 90,
+     "seller_en_share": 0.1302
+    },
+    {
+     "turnover_band": "micro",
+     "region": "west_gu",
+     "n": 1488,
+     "seller_en_share": 0.1254
+    },
+    {
+     "turnover_band": "unknown",
+     "region": "east_bn",
+     "n": 84,
+     "seller_en_share": 0.1206
+    },
+    {
+     "turnover_band": "micro",
+     "region": "east_bn",
+     "n": 366,
+     "seller_en_share": 0.1167
+    },
+    {
+     "turnover_band": "small",
+     "region": "west_gu",
+     "n": 365,
+     "seller_en_share": 0.1156
+    },
+    {
+     "turnover_band": "small",
+     "region": "east_bn",
+     "n": 81,
+     "seller_en_share": 0.0848
+    },
+    {
+     "turnover_band": "micro",
+     "region": "east_as",
+     "n": 57,
+     "seller_en_share": 0.0843
+    }
+   ],
+   "used_by": [
+    "language.hinglish_mix",
+    "language.primary"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-23b",
+   "claim": "English-leaning sellers get a Hindi-heavy bot today; their meeting-fix rate",
+   "segment": "all sellers",
+   "choice_a": "seller English share >= 35%",
+   "choice_b": "< 15%",
+   "outcome": "meeting_fixed",
+   "n_a": 356,
+   "n_b": 6669,
+   "rate_a": 0.25,
+   "rate_b": 0.2886,
+   "ci_a": [
+    0.2078,
+    0.2975
+   ],
+   "ci_b": [
+    0.2779,
+    0.2996
+   ],
+   "diff_pp": -4.66,
+   "diff_ci_pp": [
+    -9.2,
+    -0.12
+   ],
+   "lift": 0.866,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "",
+   "used_by": [
+    "language.hinglish_mix",
+    "live.language_switch"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-24.frustration",
+   "claim": "Calls where the seller showed 'frustration'",
+   "segment": "all sellers",
+   "choice_a": "frustration detected",
+   "choice_b": "no frustration",
+   "outcome": "meeting_fixed",
+   "n_a": 592,
+   "n_b": 11759,
+   "rate_a": 0.1385,
+   "rate_b": 0.2288,
+   "ci_a": [
+    0.113,
+    0.1687
+   ],
+   "ci_b": [
+    0.2213,
+    0.2365
+   ],
+   "diff_pp": -9.63,
+   "diff_ci_pp": [
+    -12.45,
+    -6.81
+   ],
+   "lift": 0.605,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Signals need seller speech, so they appear in longer calls.",
+   "used_by": [
+    "live.frustration"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-24.rush",
+   "claim": "Calls where the seller showed 'rush'",
+   "segment": "all sellers",
+   "choice_a": "rush detected",
+   "choice_b": "no rush",
+   "outcome": "meeting_fixed",
+   "n_a": 1383,
+   "n_b": 10968,
+   "rate_a": 0.1461,
+   "rate_b": 0.2344,
+   "ci_a": [
+    0.1284,
+    0.1657
+   ],
+   "ci_b": [
+    0.2266,
+    0.2424
+   ],
+   "diff_pp": -8.71,
+   "diff_ci_pp": [
+    -10.72,
+    -6.7
+   ],
+   "lift": 0.623,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Signals need seller speech, so they appear in longer calls.",
+   "used_by": [
+    "live.rush"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-24.unavailable",
+   "claim": "Calls where the seller showed 'unavailable'",
+   "segment": "all sellers",
+   "choice_a": "unavailable detected",
+   "choice_b": "no unavailable",
+   "outcome": "meeting_fixed",
+   "n_a": 1597,
+   "n_b": 10754,
+   "rate_a": 0.1572,
+   "rate_b": 0.2345,
+   "ci_a": [
+    0.1401,
+    0.1758
+   ],
+   "ci_b": [
+    0.2266,
+    0.2426
+   ],
+   "diff_pp": -7.5,
+   "diff_ci_pp": [
+    -9.43,
+    -5.57
+   ],
+   "lift": 0.67,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Signals need seller speech, so they appear in longer calls.",
+   "used_by": [
+    "live.unavailable"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-24.confusion",
+   "claim": "Calls where the seller showed 'confusion'",
+   "segment": "all sellers",
+   "choice_a": "confusion detected",
+   "choice_b": "no confusion",
+   "outcome": "meeting_fixed",
+   "n_a": 2134,
+   "n_b": 10217,
+   "rate_a": 0.2573,
+   "rate_b": 0.2177,
+   "ci_a": [
+    0.2392,
+    0.2762
+   ],
+   "ci_b": [
+    0.2098,
+    0.2258
+   ],
+   "diff_pp": 3.13,
+   "diff_ci_pp": [
+    1.14,
+    5.12
+   ],
+   "lift": 1.182,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Signals need seller speech, so they appear in longer calls.",
+   "used_by": [
+    "live.confusion"
+   ],
+   "usable": false,
+   "confound": "Identity questions ('kaun bol rahe') occur in engaged calls; descriptive only."
+  },
+  {
+   "id": "EV-24.interest",
+   "claim": "Calls where the seller showed 'interest'",
+   "segment": "all sellers",
+   "choice_a": "interest detected",
+   "choice_b": "no interest",
+   "outcome": "meeting_fixed",
+   "n_a": 1156,
+   "n_b": 11195,
+   "rate_a": 0.3564,
+   "rate_b": 0.2109,
+   "ci_a": [
+    0.3293,
+    0.3844
+   ],
+   "ci_b": [
+    0.2034,
+    0.2186
+   ],
+   "diff_pp": 13.22,
+   "diff_ci_pp": [
+    10.43,
+    16.01
+   ],
+   "lift": 1.69,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Signals need seller speech, so they appear in longer calls.",
+   "used_by": [
+    "live.interest"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-24.not_interested",
+   "claim": "Calls where the seller showed 'not_interested'",
+   "segment": "all sellers",
+   "choice_a": "not_interested detected",
+   "choice_b": "no not_interested",
+   "outcome": "meeting_fixed",
+   "n_a": 1132,
+   "n_b": 11219,
+   "rate_a": 0.076,
+   "rate_b": 0.2395,
+   "ci_a": [
+    0.0619,
+    0.0929
+   ],
+   "ci_b": [
+    0.2317,
+    0.2475
+   ],
+   "diff_pp": -16.12,
+   "diff_ci_pp": [
+    -17.84,
+    -14.4
+   ],
+   "lift": 0.317,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Signals need seller speech, so they appear in longer calls.",
+   "used_by": [
+    "live.not_interested"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-25",
+   "claim": "After the seller signals rush, a short reply (<=20 words) vs a long one (>35)",
+   "segment": "all sellers",
+   "choice_a": "short reply",
+   "choice_b": "long reply",
+   "outcome": "meeting_fixed",
+   "n_a": 474,
+   "n_b": 226,
+   "rate_a": 0.0949,
+   "rate_b": 0.2257,
+   "ci_a": [
+    0.0717,
+    0.1247
+   ],
+   "ci_b": [
+    0.176,
+    0.2845
+   ],
+   "diff_pp": -9.21,
+   "diff_ci_pp": [
+    -15.15,
+    -3.28
+   ],
+   "lift": 0.421,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "Observational: what the bot happened to do next. Shows association, not cause.",
+   "used_by": [
+    "live.rush"
+   ],
+   "usable": false,
+   "confound": "Short bot replies after rush are mostly give-up closings; see EV-25b (slot offer)."
+  },
+  {
+   "id": "EV-25b",
+   "claim": "After rush, offering a concrete slot vs not",
+   "segment": "all sellers",
+   "choice_a": "offers slot",
+   "choice_b": "no slot",
+   "outcome": "meeting_fixed",
+   "n_a": 229,
+   "n_b": 1045,
+   "rate_a": 0.3013,
+   "rate_b": 0.1206,
+   "ci_a": [
+    0.2456,
+    0.3636
+   ],
+   "ci_b": [
+    0.1022,
+    0.1417
+   ],
+   "diff_pp": 13.98,
+   "diff_ci_pp": [
+    7.37,
+    20.59
+   ],
+   "lift": 2.499,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "Observational: what the bot happened to do next. Shows association, not cause.",
+   "used_by": [
+    "live.rush"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-26",
+   "claim": "After confusion, rephrasing (low overlap with previous turn) vs repeating the same words",
+   "segment": "all sellers",
+   "choice_a": "rephrase",
+   "choice_b": "repeat",
+   "outcome": "meeting_fixed",
+   "n_a": 1727,
+   "n_b": 75,
+   "rate_a": 0.2658,
+   "rate_b": 0.16,
+   "ci_a": [
+    0.2455,
+    0.2871
+   ],
+   "ci_b": [
+    0.094,
+    0.2592
+   ],
+   "diff_pp": 7.11,
+   "diff_ci_pp": [
+    -3.42,
+    17.64
+   ],
+   "lift": 1.661,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "Observational: what the bot happened to do next. Shows association, not cause.",
+   "used_by": [
+    "live.confusion"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-26b",
+   "claim": "After confusion, a short simple reply vs a long one",
+   "segment": "all sellers",
+   "choice_a": "short reply",
+   "choice_b": "long reply",
+   "outcome": "meeting_fixed",
+   "n_a": 741,
+   "n_b": 573,
+   "rate_a": 0.2038,
+   "rate_b": 0.3106,
+   "ci_a": [
+    0.1763,
+    0.2343
+   ],
+   "ci_b": [
+    0.2741,
+    0.3497
+   ],
+   "diff_pp": -7.48,
+   "diff_ci_pp": [
+    -12.17,
+    -2.8
+   ],
+   "lift": 0.656,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "call_turns",
+   "caveat": "Observational: what the bot happened to do next. Shows association, not cause.",
+   "used_by": [
+    "live.confusion"
+   ],
+   "usable": false,
+   "confound": "Short replies after confusion include closings; direction not interpretable."
+  },
+  {
+   "id": "EV-27",
+   "claim": "After frustration, acknowledging it (empathy phrase) vs pushing on",
+   "segment": "all sellers",
+   "choice_a": "empathy",
+   "choice_b": "no empathy",
+   "outcome": "meeting_fixed",
+   "n_a": 327,
+   "n_b": 214,
+   "rate_a": 0.159,
+   "rate_b": 0.1262,
+   "ci_a": [
+    0.1234,
+    0.2026
+   ],
+   "ci_b": [
+    0.0882,
+    0.1773
+   ],
+   "diff_pp": 1.49,
+   "diff_ci_pp": [
+    -4.4,
+    7.38
+   ],
+   "lift": 1.26,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "Observational: what the bot happened to do next. Shows association, not cause.",
+   "used_by": [
+    "live.frustration"
+   ],
+   "usable": false
+  },
+  {
+   "id": "EV-27b",
+   "claim": "After frustration, a short reply vs a long one",
+   "segment": "all sellers",
+   "choice_a": "short reply",
+   "choice_b": "long reply",
+   "outcome": "meeting_fixed",
+   "n_a": 221,
+   "n_b": 105,
+   "rate_a": 0.0905,
+   "rate_b": 0.2381,
+   "ci_a": [
+    0.0593,
+    0.1356
+   ],
+   "ci_b": [
+    0.1668,
+    0.3279
+   ],
+   "diff_pp": -4.39,
+   "diff_ci_pp": [
+    -14.17,
+    5.4
+   ],
+   "lift": 0.38,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "call_turns",
+   "caveat": "Observational: what the bot happened to do next. Shows association, not cause.",
+   "used_by": [
+    "live.frustration"
+   ],
+   "usable": false,
+   "confound": "Short replies after frustration include closings; direction not interpretable."
+  },
+  {
+   "id": "EV-28",
+   "claim": "After interest, moving to a concrete slot vs not",
+   "segment": "all sellers",
+   "choice_a": "offers slot",
+   "choice_b": "no slot",
+   "outcome": "meeting_fixed",
+   "n_a": 315,
+   "n_b": 784,
+   "rate_a": 0.6095,
+   "rate_b": 0.2717,
+   "ci_a": [
+    0.5546,
+    0.6618
+   ],
+   "ci_b": [
+    0.2417,
+    0.3039
+   ],
+   "diff_pp": 33.05,
+   "diff_ci_pp": [
+    26.66,
+    39.44
+   ],
+   "lift": 2.244,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "Observational: what the bot happened to do next. Shows association, not cause.",
+   "used_by": [
+    "live.interest"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-28b",
+   "claim": "When seller is unavailable, proposing a specific later slot vs not",
+   "segment": "all sellers",
+   "choice_a": "offers slot",
+   "choice_b": "no slot",
+   "outcome": "meeting_fixed",
+   "n_a": 364,
+   "n_b": 1174,
+   "rate_a": 0.2637,
+   "rate_b": 0.1286,
+   "ci_a": [
+    0.2211,
+    0.3113
+   ],
+   "ci_b": [
+    0.1107,
+    0.149
+   ],
+   "diff_pp": 10.25,
+   "diff_ci_pp": [
+    5.24,
+    15.27
+   ],
+   "lift": 2.051,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "moderate",
+   "source": "call_turns",
+   "caveat": "Observational: what the bot happened to do next. Shows association, not cause.",
+   "used_by": [
+    "plan.escalation"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-29",
+   "claim": "Fast bot replies (median gap <=1.2s) vs slow (>=2s)",
+   "segment": "all sellers",
+   "choice_a": "fast reply",
+   "choice_b": "slow reply",
+   "outcome": "meeting_fixed",
+   "n_a": 9307,
+   "n_b": 1181,
+   "rate_a": 0.247,
+   "rate_b": 0.1236,
+   "ci_a": [
+    0.2384,
+    0.2559
+   ],
+   "ci_b": [
+    0.1061,
+    0.1436
+   ],
+   "diff_pp": 12.62,
+   "diff_ci_pp": [
+    10.53,
+    14.71
+   ],
+   "lift": 1.998,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "eval_latency_repetition",
+   "caveat": "",
+   "used_by": [
+    "live.latency_budget"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-29b",
+   "claim": "Calls where the seller had to repeat themselves",
+   "segment": "all sellers",
+   "choice_a": "seller repeated",
+   "choice_b": "no repeat",
+   "outcome": "meeting_fixed",
+   "n_a": 2157,
+   "n_b": 10111,
+   "rate_a": 0.2814,
+   "rate_b": 0.2235,
+   "ci_a": [
+    0.2628,
+    0.3008
+   ],
+   "ci_b": [
+    0.2155,
+    0.2317
+   ],
+   "diff_pp": 5.22,
+   "diff_ci_pp": [
+    3.17,
+    7.26
+   ],
+   "lift": 1.259,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "eval_latency_repetition",
+   "caveat": "",
+   "used_by": [
+    "live.confusion"
+   ],
+   "usable": false,
+   "confound": "Longer (successful) calls have more chances for a repeat: call-length confound."
+  },
+  {
+   "id": "EV-29c",
+   "claim": "Calls where the bot repeated itself 2+ times",
+   "segment": "all sellers",
+   "choice_a": "bot repeats",
+   "choice_b": "no repeats",
+   "outcome": "meeting_fixed",
+   "n_a": 90,
+   "n_b": 10694,
+   "rate_a": 0.6222,
+   "rate_b": 0.201,
+   "ci_a": [
+    0.519,
+    0.7154
+   ],
+   "ci_b": [
+    0.1935,
+    0.2087
+   ],
+   "diff_pp": 41.53,
+   "diff_ci_pp": [
+    30.96,
+    52.09
+   ],
+   "lift": 3.096,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "weak",
+   "source": "eval_latency_repetition",
+   "caveat": "",
+   "used_by": [
+    "live.confusion",
+    "guardrails.no_loop"
+   ],
+   "usable": false,
+   "confound": "Longer (successful) calls have more chances for bot repeats: call-length confound."
+  },
+  {
+   "id": "EV-30",
+   "claim": "Objection category -> share of those calls that still ended in a meeting",
+   "strength": "moderate",
+   "source": "eval_objections",
+   "note": "",
+   "table": [
+    {
+     "category": "Seller Unavailability & Scheduling Constraints",
+     "n": 1314,
+     "mf_rate": 0.0572
+    },
+    {
+     "category": "Callback / Deferred Engagement (Neutral)",
+     "n": 1205,
+     "mf_rate": 0.0568
+    },
+    {
+     "category": "Call Quality / Technical Failures",
+     "n": 840,
+     "mf_rate": 0.0262
+    },
+    {
+     "category": "Explicit Disinterest / Refusal",
+     "n": 781,
+     "mf_rate": 0.0229
+    },
+    {
+     "category": "No Seller Response / Engagement Drop",
+     "n": 752,
+     "mf_rate": 0.0185
+    },
+    {
+     "category": "Call Handling / Executive Gaps",
+     "n": 593,
+     "mf_rate": 0.0569
+    },
+    {
+     "category": "Existing Engagement / Past Experience",
+     "n": 367,
+     "mf_rate": 0.0486
+    },
+    {
+     "category": "Wrong Contact / Business Not Applicable",
+     "n": 202,
+     "mf_rate": 0.0297
+    },
+    {
+     "category": "Not Ready / Needs Time / Early-Stage Seller",
+     "n": 196,
+     "mf_rate": 0.0808
+    },
+    {
+     "category": "Product / Service / Business Mismatch",
+     "n": 130,
+     "mf_rate": 0.0746
+    },
+    {
+     "category": "Information / Trust / Privacy Concerns",
+     "n": 50,
+     "mf_rate": 0.0392
+    },
+    {
+     "category": "Others",
+     "n": 37,
+     "mf_rate": 0.1081
+    }
+   ],
+   "used_by": [
+    "plan.objections"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-31",
+   "claim": "Question the seller asked -> meeting-fix rate of the call",
+   "strength": "moderate",
+   "source": "eval_seller_questions",
+   "note": "",
+   "table": [
+    {
+     "category": "Meeting Visit",
+     "n": 1157,
+     "mf_rate": 0.5541
+    },
+    {
+     "category": "Clarification",
+     "n": 936,
+     "mf_rate": 0.3908
+    },
+    {
+     "category": "Location Confirmation",
+     "n": 337,
+     "mf_rate": 0.3091
+    },
+    {
+     "category": "Problem Complaint",
+     "n": 96,
+     "mf_rate": 0.2931
+    },
+    {
+     "category": "Profile Visibility",
+     "n": 104,
+     "mf_rate": 0.2909
+    },
+    {
+     "category": "Service Product Info",
+     "n": 640,
+     "mf_rate": 0.2873
+    },
+    {
+     "category": "Enquiry Lead",
+     "n": 261,
+     "mf_rate": 0.2427
+    },
+    {
+     "category": "Purpose Reason",
+     "n": 773,
+     "mf_rate": 0.2319
+    },
+    {
+     "category": "Pricing Payment",
+     "n": 272,
+     "mf_rate": 0.2308
+    },
+    {
+     "category": "Benefit Value",
+     "n": 201,
+     "mf_rate": 0.211
+    },
+    {
+     "category": "AI Bot Confirmation",
+     "n": 125,
+     "mf_rate": 0.1852
+    },
+    {
+     "category": "Identity Confirmation",
+     "n": 987,
+     "mf_rate": 0.184
+    },
+    {
+     "category": "Callback Contact",
+     "n": 330,
+     "mf_rate": 0.1524
+    },
+    {
+     "category": "Frustrated User",
+     "n": 136,
+     "mf_rate": 0.0958
+    }
+   ],
+   "used_by": [
+    "live.interest",
+    "live.confusion"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-32",
+   "claim": "Where calls are lost: sub-disposition shares (disposition evaluator)",
+   "strength": "strong",
+   "source": "eval_disposition",
+   "note": "dropped_after_indiamart_identity + dropped_mid_pitch = the opening is the biggest leak.",
+   "table": [
+    {
+     "sub_disposition": "no_response",
+     "share": 0.2519
+    },
+    {
+     "sub_disposition": "none",
+     "share": 0.1863
+    },
+    {
+     "sub_disposition": "dropped_mid_pitch",
+     "share": 0.1148
+    },
+    {
+     "sub_disposition": "flat_refusal_or_no_requirement",
+     "share": 0.1011
+    },
+    {
+     "sub_disposition": "dropped_after_indiamart_identity",
+     "share": 0.0998
+    },
+    {
+     "sub_disposition": "dropped_after_seller_identity",
+     "share": 0.0733
+    },
+    {
+     "sub_disposition": "callback_with_datetime",
+     "share": 0.0625
+    },
+    {
+     "sub_disposition": "callback_without_datetime",
+     "share": 0.0615
+    },
+    {
+     "sub_disposition": "already_met_exec",
+     "share": 0.0189
+    },
+    {
+     "sub_disposition": "voicemail",
+     "share": 0.0111
+    },
+    {
+     "sub_disposition": "in_touch_with_exec",
+     "share": 0.0109
+    },
+    {
+     "sub_disposition": "business_closed",
+     "share": 0.0045
+    }
+   ],
+   "used_by": [
+    "plan.opening"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-33",
+   "claim": "Long first pitch (>14s) -> seller hangs up mid-pitch more often",
+   "segment": "all sellers",
+   "choice_a": "pitch > 14s",
+   "choice_b": "pitch <= 10s",
+   "outcome": "drop_mid",
+   "n_a": 3800,
+   "n_b": 2394,
+   "rate_a": 0.0858,
+   "rate_b": 0.185,
+   "ci_a": [
+    0.0773,
+    0.0951
+   ],
+   "ci_b": [
+    0.17,
+    0.2011
+   ],
+   "diff_pp": -10.31,
+   "diff_ci_pp": [
+    -12.11,
+    -8.5
+   ],
+   "lift": 0.464,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "eval_disposition+call_turns",
+   "caveat": "",
+   "used_by": [
+    "plan.opening",
+    "tone.verbosity"
+   ],
+   "usable": false,
+   "confound": "Same survivorship as EV-21 (a drop truncates the pitch)."
+  },
+  {
+   "id": "EV-36",
+   "claim": "Where VANI mishandles the seller today (6,448 evaluator-flagged turns)",
+   "strength": "strong",
+   "source": "eval_seller_questions (gaps)",
+   "note": "Seller turn types: Objection 3100, Question 1575, Request 1448, Complaint 325",
+   "table": [
+    {
+     "theme": "busy / no time (rush)",
+     "gaps": 377,
+     "share_of_gaps": 0.0585
+    },
+    {
+     "theme": "repeated the pitch / ignored seller",
+     "gaps": 2838,
+     "share_of_gaps": 0.4401
+    },
+    {
+     "theme": "confusion / clarification",
+     "gaps": 474,
+     "share_of_gaps": 0.0735
+    },
+    {
+     "theme": "frustration",
+     "gaps": 104,
+     "share_of_gaps": 0.0161
+    },
+    {
+     "theme": "price / charges",
+     "gaps": 271,
+     "share_of_gaps": 0.042
+    },
+    {
+     "theme": "language",
+     "gaps": 61,
+     "share_of_gaps": 0.0095
+    }
+   ],
+   "used_by": [
+    "live.rush",
+    "live.confusion",
+    "live.frustration",
+    "plan.objections"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-37",
+   "claim": "Calls where VANI mishandled a seller turn vs calls handled cleanly",
+   "segment": "all sellers",
+   "choice_a": "bot mishandled a turn",
+   "choice_b": "no gap",
+   "outcome": "meeting_fixed",
+   "n_a": 5578,
+   "n_b": 2782,
+   "rate_a": 0.2325,
+   "rate_b": 0.303,
+   "ci_a": [
+    0.2216,
+    0.2438
+   ],
+   "ci_b": [
+    0.2862,
+    0.3204
+   ],
+   "diff_pp": -9.87,
+   "diff_ci_pp": [
+    -12.15,
+    -7.6
+   ],
+   "lift": 0.767,
+   "stratified_by": [
+    "redis_bucket",
+    "lead_bot_version"
+   ],
+   "strength": "strong",
+   "source": "eval_seller_questions",
+   "caveat": "Gaps need seller speech, so they occur in longer calls; read with EV-36.",
+   "used_by": [
+    "live.overall"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-34",
+   "claim": "Meetings marked fixed that the seller actually rejected (pushiness risk)",
+   "strength": "strong",
+   "source": "eval_incorrect_mf",
+   "note": "Guardrail: never claim a meeting is fixed without explicit seller agreement.",
+   "table": [
+    {
+     "seller_final_stance": "agreed_to_meeting",
+     "share": 0.9761
+    },
+    {
+     "seller_final_stance": "explicitly_rejected",
+     "share": 0.0239
+    }
+   ],
+   "used_by": [
+    "guardrails.confirmation"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-35",
+   "claim": "Frustrated sellers hang up on the bot",
+   "segment": "all sellers",
+   "choice_a": "frustration",
+   "choice_b": "none",
+   "outcome": "seller_hung_up",
+   "n_a": 556,
+   "n_b": 10974,
+   "rate_a": 0.1906,
+   "rate_b": 0.0992,
+   "ci_a": [
+    0.1602,
+    0.2254
+   ],
+   "ci_b": [
+    0.0938,
+    0.105
+   ],
+   "diff_pp": 9.14,
+   "diff_ci_pp": [
+    5.83,
+    12.45
+   ],
+   "lift": 1.921,
+   "stratified_by": [],
+   "strength": "strong",
+   "source": "eval_execdrop",
+   "caveat": "",
+   "used_by": [
+    "live.frustration"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-G1",
+   "claim": "Voice gender per seller type",
+   "strength": "informed_guess",
+   "note": "Every past call used one female voice ('Payal'), so the data cannot compare genders. We default to a warm female voice (matches the proven baseline) and use a measured male voice only for formal large-company personas, as a deliberate, low-confidence choice to be A/B tested.",
+   "used_by": [
+    "voice.speaker"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-G2",
+   "claim": "Regional language for non-Hindi states",
+   "strength": "informed_guess",
+   "note": "Bot spoke Hindi/Hinglish only. EV-08* shows how those regions convert on Hindi; offering the regional language is an informed guess, so we start in Hinglish/English and switch only when the seller does.",
+   "used_by": [
+    "language.primary",
+    "live.language_switch"
+   ],
+   "usable": true
+  },
+  {
+   "id": "EV-G3",
+   "claim": "Pitch/pace for confused sellers",
+   "strength": "informed_guess",
+   "note": "Bulbul pace can only be set per persona; past calls had nearly constant pace, so slowing down on confusion relies on EV-26 (rephrase) and EV-29b (repeat) plus standard call-centre practice.",
+   "used_by": [
+    "live.confusion",
+    "voice.pace"
+   ],
+   "usable": true
+  }
+ ]
+}

@@ -1,0 +1,57 @@
+{
+  "_note": "Sarvam Voice Agents (indus.sarvam.ai/samvaad) created 2026-10-09; closing-line prompt committed 2026-10-10. committed_version = latest frozen version. Each agent's default variables = its demo seller.",
+  "warm_hinglish": {
+    "app_id": "VANI---Warm-26080196-acf0",
+    "name": "VANI · Warm Hinglish",
+    "committed_version": 6,
+    "voice": "Ritu - Warm Support Agent",
+    "pace": 0.9,
+    "demo_seller": 331550,
+    "switch_tool": "update_persona_mode"
+  },
+  "friendly_hinglish": {
+    "app_id": "VANI---Frie-1b2d8878-1b4f",
+    "name": "VANI · Friendly Hinglish",
+    "committed_version": 7,
+    "voice": "Simran - Hindi Sales Agent",
+    "pace": 0.9,
+    "demo_seller": 97898477,
+    "switch_tool": "update_persona_mode"
+  },
+  "clear_hinglish": {
+    "app_id": "VANI---Clea-e7036afd-0bd7",
+    "name": "VANI · Clear Hinglish",
+    "committed_version": 6,
+    "voice": "Ritu - Sales Agent",
+    "pace": 1.0,
+    "demo_seller": 25144509,
+    "switch_tool": "update_persona_mode"
+  },
+  "formal_hinglish": {
+    "app_id": "VANI---Form-6dff5c14-afcc",
+    "name": "VANI · Formal Hinglish",
+    "committed_version": 6,
+    "voice": "Aditya - Sales Agent",
+    "pace": 1.0,
+    "demo_seller": 98255184,
+    "switch_tool": "update_persona_mode"
+  },
+  "english_led": {
+    "app_id": "VANI---Engl-de2235e0-2377",
+    "name": "VANI · English-led",
+    "committed_version": 6,
+    "voice": "Simran - English Support Agent",
+    "pace": 1.0,
+    "demo_seller": 2911154,
+    "switch_tool": "update_persona_mode"
+  },
+  "english_formal": {
+    "app_id": "VANI---Engl-62ecd0f8-db10",
+    "name": "VANI · English Formal",
+    "committed_version": 7,
+    "voice": "Shubh - Expressive Banking Agent",
+    "pace": 1.0,
+    "demo_seller": 66773609,
+    "switch_tool": "update_persona_mode"
+  }
+}

@@ -1,0 +1,6 @@
+.venv/
+.env
+__pycache__/
+out/voice_samples/
+out/smoke/
+out/service.db

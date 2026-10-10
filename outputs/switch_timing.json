@@ -1,0 +1,102 @@
+{
+ "method": "Every audited call is replayed seller turn by seller turn through the exact Sarvam code tool\n(sarvam_agent/update_persona_mode.py). The evaluator's reason text labels 2,986 seller turns with the signal it saw\n(rush, confusion, frustration, interest, or none). For each labelled turn we check what the tool did:",
+ "cooldown_turns": 2,
+ "keywords_only": {
+  "calls": 2735,
+  "by_signal": {
+   "rush": {
+    "labelled_turns": 145,
+    "on_time": 57,
+    "one_late": 3,
+    "missed": 85,
+    "on_time_rate": 0.393,
+    "within_one_turn_rate": 0.414
+   },
+   "confusion": {
+    "labelled_turns": 323,
+    "on_time": 3,
+    "one_late": 0,
+    "missed": 320,
+    "on_time_rate": 0.009,
+    "within_one_turn_rate": 0.009
+   },
+   "frustration": {
+    "labelled_turns": 76,
+    "on_time": 41,
+    "one_late": 0,
+    "missed": 35,
+    "on_time_rate": 0.539,
+    "within_one_turn_rate": 0.539
+   },
+   "interest": {
+    "labelled_turns": 210,
+    "on_time": 21,
+    "one_late": 0,
+    "missed": 189,
+    "on_time_rate": 0.1,
+    "within_one_turn_rate": 0.1
+   }
+  },
+  "all_signals": {
+   "labelled_turns": 754,
+   "on_time": 122,
+   "one_late": 3,
+   "missed": 629,
+   "on_time_rate": 0.162,
+   "within_one_turn_rate": 0.166
+  },
+  "no_signal_turns": 2293,
+  "false_switch_rate": 0.058,
+  "flapping_events": 0,
+  "avg_switches_per_call": 0.29
+ },
+ "with_llm_guess": {
+  "calls": 290,
+  "by_signal": {
+   "rush": {
+    "labelled_turns": 62,
+    "on_time": 40,
+    "one_late": 0,
+    "missed": 22,
+    "on_time_rate": 0.645,
+    "within_one_turn_rate": 0.645
+   },
+   "confusion": {
+    "labelled_turns": 76,
+    "on_time": 26,
+    "one_late": 0,
+    "missed": 50,
+    "on_time_rate": 0.342,
+    "within_one_turn_rate": 0.342
+   },
+   "frustration": {
+    "labelled_turns": 61,
+    "on_time": 44,
+    "one_late": 0,
+    "missed": 17,
+    "on_time_rate": 0.721,
+    "within_one_turn_rate": 0.721
+   },
+   "interest": {
+    "labelled_turns": 70,
+    "on_time": 21,
+    "one_late": 0,
+    "missed": 49,
+    "on_time_rate": 0.3,
+    "within_one_turn_rate": 0.3
+   }
+  },
+  "all_signals": {
+   "labelled_turns": 269,
+   "on_time": 131,
+   "one_late": 0,
+   "missed": 138,
+   "on_time_rate": 0.487,
+   "within_one_turn_rate": 0.487
+  },
+  "no_signal_turns": 60,
+  "false_switch_rate": 0.533,
+  "flapping_events": 0,
+  "avg_switches_per_call": 0.88
+ }
+}

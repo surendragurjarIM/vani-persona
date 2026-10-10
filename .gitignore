@@ -1,0 +1,12 @@
+.venv/
+.env
+__pycache__/
+data/cache/
+out/
+manual/inbox/
+video/node_modules/
+video/frames/
+video/audio/
+video/out/
+video/stills/
+*.db

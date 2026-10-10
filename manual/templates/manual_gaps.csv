@@ -1,0 +1,4 @@
+gap_id,call_id,fk_glusr_usr_id,turn_no,seller_said,vani_said,should_have_said,signal,tone_heard,persona_setting,recommended_value,applies_to,priority,reviewer,date,notes
+MG-0001,M-0001,127142815,4,"Madam main busy hoon, price bataiye","(repeated the full pitch)","Ji, seedha bata deti hoon: 4,000 plus GST mahina. Kal subah 10 ya shaam 5, 15 minute ki free meeting?",rush,irritated / fast,live_adaptation.thresholds.rush,0.4,seller:127142815,5,qa_team,2026-10-10,"Example: lower rush threshold for this seller"
+MG-0002,M-0001,,,"(any seller who says 'busy')","(repeated the pitch)","Acknowledge + two slots, no pitch repeat",rush,,conversation_plan.guardrails,"When the seller says busy, never repeat the pitch; offer two slots.",all,4,qa_team,2026-10-10,"Example of a rule for everyone"
+MG-0003,,,,,,,,,tone.max_words_per_turn,18,segment:turnover_band=micro&biz_kind=retailer,3,qa_team,2026-10-10,"Example of a segment-level override"

@@ -1,0 +1,406 @@
+<title>VANI Seller-Fit Persona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column (max 1080px) with full-width diagram band; offline lane = teal, live lane = saffron, manual feed = violet */
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --fg:#151a22; --muted:#5b6472; --line:#d9dde4;
+  --accent:#1f4fd1; --offline:#0d7f74; --offline-soft:#e3f3f1; --live:#c26a12; --live-soft:#fbefe1;
+  --manual:#7a3fc4; --manual-soft:#f1e9fb;
+  --good:#1d8a4b; --warn:#b7791f; --weak:#8a93a1;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f131a; --surface:#171c25; --fg:#e7eaf0; --muted:#9aa3b2; --line:#2a313d;
+  --accent:#7d9cff; --offline:#4cc3b5; --offline-soft:#13302d; --live:#f0a24f; --live-soft:#35260f;
+  --manual:#b48af0; --manual-soft:#2a1d3d;
+  --good:#5fd08f; --warn:#e7b25a; --weak:#7b8494; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f131a; --surface:#171c25; --fg:#e7eaf0; --muted:#9aa3b2; --line:#2a313d;
+  --accent:#7d9cff; --offline:#4cc3b5; --offline-soft:#13302d; --live:#f0a24f; --live-soft:#35260f;
+  --manual:#b48af0; --manual-soft:#2a1d3d;
+  --good:#5fd08f; --warn:#e7b25a; --weak:#7b8494; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.6 var(--body);padding-inline:16px;padding-block:32px 64px}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:52px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(28px,4.5vw,44px);letter-spacing:-.01em}
+h2{font-size:24px}
+h3{font-size:16px}
+p{margin:0;max-width:70ch}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+section{display:flex;flex-direction:column;gap:16px}
+.lede{color:var(--muted);font-size:17px}
+.mono{font-family:var(--mono)}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0;display:flex;flex-direction:column;gap:8px}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+td.num{text-align:right;white-space:nowrap}
+.scroll{overflow-x:auto;min-width:0}
+.tablecard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:4px 8px}
+.crit{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.crit .w{font:700 28px var(--display);color:var(--accent);font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font:500 11px var(--mono);padding:1px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;vertical-align:1px}
+.strong{color:var(--good)} .mod{color:var(--warn)} .weakc{color:var(--weak)} .guess{color:var(--manual)}
+.status{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.st{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--surface);display:flex;flex-direction:column;gap:4px}
+.st .n{font:500 12px var(--mono);color:var(--muted)}
+.st b{font-family:var(--display);font-size:15px}
+.st.done{border-color:var(--good)} .st.done .n{color:var(--good)}
+.st.next{border-color:var(--accent)} .st.next .n{color:var(--accent)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.kpi b{font:700 26px var(--display);font-variant-numeric:tabular-nums;display:block}
+.kpi span{color:var(--muted);font-size:13px}
+.diagram{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.diagram svg{display:block;min-width:920px;width:100%;height:auto}
+svg text{font-family:var(--body);fill:var(--fg)}
+svg .sub{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+svg .t{font-size:13px;font-weight:600}
+svg .lane-o{fill:var(--offline-soft)} svg .lane-l{fill:var(--live-soft)}
+svg .lane-label{font:600 12px var(--mono);letter-spacing:.08em}
+svg .bx{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+svg .bx-o{fill:var(--surface);stroke:var(--offline);stroke-width:1.4}
+svg .bx-l{fill:var(--surface);stroke:var(--live);stroke-width:1.4}
+svg .bx-s{fill:var(--surface);stroke:var(--accent);stroke-width:1.8}
+svg .bx-m{fill:var(--manual-soft);stroke:var(--manual);stroke-width:1.8}
+svg .ar{stroke:var(--muted);stroke-width:1.4;fill:none}
+svg .ar-d{stroke:var(--accent);stroke-width:1.4;fill:none;stroke-dasharray:5 4}
+svg .ar-m{stroke:var(--manual);stroke-width:1.6;fill:none;stroke-dasharray:5 4}
+svg .ah{fill:var(--muted)} svg .ah-d{fill:var(--accent)} svg .ah-m{fill:var(--manual)}
+svg .lbl{font:10.5px var(--mono);fill:var(--muted)}
+.spec{font:12.5px/1.6 var(--mono);white-space:pre;overflow-x:auto;margin:0;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px}
+.k{color:var(--accent)} .s{color:var(--offline)} .c{color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.loop{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;counter-reset:s}
+.loop div{border:1px dashed var(--manual);background:var(--manual-soft);border-radius:10px;padding:12px;font-size:14px;min-width:0}
+.loop div b{display:block;font-family:var(--display);margin-bottom:2px}
+.callout{border-left:3px solid var(--manual);padding:4px 0 4px 14px}
+.steps{display:flex;flex-direction:column;border-left:2px solid var(--line);margin-left:6px}
+.step{position:relative;padding:0 0 20px 22px;display:flex;flex-direction:column;gap:4px}
+.step::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
+.step.done::before{background:var(--good);border-color:var(--good)}
+.step .hd{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+.step .hrs{font:500 12px var(--mono);color:var(--muted)}
+.step ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px}
+footer{color:var(--muted);font-size:13px}
+</style>
+
+<div class="wrap">
+
+<header style="display:flex;flex-direction:column;gap:12px">
+  <div class="eyebrow">Voice AI Hackathon 2.0 · PS04 Persona Design · Build log · updated 10 Oct 2026</div>
+  <h1>VANI that sounds right for each seller, and changes when the call does</h1>
+  <p class="lede">Before each call we generate a persona spec for the seller from their data and their audited call history. Every setting carries a reason, evidence and a confidence. The calls run on <b>Sarvam Voice Agents</b>: six VANI agents share one prompt, and each seller's persona arrives as 17 variables. During the call VANI detects frustration, confusion, interest, rush and language switches, changes delivery at the next turn, and logs every switch on the platform.</p>
+  <div class="status">
+    <div class="st done"><span class="n">DONE</span><b>Evidence mining</b><span class="small muted">145 records, detector eval</span></div>
+    <div class="st done"><span class="n">DONE</span><b>Persona generator</b><span class="small muted">149,363 specs, 9,002 configs</span></div>
+    <div class="st done"><span class="n">DONE</span><b>6 VANI agents on Sarvam</b><span class="small muted">committed, Python switch tool</span></div>
+    <div class="st done"><span class="n">DONE</span><b>Persona Service</b><span class="small muted">routing, cohorts, webhooks</span></div>
+    <div class="st done"><span class="n">DONE</span><b>Console + Board</b><span class="small muted">browser voice, Sarvam board</span></div>
+    <div class="st next"><span class="n">OPEN</span><b>Telephony + evals</b><span class="small muted">campaign number, graded tests</span></div>
+  </div>
+  <p class="small"><a href="https://claude.ai/artifact/HCiuUPEqLrBtKJUFKtfspj">One-slide summary →</a></p>
+</header>
+
+<section>
+  <div class="eyebrow">How we're scored</div>
+  <div class="crit">
+    <div class="card"><span class="w">25%</span><h3>Persona fit</h3><p class="small muted">23 rules on seller data + audited history; reason, evidence and confidence per setting</p></div>
+    <div class="card"><span class="w">25%</span><h3>Mid-call switches</h3><p class="small muted">Per-signal fused detector, tuned on 2,986 audited turns; next-turn switch</p></div>
+    <div class="card"><span class="w">20%</span><h3>Distinctness</h3><p class="small muted">9,002 distinct configurations; segments differ in 7.2 of 12 settings</p></div>
+    <div class="card"><span class="w">15%</span><h3>Voice, 2+ languages</h3><p class="small muted">Bulbul v4-flash style voices: Hinglish, English, Gujarati, Tamil…</p></div>
+    <div class="card"><span class="w">15%</span><h3>Past-call evidence</h3><p class="small muted">evidence.json: n, lift, 95% CI, strength; confounded results flagged</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Deployment</div>
+  <h2>The Persona Service decides who gets which persona; Sarvam runs every call</h2>
+  <div class="diagram scroll">
+  <svg viewBox="0 0 1060 532" role="img" aria-label="Deployment: IndiaMART-side Persona Service (data, evidence miner, persona generator, routing, console, manual feed, review queue, results) feeding Sarvam Voice Agents (entry points, six VANI agents, live signals, switch log, call logs and board, webhook back)">
+    <defs>
+      <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker>
+      <marker id="bm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah-m"/></marker>
+      <marker id="bd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah-d"/></marker>
+    </defs>
+    <rect x="4" y="4" width="1052" height="232" rx="10" class="lane-o"/>
+    <text x="20" y="28" class="lane-label" style="fill:var(--offline)">INDIAMART SIDE · VANI PERSONA SERVICE (PYTHON: NIGHTLY JOB + API)</text>
+    <rect x="4" y="256" width="1052" height="272" rx="10" class="lane-l"/>
+    <text x="20" y="280" class="lane-label" style="fill:var(--live)">SARVAM VOICE AGENTS · INDUS.SARVAM.AI</text>
+
+    <rect x="20" y="50" width="180" height="60" rx="6" class="bx"/><text x="110" y="74" text-anchor="middle" class="t">Seller data + audits</text><text x="110" y="92" text-anchor="middle" class="sub">149k · 269k calls · 278k evals</text>
+    <rect x="230" y="50" width="180" height="60" rx="6" class="bx-o"/><text x="320" y="74" text-anchor="middle" class="t">Evidence miner</text><text x="320" y="92" text-anchor="middle" class="sub">145 records · CI · strength</text>
+    <rect x="440" y="50" width="180" height="60" rx="6" class="bx-o"/><text x="530" y="74" text-anchor="middle" class="t">Persona generator</text><text x="530" y="92" text-anchor="middle" class="sub">23 rules · 9,002 configs</text>
+    <rect x="650" y="50" width="170" height="60" rx="6" class="bx-s"/><text x="735" y="74" text-anchor="middle" class="t">Persona Service</text><text x="735" y="92" text-anchor="middle" class="sub">→ 1 of 6 agents + 17 vars</text>
+    <rect x="860" y="50" width="170" height="60" rx="6" class="bx"/><text x="945" y="74" text-anchor="middle" class="t">Demo console</text><text x="945" y="92" text-anchor="middle" class="sub">any seller · browser voice</text>
+    <path d="M200 80 H228" class="ar" marker-end="url(#b)"/>
+    <path d="M410 80 H438" class="ar" marker-end="url(#b)"/>
+    <path d="M620 80 H648" class="ar" marker-end="url(#b)"/>
+    <path d="M820 80 H858" class="ar" marker-end="url(#b)"/>
+
+    <rect x="230" y="150" width="180" height="56" rx="6" class="bx-m"/><text x="320" y="173" text-anchor="middle" class="t" style="fill:var(--manual)">Manual feed</text><text x="320" y="191" text-anchor="middle" class="sub">reviewed gaps · top priority</text>
+    <rect x="440" y="150" width="180" height="56" rx="6" class="bx"/><text x="530" y="173" text-anchor="middle" class="t">Review queue</text><text x="530" y="191" text-anchor="middle" class="sub">auto-flagged calls</text>
+    <rect x="650" y="150" width="170" height="56" rx="6" class="bx"/><text x="735" y="173" text-anchor="middle" class="t">Results DB</text><text x="735" y="191" text-anchor="middle" class="sub">outcome · switches</text>
+    <path d="M650 178 H622" class="ar" marker-end="url(#b)"/>
+    <path d="M440 178 H412" class="ar-m" marker-end="url(#bm)"/>
+    <path d="M320 150 V132 H500 V112" class="ar-m" marker-end="url(#bm)"/>
+    <text x="330" y="128" class="lbl" style="fill:var(--manual)">overrides outrank rules</text>
+
+    <path d="M820 98 H838 V298" class="ar-d" marker-end="url(#bd)"/>
+    <path d="M945 110 V298" class="ar-d" marker-end="url(#bd)"/>
+    <text x="846" y="240" class="lbl" style="fill:var(--accent)">cohort · on-start · session</text>
+
+    <rect x="770" y="300" width="270" height="56" rx="6" class="bx-l"/><text x="905" y="323" text-anchor="middle" class="t">Entry points</text><text x="905" y="341" text-anchor="middle" class="sub">campaign · test call · web session</text>
+    <rect x="20" y="300" width="720" height="120" rx="6" class="bx-s"/>
+    <text x="380" y="326" text-anchor="middle" class="t">6 VANI agents · one prompt · per-seller variables · committed versions</text>
+    <text x="380" y="350" text-anchor="middle" class="sub">Warm Hinglish 0.9× · Friendly Hinglish 0.9× · Clear Hinglish · Formal Hinglish (male)</text>
+    <text x="380" y="368" text-anchor="middle" class="sub">English-led · English Formal (male)</text>
+    <text x="380" y="396" text-anchor="middle" class="sub">Saaras STT → platform LLM → Bulbul v4 · per-language voice on switch (Gujarati, Tamil, Bengali…)</text>
+    <path d="M770 328 H742" class="ar" marker-end="url(#b)"/>
+
+    <rect x="20" y="452" width="220" height="56" rx="6" class="bx-l"/><text x="130" y="475" text-anchor="middle" class="t">update_persona_mode</text><text x="130" y="493" text-anchor="middle" class="sub">Python tool · LLM + lexicon</text>
+    <rect x="270" y="452" width="220" height="56" rx="6" class="bx-s"/><text x="380" y="475" text-anchor="middle" class="t">live_switch_log</text><text x="380" y="493" text-anchor="middle" class="sub">turn · signal · words · from → to</text>
+    <rect x="520" y="452" width="220" height="56" rx="6" class="bx-l"/><text x="630" y="475" text-anchor="middle" class="t">Call logs + Board</text><text x="630" y="493" text-anchor="middle" class="sub">outcome · slot · switches</text>
+    <rect x="770" y="452" width="270" height="56" rx="6" class="bx"/><text x="905" y="475" text-anchor="middle" class="t">Call-end webhook</text><text x="905" y="493" text-anchor="middle" class="sub">→ Persona Service</text>
+    <path d="M130 420 V450" class="ar" marker-end="url(#b)"/>
+    <path d="M240 480 H268" class="ar" marker-end="url(#b)"/>
+    <path d="M490 480 H518" class="ar" marker-end="url(#b)"/>
+    <path d="M740 480 H768" class="ar" marker-end="url(#b)"/>
+    <path d="M1040 480 H1050 V178 H822" class="ar-d" marker-end="url(#bd)"/>
+  </svg>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="eyebrow">Step 0 · Sarvam, verified with our key</div>
+  <div class="tablecard scroll">
+  <table>
+    <thead><tr><th>Job</th><th>Model</th><th>Measured</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>Live LLM + signal classifier</td><td class="mono">sarvam-105b-conversations</td><td class="num">0.3–0.8 s</td><td>sarvam-30b / sarvam-m are deprecated; sarvam-105b spends 3,000+ tokens on hidden reasoning, too slow live</td></tr>
+      <tr><td>Speech-to-text</td><td class="mono">saaras:v4 streaming</td><td class="num">~0.1 s after speech ends</td><td>keeps English words in Latin script; tested on real 8 kHz call audio</td></tr>
+      <tr><td>Text-to-speech</td><td class="mono">bulbul:v4-flash</td><td class="num">first audio ~0.8 s</td><td>style voices (sales, customer-warm…) + regional voices; pace works</td></tr>
+      <tr><td>Mid-call voice switch</td><td class="mono">TTS stream re-config</td><td class="num">~0.44 s</td><td>pace/speaker change on the same socket, no reconnect</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="small muted">Two findings that shaped the design: language IDs on 1–2 word replies are unreliable (so a language switch needs 2 utterances of 3+ words), and Sarvam rate-limits at about 2 parallel chat calls (so the detector backs off and retries).</p>
+</section>
+
+<section>
+  <div class="eyebrow">Step 1 · Evidence from past calls · meeting-fix rate, A vs B</div>
+  <h2>What the data supports, and how strongly</h2>
+  <div class="tablecard scroll">
+  <table>
+    <thead><tr><th>Persona choice</th><th>A</th><th>B</th><th>Strength</th></tr></thead>
+    <tbody>
+      <tr><td>Name the seller's own action in the opening ("you explored paid services"), same lead bucket</td><td class="num">29.0%</td><td class="num">16.8%</td><td><span class="pill strong">strong</span></td></tr>
+      <tr><td>Slower pitch, measured on complete pitches, stratified by hook and bucket</td><td class="num">33.3%</td><td class="num">23.1%</td><td><span class="pill strong">strong</span></td></tr>
+      <tr><td>…but not for large sellers (1.5Cr+)</td><td class="num">28.2%</td><td class="num">24.9%</td><td><span class="pill weakc">weak</span></td></tr>
+      <tr><td>1st call attempt vs 4th+ attempt (shorter opening for repeat-called sellers)</td><td class="num">16.3%</td><td class="num">4.3%</td><td><span class="pill strong">strong</span></td></tr>
+      <tr><td>Sellers who cut 2+ past calls under 15 s vs none</td><td class="num">2.0%</td><td class="num">8.0%</td><td><span class="pill strong">strong</span></td></tr>
+      <tr><td>Large businesses vs micro on the generic pitch (so: formal persona)</td><td class="num">8.8%</td><td class="num">11.4%</td><td><span class="pill strong">strong</span></td></tr>
+      <tr><td>Late-morning calls (11–13) vs morning/evening</td><td class="num">7.1%</td><td class="num">13.2%</td><td><span class="pill strong">strong</span></td></tr>
+      <tr><td>After interest: offer a concrete slot vs not</td><td class="num">61.0%</td><td class="num">27.2%</td><td><span class="pill mod">moderate</span></td></tr>
+      <tr><td>After rush: offer a concrete slot vs not</td><td class="num">30.1%</td><td class="num">12.1%</td><td><span class="pill mod">moderate</span></td></tr>
+      <tr><td>Calls where VANI mishandled a seller turn vs clean calls</td><td class="num">23.2%</td><td class="num">30.3%</td><td><span class="pill strong">strong</span></td></tr>
+      <tr><td>Voice gender; regional language</td><td colspan="2" class="muted">no variation in past calls</td><td><span class="pill guess">informed guess</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="small muted">145 records in <span class="mono">out/evidence.json</span>. Results that look strong but are confounded are kept and marked "not used for rules", e.g. pitch length (a hang-up truncates the pitch) and whole-call pace. All effects are observational, not A/B tests. In 44% of the 6,448 audited mishandled turns, VANI repeated the pitch or ignored the seller.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Signal detection accuracy · F1 on audited seller turns · used to tune the switch rules</div>
+  <div class="tablecard scroll">
+  <table>
+    <thead><tr><th>Signal</th><th>Keywords</th><th>LLM</th><th>Best tier</th><th>Policy</th></tr></thead>
+    <tbody>
+      <tr><td><b>Frustration</b></td><td class="num">0.71</td><td class="num">0.62</td><td class="num"><b>0.77</b></td><td>strong keyword hit OR LLM</td></tr>
+      <tr><td><b>Rush</b></td><td class="num">0.50</td><td class="num">0.67</td><td class="num"><b>0.67</b></td><td>LLM-led, keywords as backup</td></tr>
+      <tr><td><b>Interest</b></td><td class="num">0.46</td><td class="num">0.34</td><td class="num"><b>0.46</b></td><td>keywords lead (price and time words are explicit)</td></tr>
+      <tr><td><b>Confusion</b></td><td class="num">0.14</td><td class="num">0.43</td><td class="num"><b>0.43</b></td><td>LLM only; needs context</td></tr>
+      <tr><td><b>Language switch</b></td><td colspan="2" class="muted">STT language ID + script</td><td class="num">–</td><td>2 consecutive utterances of 3+ words</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="small muted">Labels come from the evaluator's audited gaps, written by a separate model, so they are weak and these numbers are a lower bound. Sample: 293 turns.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Step 2 · Persona generator</div>
+  <h2>A spec for every seller, built from their data and audited history</h2>
+  <div class="kpis">
+    <div class="card kpi"><b>149,363</b><span>persona specs generated in 147 s</span></div>
+    <div class="card kpi"><b>9,002</b><span>distinct persona configurations; the largest covers 1.5% of sellers</span></div>
+    <div class="card kpi"><b>7.2 / 12</b><span>settings that differ between two sellers of different segments (4.8 within a segment)</span></div>
+    <div class="card kpi"><b>14% · 80% · 6%</b><span>specs with high · medium · low overall confidence</span></div>
+  </div>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Rules, in order</h3>
+      <p class="small muted">R-01 true call reason → hook · R-02 repeat-called · R-03 short-call history · R-04/05 pace by size and business kind · R-06 large business · R-07 registered company · R-08 micro proprietor · R-09 region language · R-10 the seller's own spoken language · R-11 past refusal (graded) · R-12 frustration history · R-13 do-not-call (enforced last) · R-14 asked if bot · R-15 already met an executive · R-16 new business · R-17 service · R-18 wholesaler · R-19 personal details · R-20 high enquiries · R-21 callback history · R-22 this seller's audited gaps · R-23 objection playbook in their own order.</p>
+    </div>
+    <div class="card">
+      <h3>Guardrail built into the hook</h3>
+      <p class="small muted">The opening hook states the real reason for the call, which the lead bucket fixes (PIM/PAM → explored paid services, PUA/OLP → checked buy leads). So the persona cannot pick a flattering but false hook. It only chooses how to frame the true reason, how long the opening runs, and how it sounds. Prices come verbatim from the fact sheet. Today the bot quotes both ₹30,200 and ₹32,000, so the locked sheet fixes that.</p>
+    </div>
+  </div>
+  <div class="grid g2">
+    <pre class="spec"><span class="c"># Seller 331550 · Noida · service · 0-40L · 6th attempt</span>
+<span class="c"># "Calm, friendly Hindi · repeat-called micro service"</span>
+<span class="k">voice.speaker</span>  <span class="s">ritu_hi_customer_warm</span>  <span class="c">bulbul:v4-flash</span>
+<span class="k">voice.pace</span>     <span class="s">0.9</span>  <span class="c">high · EV-22p.micro</span>
+  "slower pitch 32.1% vs 21.6% for micro sellers"
+<span class="k">language</span>       <span class="s">hi-IN · 15% English · "aap + ji"</span>
+<span class="k">tone</span>           <span class="s">warmth 4 · ≤20 words/turn</span>
+<span class="k">opening_hook</span>   <span class="s">buylead</span>  <span class="c">high · EV-20b.PUA.buylead</span>
+<span class="k">opening_style</span>  <span class="s">short_acknowledging</span>  <span class="c">high · EV-02</span>
+  "attempt #6: 1st 16.3% vs 4th+ 4.3%"
+<span class="k">opening_line</span>   <span class="s">"Namaste ji, IndiaMART se Payal bol
+  rahi hoon. Pehle bhi call kiya tha, isliye
+  seedha point par: aap IndiaMART par Electronic
+  Billing Machine ke buy leads dekh rahe the.
+  Kal 15 minute ki free meeting rakh lein,
+  subah 10 baje ya shaam 5 baje?"</span>
+<span class="k">thresholds</span>     <span class="s">unavailable 0.45</span>  <span class="c">R-21 callback history</span></pre>
+    <pre class="spec"><span class="c"># Seller 79959 · Ahmedabad · Ltd manufacturer · 5-25Cr</span>
+<span class="c"># "Steady, formal Hinglish · large manufacturer"</span>
+<span class="k">voice.speaker</span>  <span class="s">aditya_hi_sales</span>  <span class="c">male · low · EV-G1 guess</span>
+<span class="k">voice.pace</span>     <span class="s">1.0</span>  <span class="c">low · EV-22p.large</span>
+  "slowing down showed no benefit for large"
+<span class="k">language</span>       <span class="s">hi-IN · 45% English · "sir", no slang</span>
+<span class="k">formality</span>      <span class="s">high</span>  <span class="c">medium · EV-06</span>
+  "1.5Cr+ 8.8% vs 0-40L 11.4% on generic pitch"
+<span class="k">switch_option</span>  <span class="s">gu-IN after 2 utterances</span>  <span class="c">EV-G2</span>
+<span class="k">tone</span>           <span class="s">assertiveness 2 · ≤20 words</span>
+<span class="k">opening_hook</span>   <span class="s">buylead</span>  <span class="c">high · EV-20b.PUA.buylead</span>
+<span class="k">opening_line</span>   <span class="s">"Namaste sir, Aditya, IndiaMART se.
+  Pehle bhi call kiya tha, isliye seedha point
+  par: aap IndiaMART par Eyeglass ke buy leads
+  check kar rahe the. Kal 15 minute ki free
+  meeting rakh dein, subah 10 baje ya shaam 5?"</span>
+<span class="k">best_window</span>    <span class="s">09-11 or 17-20</span>  <span class="c">high · EV-10</span></pre>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">On Sarvam · six VANI agents, committed in the workspace</div>
+  <h2>Voice and pace are per agent, so personas that sound different are separate agents with one shared brain</h2>
+  <div class="tablecard scroll">
+  <table>
+    <thead><tr><th>Agent</th><th>Voice (pace)</th><th>Starts in</th><th>Voice after a language switch</th><th class="num">Sellers routed</th><th>Demo seller</th></tr></thead>
+    <tbody>
+      <tr><td><b>VANI · Friendly Hinglish</b></td><td>Simran Hindi Sales (0.9×)</td><td>Hindi</td><td>Pooja Gujarati, Kavitha Tamil…</td><td class="num">50,403</td><td>97898477 · Sambhal jeweller</td></tr>
+      <tr><td><b>VANI · Warm Hinglish</b></td><td>Ritu Warm Support (0.9×)</td><td>Hindi</td><td>same set</td><td class="num">35,063</td><td>331550 · Noida, 6th attempt</td></tr>
+      <tr><td><b>VANI · Clear Hinglish</b></td><td>Ritu Sales (1.0×)</td><td>Hindi</td><td>same set</td><td class="num">34,517</td><td>25144509 · Jaipur, short calls</td></tr>
+      <tr><td><b>VANI · Formal Hinglish</b></td><td>Aditya Sales, male (1.0×)</td><td>Hindi</td><td>Bhavik Gujarati, Gokul Tamil…</td><td class="num">21,745</td><td>98255184 · Morbi wholesaler</td></tr>
+      <tr><td><b>VANI · English-led</b></td><td>Simran English Support (1.0×)</td><td>English</td><td>Kavitha Tamil…</td><td class="num">5,319</td><td>2911154 · Chennai</td></tr>
+      <tr><td><b>VANI · English Formal</b></td><td>Shubh Banking, male (1.0×)</td><td>English</td><td>Gokul Tamil…</td><td class="num">1,138</td><td>66773609 · Chennai, large firm</td></tr>
+      <tr><td class="muted">Do-not-call</td><td colspan="3" class="muted">never dialled; excluded by the Persona Service</td><td class="num">1,178</td><td></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="grid g3">
+    <div class="card"><h3>17 persona variables per call</h3><p class="small muted">True call reason, opening style, language mix and register, tone, turn length, personal details, call history and audit, objection order, switch sensitivity, regional language, best callback window. Filled per seller from the generator via campaign cohort, on-start hook, test call or web session.</p></div>
+    <div class="card"><h3>Live switch decided in code</h3><p class="small muted">On a turn that looks like a change, the agent calls <span class="mono">update_persona_mode</span>, a Python tool running inside Sarvam. It fuses the LLM's guess with the Hinglish lexicon mined from past calls, applies a fixed priority (do-not-call, frustration, rush, unavailable, confusion, interest) and a two-turn cooldown, lowers the frustration threshold for sellers called 4+ times, and returns the next reply's mode. Each switch is written to <span class="mono">live_switch_log</span>, which reaches the call results. Runs in 3 to 18 ms; nothing leaves Sarvam. The tool sees the words, not the audio.</p></div>
+    <div class="card"><h3>Facts locked</h3><p class="small muted">Price written in words and digits so it is never rounded. The platform model first said ₹32,000, the old bot's wrong figure, and now says ₹30,200. Meetings count as fixed only on an explicit yes to a day and time.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Live on Sarvam · what the calls show</div>
+  <h2>Switches fire at the right turn and are recorded on the platform</h2>
+  <div class="tablecard scroll">
+  <table>
+    <thead><tr><th>Turn</th><th>Seller said (chat tests on committed agents)</th><th>Switch</th><th>Detected by</th><th>Next reply</th></tr></thead>
+    <tbody>
+      <tr><td class="num">2</td><td class="mono">"kya bola? samjha nahi, kaun si meeting?"</td><td>base → confusion</td><td>LLM + keywords</td><td>apologised, explained in simpler words, checked understanding</td></tr>
+      <tr><td class="num">3</td><td class="mono">"busy hoon abhi, jaldi bolo kab aayenge"</td><td>confusion → rush</td><td>LLM + keywords</td><td>one line: tomorrow 10 am or 6 pm?</td></tr>
+      <tr><td class="num">5</td><td class="mono">"haan sahi hai"</td><td>close</td><td></td><td>"kal shaam chhe baje aapki dukaan par" + executive calls first, said once</td></tr>
+      <tr><td class="num">2</td><td class="mono">"You people call baar baar… so irritating" (English Formal)</td><td>rush → frustration</td><td>LLM + keywords</td><td>apology, callback at the seller's time</td></tr>
+      <tr><td class="num">2</td><td class="mono">"મને ગુજરાતીમાં કહો" (Formal Hinglish)</td><td>Hindi → Gujarati</td><td>platform + LLM</td><td>continued in Gujarati; Thursday 10 am kept to the close</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tablecard scroll">
+  <table>
+    <thead><tr><th>Real voice calls (Board: VANI · Persona Performance)</th><th class="num">Connected</th><th class="num">With switches</th><th class="num">Meetings</th><th class="num">Callbacks</th></tr></thead>
+    <tbody>
+      <tr><td>Warm Hinglish</td><td class="num">5</td><td class="num">1</td><td class="num">1</td><td class="num">1</td></tr>
+      <tr><td>Formal Hinglish</td><td class="num">2</td><td class="num">1</td><td class="num">0</td><td class="num">1</td></tr>
+      <tr><td>English Formal</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="num">1</td></tr>
+      <tr><td>English-led</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="small muted">From the real calls: the Morbi seller (Formal Hinglish) went confusion → empathetic at turn 3, then unavailable → online-meeting slot at turn 9. The English Formal call switched language mid-call to clear confusion. In chat tests, Hindi → Gujarati and English → Tamil each switched on the next reply. Test-call numbers, not a production sample.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Persona Service · console · board</div>
+  <div class="grid g3">
+    <div class="card"><h3>Persona Service</h3><p class="small muted">FastAPI next to Sarvam: <span class="mono">/persona</span>, <span class="mono">/route</span>, <span class="mono">/onstart</span> hook, campaign push (1,000 sellers per request, do-not-call excluded), instant call, <span class="mono">/webhooks/sarvam</span> → results DB and review queue. Nightly job regenerates all personas in about 3 minutes. 15 tests; Docker image.</p></div>
+    <div class="card"><h3>Demo console</h3><p class="small muted">Pick any of 149,363 sellers, see the persona with reasons and evidence, and talk to the routed VANI agent in the browser through Sarvam's Web SDK. The API key stays on the server: a proxy forwards only VANI session requests.</p></div>
+    <div class="card"><h3>Board on Sarvam</h3><p class="small muted"><b>VANI · Persona Performance</b>: connected calls, outcome by persona agent, calls with live switches, and a recent-calls table with persona, language, signals, switch summary and slot. Reads the platform's own call data.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Audited data, used directly</div>
+  <div class="grid g3">
+    <div class="card"><h3>Objection playbook</h3><p class="small muted">9 situations (busy, seller gives a time, price, not interested, out of station, who-are-you/bot, already met, bad experience, send details). Each comes with the evaluator's suggested reply from real mishandled calls: 3,207 audited gaps.</p></div>
+    <div class="card"><h3>Per-seller history</h3><p class="small muted">5,375 sellers have audited gaps on their own calls. R-22 lowers that seller's threshold for the signal VANI missed before and adds "never repeat the pitch" when the audit caught that.</p></div>
+    <div class="card"><h3>Detector labels</h3><p class="small muted">Evaluator reasons label 2,986 seller turns. They tuned the keyword list, set per-signal fusion, and give the live switch-timing metric.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Manual feed · built in for your team</div>
+  <h2>Your reviewed calls outrank everything automatic</h2>
+  <div class="loop">
+    <div><b>1 · Listen</b>Your team reviews calls (transcript or recording) and hears tone that text misses.</div>
+    <div><b>2 · Log the gap</b>One row in <span class="mono">manual_gaps.csv</span>: seller said, VANI said, should have said, signal, tone heard.</div>
+    <div><b>3 · Set the fix</b>Any spec setting, e.g. <span class="mono">live_adaptation.thresholds.rush = 0.4</span>, for a seller, a segment, or all; priority 1–5.</div>
+    <div><b>4 · Ingest</b><span class="mono">python -m manual.ingest</span> validates the rows; recordings are transcribed with Saaras batch and speaker separation.</div>
+    <div><b>5 · Apply</b>Personas regenerate with the overrides marked <span class="mono">manual:&lt;reviewer&gt;</span> at high confidence. Live thresholds, guardrails and detector examples update too.</div>
+  </div>
+  <p class="callout small muted">Tested end to end with the template rows: one seller, one segment and an all-seller guardrail were each applied and tagged. Templates and instructions: <span class="mono">vani-persona/manual/</span>.</p>
+</section>
+
+<section>
+  <div class="eyebrow">Open points</div>
+  <div class="grid g3">
+    <div class="card"><h3>Telephony for campaigns</h3><p class="small muted">The workspace has no telephony connection yet, so it can't dial at scale. Test calls to verified numbers and browser sessions work now. Campaigns need a connection (Exotel, Twilio, Plivo or a number rented from Sarvam); the Persona Service already pushes cohorts.</p></div>
+    <div class="card"><h3>Confirm the price</h3><p class="small muted">The old bot quoted both ₹30,200 and ₹32,000. VANI uses ₹30,200 + GST a year (about ₹4,000 + GST a month); IndiaMART should confirm it.</p></div>
+    <div class="card"><h3>Guesses to test</h3><p class="small muted">Voice gender and regional language have no past-call evidence, so they are low-confidence choices. Pace can't change mid-call on this plan, and a code tool gets no audio; switches change wording, length, tone and language. Tone of voice comes from the manual feed's <span class="mono">tone_heard</span> column.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Next</div>
+  <div class="steps">
+    <div class="step done"><div class="hd"><h3>Evidence, persona generator, six Sarvam agents, Persona Service, console, board, one slide</h3><span class="hrs">done</span></div></div>
+    <div class="step"><div class="hd"><h3>Graded evals on Sarvam</h3><span class="hrs">~1h</span></div><ul><li>Scripted rushed, confused, frustrated and Gujarati/Tamil sellers per demo agent, graded on the switch and its timing</li></ul></div>
+    <div class="step"><div class="hd"><h3>Pilot campaign</h3><span class="hrs">needs telephony</span></div><ul><li>Connect a number, create one campaign per agent, push a small cohort, read results on the board and in the review queue</li></ul></div>
+    <div class="step done"><div class="hd"><h3>Closing line and Python switch tool</h3><span class="hrs">done</span></div><ul><li>Close repeats the slot as the seller said it, executive calls first, said once; switches decided in code on all six agents</li></ul></div>
+    <div class="step done"><div class="hd"><h3>Switch-timing replay</h3><span class="hrs">done</span></div><ul><li>The live tool, replayed on 290 audited calls with the LLM's recorded guess, is in the right mode on the labelled turn for frustration 72%, rush 65%, confusion 34%, interest 30%; zero flapping. Keywords alone: 54% frustration, 39% rush, 5.8% false switches. Command: <span class="mono">python -m evidence.switch_replay</span></li></ul></div>
+    <div class="step"><div class="hd"><h3>Recorded demo calls</h3><span class="hrs">~30 min</span></div><ul><li>Three real calls: Warm Hinglish (rush → frustration), Formal Hinglish (→ Gujarati), English-led (confusion → interest)</li></ul></div>
+  </div>
+</section>
+
+<footer>Data: IndiaMART PS07 dataset (seller files, bot calls, evaluator outputs, call turns), Apr–Sep 2026. Rates are observational; each rule's strength tag says how far to trust it. Code: <span class="mono">vani-persona/</span>.</footer>
+</div>

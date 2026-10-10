@@ -1,0 +1,389 @@
+{
+ "call_level": {
+  "frustration": {
+   "0.4": {
+    "precision": 0.187,
+    "recall": 0.784,
+    "f1": 0.302,
+    "tp": 105,
+    "fp": 457,
+    "fn": 29,
+    "support": 134
+   },
+   "0.6": {
+    "precision": 0.187,
+    "recall": 0.784,
+    "f1": 0.302,
+    "tp": 105,
+    "fp": 457,
+    "fn": 29,
+    "support": 134
+   },
+   "0.8": {
+    "precision": 0.246,
+    "recall": 0.761,
+    "f1": 0.372,
+    "tp": 102,
+    "fp": 313,
+    "fn": 32,
+    "support": 134
+   }
+  },
+  "confusion": {
+   "0.4": {
+    "precision": 0.323,
+    "recall": 0.409,
+    "f1": 0.361,
+    "tp": 768,
+    "fp": 1608,
+    "fn": 1111,
+    "support": 1879
+   },
+   "0.6": {
+    "precision": 0.36,
+    "recall": 0.37,
+    "f1": 0.365,
+    "tp": 695,
+    "fp": 1236,
+    "fn": 1184,
+    "support": 1879
+   },
+   "0.8": {
+    "precision": 0.254,
+    "recall": 0.016,
+    "f1": 0.031,
+    "tp": 31,
+    "fp": 91,
+    "fn": 1848,
+    "support": 1879
+   }
+  },
+  "interest": {
+   "0.4": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 3829,
+    "fn": 0,
+    "support": 0
+   },
+   "0.6": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 1068,
+    "fn": 0,
+    "support": 0
+   },
+   "0.8": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 280,
+    "fn": 0,
+    "support": 0
+   }
+  },
+  "rush": {
+   "0.4": {
+    "precision": 0.417,
+    "recall": 0.683,
+    "f1": 0.518,
+    "tp": 1480,
+    "fp": 2068,
+    "fn": 687,
+    "support": 2167
+   },
+   "0.6": {
+    "precision": 0.47,
+    "recall": 0.517,
+    "f1": 0.492,
+    "tp": 1120,
+    "fp": 1264,
+    "fn": 1047,
+    "support": 2167
+   },
+   "0.8": {
+    "precision": 0.499,
+    "recall": 0.345,
+    "f1": 0.408,
+    "tp": 747,
+    "fp": 750,
+    "fn": 1420,
+    "support": 2167
+   }
+  },
+  "not_interested": {
+   "0.4": {
+    "precision": 0.412,
+    "recall": 0.462,
+    "f1": 0.436,
+    "tp": 860,
+    "fp": 1225,
+    "fn": 1003,
+    "support": 1863
+   },
+   "0.6": {
+    "precision": 0.603,
+    "recall": 0.337,
+    "f1": 0.432,
+    "tp": 628,
+    "fp": 414,
+    "fn": 1235,
+    "support": 1863
+   },
+   "0.8": {
+    "precision": 0.616,
+    "recall": 0.254,
+    "f1": 0.36,
+    "tp": 474,
+    "fp": 296,
+    "fn": 1389,
+    "support": 1863
+   }
+  }
+ },
+ "turn_level": {
+  "rush": {
+   "0.4": {
+    "precision": 0.205,
+    "recall": 0.566,
+    "f1": 0.301,
+    "tp": 82,
+    "fp": 318,
+    "fn": 63,
+    "support": 145
+   },
+   "0.6": {
+    "precision": 0.237,
+    "recall": 0.421,
+    "f1": 0.303,
+    "tp": 61,
+    "fp": 196,
+    "fn": 84,
+    "support": 145
+   },
+   "0.8": {
+    "precision": 0.283,
+    "recall": 0.297,
+    "f1": 0.29,
+    "tp": 43,
+    "fp": 109,
+    "fn": 102,
+    "support": 145
+   }
+  },
+  "confusion": {
+   "0.4": {
+    "precision": 0.302,
+    "recall": 0.186,
+    "f1": 0.23,
+    "tp": 60,
+    "fp": 139,
+    "fn": 263,
+    "support": 323
+   },
+   "0.6": {
+    "precision": 0.238,
+    "recall": 0.096,
+    "f1": 0.137,
+    "tp": 31,
+    "fp": 99,
+    "fn": 292,
+    "support": 323
+   },
+   "0.8": {
+    "precision": 0.25,
+    "recall": 0.003,
+    "f1": 0.006,
+    "tp": 1,
+    "fp": 3,
+    "fn": 322,
+    "support": 323
+   }
+  },
+  "frustration": {
+   "0.4": {
+    "precision": 0.466,
+    "recall": 0.539,
+    "f1": 0.5,
+    "tp": 41,
+    "fp": 47,
+    "fn": 35,
+    "support": 76
+   },
+   "0.6": {
+    "precision": 0.466,
+    "recall": 0.539,
+    "f1": 0.5,
+    "tp": 41,
+    "fp": 47,
+    "fn": 35,
+    "support": 76
+   },
+   "0.8": {
+    "precision": 0.538,
+    "recall": 0.461,
+    "f1": 0.496,
+    "tp": 35,
+    "fp": 30,
+    "fn": 41,
+    "support": 76
+   }
+  },
+  "interest": {
+   "0.4": {
+    "precision": 0.163,
+    "recall": 0.438,
+    "f1": 0.238,
+    "tp": 92,
+    "fp": 471,
+    "fn": 118,
+    "support": 210
+   },
+   "0.6": {
+    "precision": 0.315,
+    "recall": 0.271,
+    "f1": 0.292,
+    "tp": 57,
+    "fp": 124,
+    "fn": 153,
+    "support": 210
+   },
+   "0.8": {
+    "precision": 0.5,
+    "recall": 0.09,
+    "f1": 0.153,
+    "tp": 19,
+    "fp": 19,
+    "fn": 191,
+    "support": 210
+   }
+  }
+ },
+ "n_calls": 10697,
+ "llm_tier_sample": {
+  "n": 293,
+  "results": {
+   "rush": {
+    "fast": {
+     "precision": 0.706,
+     "recall": 0.387,
+     "f1": 0.5,
+     "tp": 24,
+     "fp": 10,
+     "fn": 38,
+     "support": 62
+    },
+    "llm": {
+     "precision": 0.709,
+     "recall": 0.629,
+     "f1": 0.667,
+     "tp": 39,
+     "fp": 16,
+     "fn": 23,
+     "support": 62
+    },
+    "fused": {
+     "precision": 0.702,
+     "recall": 0.645,
+     "f1": 0.672,
+     "tp": 40,
+     "fp": 17,
+     "fn": 22,
+     "support": 62
+    }
+   },
+   "confusion": {
+    "fast": {
+     "precision": 0.462,
+     "recall": 0.079,
+     "f1": 0.135,
+     "tp": 6,
+     "fp": 7,
+     "fn": 70,
+     "support": 76
+    },
+    "llm": {
+     "precision": 0.578,
+     "recall": 0.342,
+     "f1": 0.43,
+     "tp": 26,
+     "fp": 19,
+     "fn": 50,
+     "support": 76
+    },
+    "fused": {
+     "precision": 0.578,
+     "recall": 0.342,
+     "f1": 0.43,
+     "tp": 26,
+     "fp": 19,
+     "fn": 50,
+     "support": 76
+    }
+   },
+   "frustration": {
+    "fast": {
+     "precision": 0.946,
+     "recall": 0.574,
+     "f1": 0.714,
+     "tp": 35,
+     "fp": 2,
+     "fn": 26,
+     "support": 61
+    },
+    "llm": {
+     "precision": 0.795,
+     "recall": 0.508,
+     "f1": 0.62,
+     "tp": 31,
+     "fp": 8,
+     "fn": 30,
+     "support": 61
+    },
+    "fused": {
+     "precision": 0.843,
+     "recall": 0.705,
+     "f1": 0.768,
+     "tp": 43,
+     "fp": 8,
+     "fn": 18,
+     "support": 61
+    }
+   },
+   "interest": {
+    "fast": {
+     "precision": 0.706,
+     "recall": 0.343,
+     "f1": 0.462,
+     "tp": 24,
+     "fp": 10,
+     "fn": 46,
+     "support": 70
+    },
+    "llm": {
+     "precision": 0.452,
+     "recall": 0.271,
+     "f1": 0.339,
+     "tp": 19,
+     "fp": 23,
+     "fn": 51,
+     "support": 70
+    },
+    "fused": {
+     "precision": 0.5,
+     "recall": 0.329,
+     "f1": 0.397,
+     "tp": 23,
+     "fp": 23,
+     "fn": 47,
+     "support": 70
+    }
+   }
+  }
+ }
+}

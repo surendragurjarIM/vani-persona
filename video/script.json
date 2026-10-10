@@ -1,0 +1,15 @@
+[
+ {"id": "open", "kind": "voice", "text": "Every day, IndiaMART's voice bot VANI sets sail for thousands of sellers, chasing one treasure: a short meeting with a sales executive."},
+ {"id": "problem", "kind": "voice", "text": "But VANI spoke to every seller the same way. Same voice, same pitch, same script. A busy shop owner on his sixth call heard exactly what a large wholesaler heard. Only eleven and a half percent of answered calls fixed a meeting."},
+ {"id": "idea", "kind": "voice", "text": "So we gave VANI a crew. Before every call, each seller gets a persona built from their own data. And during the call, VANI changes course the moment the seller does."},
+ {"id": "demos", "kind": "placeholder", "seconds": 12},
+ {"id": "how", "kind": "voice", "text": "Here is how the voyage works."},
+ {"id": "map", "kind": "voice", "text": "It starts with the map. One lakh forty nine thousand seller profiles, two lakh sixty nine thousand past calls, and nearly three lakh audited conversations."},
+ {"id": "evidence", "kind": "voice", "text": "From those calls, we mined what actually works. A first call fixes almost four times more meetings than a fourth. A slower pitch wins with small sellers. Every finding carries its sample size and a strength tag."},
+ {"id": "persona", "kind": "voice", "text": "The persona generator turns that evidence into a persona for every seller. Voice, language, tone and a conversation plan, each with the reason behind it. Nine thousand distinct personas, not one."},
+ {"id": "crew", "kind": "voice", "text": "Each persona sails with one of six VANI agents on Sarvam, carrying seventeen personal details into the call."},
+ {"id": "switch", "kind": "voice", "text": "On the call, Sarvam listens. When a seller sounds rushed, annoyed or confused, gets interested, or switches language, a switch tool on Sarvam reads the moment, changes how VANI speaks on the very next turn, and writes it to the switch log."},
+ {"id": "loop", "kind": "voice", "text": "After the call, the result sails home. Calls that need a human ear go to a review queue, and the team's corrections steer tomorrow's personas."},
+ {"id": "results", "kind": "voice", "text": "Replayed on real audited calls, the switch lands on the right turn seventy two percent of the time for frustration and sixty five percent for rush, with zero flip flopping."},
+ {"id": "close", "kind": "voice", "text": "One seller, one persona. The right crew member for every call. VANI, built on Sarvam."}
+]

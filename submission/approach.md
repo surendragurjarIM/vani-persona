@@ -1,0 +1,15 @@
+**Idea:** VANI used one voice and one script for every seller. We give each seller their own VANI persona before the call, and let VANI change course during the call.
+
+**1. Data and evidence.** We used the PS07 data as given: 1,49,363 seller files, 2,69,455 answered bot calls, 2,78,000+ audited evaluator outputs and 12.8k turn-by-turn transcripts. An evidence miner compares meeting-fix rates for each choice VANI can make, with 95% Wilson confidence intervals stratified by lead type, and tags each result strong / moderate / weak / informed guess. Confounded results are kept but not used. Output: 145 evidence records. Examples: first call 16.3% vs 4th+ call 4.3%; slower pitch 33.3% vs 23.1%; offering a slot right after interest 61.0% vs 27.2%.
+
+**2. Persona generator** (Python, runs on any seller file). 23 evidence-cited rules map a seller's data to a persona spec: voice (speaker, gender, pace, accent), language (primary, English share, formality, address form), tone (warmth, empathy, assertiveness, turn length) and a conversation plan (opening hook and style, objection order, best call window, escalation, guardrails), plus live-switch thresholds. Every setting carries a value, a reason, evidence ids and a confidence. A manual feed lets reviewers override any setting for one seller, a segment or everyone, and it outranks the automatic rules. Result: a spec for every seller, with 9,002 distinct configurations.
+
+**3. On Sarvam.** Six VANI agents (Warm, Friendly, Clear and Formal Hinglish; English-led; English Formal) share one prompt. Each seller is routed to one agent with 17 persona variables. Saaras STT and Bulbul v4 voices handle speech, with a native voice for each language after a switch. Price and compliance lines are locked.
+
+**4. Live switching.** On a turn that looks like a change, the agent calls `update_persona_mode`, a Python code tool running on Sarvam. It fuses the LLM's guess with a Hinglish lexicon mined from past calls (Devanagari is transliterated for phone STT), applies a fixed priority (do-not-call > frustration > rush > unavailable > confusion > interest) and a 2-turn cooldown, changes language when needed, and returns the delivery mode for the next reply. Every switch is written to `live_switch_log` (turn, signal, the seller's words, how it was detected, from → to), which is returned with the call result.
+
+**5. Learning loop.** A Persona Service (FastAPI) runs nightly persona generation, routing and cohort push, and takes Sarvam's call-end webhook into a results store and a review queue. Reviewed calls go back through the manual feed.
+
+**LLMs:** the platform LLM on Sarvam for live calls; sarvam-105b-conversations offline, for LLM signal labels and plain-language persona rationales.
+
+**Deliverables:** persona generator code; a persona spec per seller with reasons; three live Sarvam calls with mid-call switches (Hinglish rush → frustration, Hindi → Gujarati, English confusion → interest); a switch log per call; and a one-slide summary.

@@ -1,0 +1,352 @@
+<title>VANI Architecture Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one wide map (three hosting zones + people), then the same steps as a readable table, one call in motion, and where each part is deployed. */
+:root{
+  --bg:#F5F6F8; --card:#FFFFFF; --ink:#151A22; --muted:#566070; --line:#D6DBE3; --arrow:#4B5566;
+  --data-bg:#ECEFF4; --data:#6B7689;
+  --im-bg:#E8EEFC; --im:#2A55C9;
+  --sv-bg:#FBEEDF; --sv:#B8620F;
+  --pp-bg:#E4F3EF; --pp:#0D7F74;
+  --live:#1E8A4C; --live-bg:#E2F3E8; --build:#9A6411; --build-bg:#FBF0DA; --setup:#B23A34; --setup-bg:#FBE5E3;
+  --display:"Bricolage Grotesque",Georgia,serif; --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11151C; --card:#1A1F28; --ink:#E8ECF2; --muted:#9AA4B4; --line:#2E3542; --arrow:#A3ADBD;
+  --data-bg:#1C222C; --data:#97A2B5; --im-bg:#17213A; --im:#7F9EF0; --sv-bg:#2A1E12; --sv:#E79A4E; --pp-bg:#13261F; --pp:#4FC1B3;
+  --live:#5BC985; --live-bg:#163222; --build:#E3B062; --build-bg:#30250F; --setup:#F08A83; --setup-bg:#3A1A18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11151C; --card:#1A1F28; --ink:#E8ECF2; --muted:#9AA4B4; --line:#2E3542; --arrow:#A3ADBD;
+  --data-bg:#1C222C; --data:#97A2B5; --im-bg:#17213A; --im:#7F9EF0; --sv-bg:#2A1E12; --sv:#E79A4E; --pp-bg:#13261F; --pp:#4FC1B3;
+  --live:#5BC985; --live-bg:#163222; --build:#E3B062; --build-bg:#30250F; --setup:#F08A83; --setup-bg:#3A1A18; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;margin:0}
+.wrap{max-width:1320px;margin:0 auto;padding-inline:20px;padding-block:28px 56px;display:flex;flex-direction:column;gap:40px}
+h1,h2{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(28px,4vw,42px);line-height:1.08}
+h2{font-size:clamp(21px,2.6vw,27px);line-height:1.15}
+h3{font-size:16px;margin:0}
+p{margin:0}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lede{max-width:72ch;color:var(--muted);font-size:16px}
+.head{display:flex;flex-direction:column;gap:10px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--muted);align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.chip.live{color:var(--live);background:var(--live-bg)} .chip.build{color:var(--build);background:var(--build-bg)} .chip.setup{color:var(--setup);background:var(--setup-bg)}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;border:1.5px solid;vertical-align:-2px;margin-right:6px}
+.mapbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;overflow-x:auto}
+.mapbox svg{display:block;min-width:1100px;width:100%;height:auto}
+.hint{font-size:13px;color:var(--muted)}
+/* SVG */
+.z-data{fill:var(--data-bg);stroke:var(--data)} .z-im{fill:var(--im-bg);stroke:var(--im)} .z-sv{fill:var(--sv-bg);stroke:var(--sv)} .z-pp{fill:var(--pp-bg);stroke:var(--pp)}
+.zone{stroke-width:1.5}
+.zt{font-family:var(--display);font-weight:700;font-size:17px;fill:var(--ink)}
+.zs{font-size:11.5px;fill:var(--muted)}
+.n{fill:var(--card);stroke:var(--line);stroke-width:1.2}
+.n.im{stroke:var(--im)} .n.sv{stroke:var(--sv)} .n.pp{stroke:var(--pp)} .n.data{stroke:var(--data)}
+.strip{fill:none;stroke-dasharray:4 4;stroke-width:1.2}
+.strip.im{stroke:var(--im)} .strip.sv{stroke:var(--sv)}
+.nt{font-weight:700;font-size:13px;fill:var(--ink)}
+.nl{font-size:11px;fill:var(--muted)}
+.nw{font-size:10.5px;font-weight:600}
+.nw.im{fill:var(--im)} .nw.sv{fill:var(--sv)} .nw.pp{fill:var(--pp)} .nw.data{fill:var(--data)}
+.mono{font-family:var(--mono)}
+.badge circle{stroke:none} .badge text{font-size:11px;font-weight:700;fill:#FFFFFF;text-anchor:middle}
+.b-im{fill:var(--im)} .b-sv{fill:var(--sv)} .b-data{fill:var(--data)}
+.sub{fill:var(--sv-bg);stroke:var(--sv);stroke-width:1}
+.subt{font-size:11px;font-weight:600;fill:var(--ink);text-anchor:middle}
+.ar{fill:none;stroke:var(--arrow);stroke-width:1.6}
+.ar.d{stroke-dasharray:5 4}
+.ah{fill:var(--arrow)}
+.al{font-size:10.5px;fill:var(--muted)}
+.cs{font-size:10px;font-weight:700}
+.cs.live{fill:var(--live)} .cs.build{fill:var(--build)}
+.csb.live{fill:var(--live-bg)} .csb.build{fill:var(--build-bg)}
+svg a{cursor:pointer} svg a:hover .n,svg a:focus .n{stroke-width:2.4}
+svg a:focus{outline:none} svg a:focus-visible .n{stroke:var(--ink)}
+/* Table */
+.tablecard{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg)}
+tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums;font-weight:700;width:44px}
+td .where{font-weight:600}
+tr:target td{background:var(--sv-bg)}
+.zonetag{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;vertical-align:1px}
+.zonetag.im{background:var(--im)} .zonetag.sv{background:var(--sv)} .zonetag.data{background:var(--data)}
+code{font-family:var(--mono);font-size:.9em}
+/* Call strip */
+.call{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.turn{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.turn .k{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.turn .said{font-family:var(--mono);font-size:13px}
+.turn .tool{font-size:12.5px;color:var(--sv);font-weight:600}
+.turn .reply{font-size:13.5px}
+@media (max-width:900px){.call{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.call{grid-template-columns:1fr}}
+/* Deploy cards */
+.deploy{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.dc{background:var(--card);border:1px solid var(--line);border-top:4px solid;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.dc.sv{border-top-color:var(--sv)} .dc.im{border-top-color:var(--im)} .dc.setup{border-top-color:var(--setup)}
+.dc ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:14px}
+.dc .top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+@media (max-width:900px){.deploy{grid-template-columns:1fr}}
+.note{font-size:14px;color:var(--muted);max-width:90ch}
+section{display:flex;flex-direction:column;gap:14px}
+</style>
+
+<div class="wrap">
+
+<header class="head">
+  <div class="eyebrow">IndiaMART VANI · Persona design · PS04</div>
+  <h1>What each part does, and where it runs</h1>
+  <p class="lede">Seller data becomes a persona every night inside IndiaMART's cloud. Sarvam runs the calls, switches the persona mid-call and records the result. Results flow back for the next night. Click any numbered box to jump to its details.</p>
+  <div class="legend">
+    <span><span class="sw" style="background:var(--data-bg);border-color:var(--data)"></span>IndiaMART data</span>
+    <span><span class="sw" style="background:var(--im-bg);border-color:var(--im)"></span>IndiaMART cloud</span>
+    <span><span class="sw" style="background:var(--sv-bg);border-color:var(--sv)"></span>Sarvam cloud</span>
+    <span><span class="sw" style="background:var(--pp-bg);border-color:var(--pp)"></span>People</span>
+    <span class="chip live">● Live</span><span class="chip build">● Built, needs hosting</span><span class="chip setup">● Needs setup</span>
+  </div>
+</header>
+
+<div class="mapbox">
+<svg viewBox="0 0 1280 716" role="img" aria-label="Architecture map. IndiaMART data feeds the Persona Service in IndiaMART's cloud, which mines evidence, tunes the signal detector, generates personas nightly and routes each seller to one of six Sarvam agents. On Sarvam, a call starts, VANI speaks in the seller's persona, a Python tool decides mid-call switches, language switches to a regional voice, the result is recorded and shown on a board, and a webhook sends it back to the Persona Service. The sales team reviews calls and feeds corrections back.">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah"/></marker>
+  </defs>
+
+  <!-- Zones -->
+  <rect x="16" y="12" width="228" height="696" rx="12" class="zone z-data"/>
+  <text x="30" y="40" class="zt">IndiaMART data</text><text x="30" y="58" class="zs">Object storage (S3 / GCS)</text>
+
+  <rect x="268" y="12" width="440" height="696" rx="12" class="zone z-im"/>
+  <text x="284" y="40" class="zt">Persona Service</text><text x="284" y="58" class="zs">IndiaMART cloud · Python · to deploy</text>
+  <rect x="548" y="27" width="146" height="20" rx="10" class="csb build"/><text x="621" y="41" text-anchor="middle" class="cs build">BUILT · NEEDS HOSTING</text>
+
+  <rect x="732" y="12" width="400" height="696" rx="12" class="zone z-sv"/>
+  <text x="748" y="40" class="zt">Sarvam Voice Agents</text><text x="748" y="58" class="zs">Sarvam cloud · indus.sarvam.ai</text>
+  <rect x="1060" y="27" width="56" height="20" rx="10" class="csb live"/><text x="1088" y="41" text-anchor="middle" class="cs live">LIVE</text>
+
+  <rect x="1156" y="12" width="108" height="696" rx="12" class="zone z-pp"/>
+  <text x="1170" y="40" class="zt">People</text><text x="1170" y="58" class="zs">phone · office</text>
+
+  <!-- Arrows (drawn first, under boxes) -->
+  <path d="M230 123 H280" class="ar" marker-end="url(#ah)"/>
+  <path d="M230 175 H490 V140 H496" class="ar" marker-end="url(#ah)"/>
+  <path d="M484 110 H496" class="ar" marker-end="url(#ah)"/>
+  <path d="M596 190 V204" class="ar" marker-end="url(#ah)"/>
+  <path d="M484 250 H494 V352 H744" class="ar d" marker-end="url(#ah)"/>
+  <text x="604" y="345" class="al" text-anchor="middle">lexicon built into the tool</text>
+  <path d="M692 251 H718 V111 H744" class="ar" marker-end="url(#ah)"/>
+  <text x="712" y="276" class="al" text-anchor="end">17 variables</text>
+  <path d="M932 142 V156" class="ar" marker-end="url(#ah)"/>
+  <path d="M1116 235 H1162" class="ar" marker-start="url(#ah)" marker-end="url(#ah)"/>
+  <text x="1139" y="226" class="al" text-anchor="middle">voice</text>
+  <path d="M837 310 V326" class="ar" marker-start="url(#ah)" marker-end="url(#ah)"/>
+  <path d="M1027 310 V326" class="ar" marker-start="url(#ah)" marker-end="url(#ah)"/>
+  <path d="M837 440 V456" class="ar" marker-end="url(#ah)"/>
+  <path d="M926 508 H934" class="ar" marker-end="url(#ah)"/>
+  <path d="M748 532 H494 V440 H488" class="ar" marker-end="url(#ah)"/>
+  <text x="620" y="525" class="al" text-anchor="middle">call-end webhook</text>
+  <path d="M1116 508 H1162" class="ar" marker-end="url(#ah)"/>
+  <path d="M1210 570 V697 H130 V574" class="ar d" marker-end="url(#ah)"/>
+  <text x="700" y="691" class="al" text-anchor="middle">team adds reviewed calls and gaps</text>
+  <path d="M230 520 H256 V176" class="ar d"/>
+  <text x="252" y="350" class="al" text-anchor="middle" transform="rotate(-90 252 350)">overrides, top priority</text>
+
+  <!-- Zone A -->
+  <rect x="30" y="80" width="200" height="176" rx="8" class="n data"/>
+  <text x="44" y="102" class="nt">IndiaMART call data</text>
+  <text x="44" y="124" class="nl">149,363 seller profiles</text>
+  <text x="44" y="142" class="nl">269k answered bot calls</text>
+  <text x="44" y="160" class="nl">278k audited evaluations</text>
+  <text x="44" y="178" class="nl">6,448 audited gaps</text>
+  <text x="44" y="196" class="nl">12.8k turn-by-turn transcripts</text>
+  <text x="44" y="236" class="nw data">PS07 dataset, Apr–Sep 2026</text>
+
+  <a href="#step-12" aria-label="Step 12, manual feed"><rect x="30" y="470" width="200" height="100" rx="8" class="n data"/>
+  <g class="badge"><circle cx="46" cy="488" r="11" class="b-data"/><text x="46" y="492">12</text></g>
+  <text x="64" y="492" class="nt">Manual feed</text>
+  <text x="44" y="514" class="nl">Reviewed calls, gaps and</text>
+  <text x="44" y="530" class="nl">recordings from your team</text>
+  <text x="44" y="556" class="nw data">Outranks automatic evidence</text></a>
+
+  <!-- Zone B -->
+  <a href="#step-1" aria-label="Step 1, mine evidence"><rect x="284" y="80" width="200" height="86" rx="8" class="n im"/>
+  <g class="badge"><circle cx="300" cy="98" r="11" class="b-im"/><text x="300" y="102">1</text></g>
+  <text x="318" y="102" class="nt">Mine evidence</text>
+  <text x="298" y="122" class="nl">Meeting-fix rate per choice,</text>
+  <text x="298" y="138" class="nl">95% CI and strength tag</text>
+  <text x="298" y="158" class="nw im">Weekly job</text></a>
+
+  <a href="#step-2" aria-label="Step 2, tune signal detector"><rect x="284" y="184" width="200" height="86" rx="8" class="n im"/>
+  <g class="badge"><circle cx="300" cy="202" r="11" class="b-im"/><text x="300" y="206">2</text></g>
+  <text x="318" y="206" class="nt">Tune signal detector</text>
+  <text x="298" y="226" class="nl">Hinglish lexicon checked on</text>
+  <text x="298" y="242" class="nl">2,986 audited seller turns</text>
+  <text x="298" y="262" class="nw im">Weekly, with step 1</text></a>
+
+  <a href="#step-3" aria-label="Step 3, generate personas"><rect x="500" y="80" width="192" height="110" rx="8" class="n im"/>
+  <g class="badge"><circle cx="516" cy="98" r="11" class="b-im"/><text x="516" y="102">3</text></g>
+  <text x="534" y="102" class="nt">Generate personas</text>
+  <text x="514" y="122" class="nl">23 evidence rules + overrides</text>
+  <text x="514" y="138" class="nl">Voice, language, tone, plan</text>
+  <text x="514" y="154" class="nl">Reason + evidence per setting</text>
+  <text x="514" y="180" class="nw im">Nightly · 149k in ~3 min</text></a>
+
+  <a href="#step-4" aria-label="Step 4, route and push"><rect x="500" y="208" width="192" height="86" rx="8" class="n im"/>
+  <g class="badge"><circle cx="516" cy="226" r="11" class="b-im"/><text x="516" y="230">4</text></g>
+  <text x="534" y="230" class="nt">Route and push</text>
+  <text x="514" y="250" class="nl">1 of 6 agents + 17 variables</text>
+  <text x="514" y="266" class="nl">Cohort upload or on-start hook</text>
+  <text x="514" y="286" class="nw im">Before each campaign</text></a>
+
+  <a href="#step-11" aria-label="Step 11, store results"><rect x="284" y="380" width="200" height="96" rx="8" class="n im"/>
+  <g class="badge"><circle cx="300" cy="398" r="11" class="b-im"/><text x="300" y="402">11</text></g>
+  <text x="318" y="402" class="nt">Store results</text>
+  <text x="298" y="422" class="nl">Webhook → results database</text>
+  <text x="298" y="438" class="nl">Problem calls → review queue</text>
+  <text x="298" y="466" class="nw im">After every call</text></a>
+
+  <a href="#step-console" aria-label="Demo console"><rect x="500" y="380" width="192" height="96" rx="8" class="n im"/>
+  <text x="514" y="402" class="nt">Demo console</text>
+  <text x="514" y="422" class="nl">Pick a seller, see the persona</text>
+  <text x="514" y="438" class="nl">and talk to VANI in a browser</text>
+  <text x="514" y="466" class="nw im">On demand</text></a>
+
+  <rect x="284" y="560" width="408" height="118" rx="8" class="strip im"/>
+  <text x="298" y="582" class="nt">Runs as</text>
+  <text x="298" y="602" class="nl">One container (FastAPI) · AWS App Runner or Cloud Run, Mumbai</text>
+  <text x="298" y="619" class="nl">Scheduler: nightly personas, weekly evidence</text>
+  <text x="298" y="636" class="nl">Postgres for results · Sarvam keys in a secret manager</text>
+  <text x="298" y="653" class="nl">HTTPS for Sarvam webhooks · console behind company login</text>
+
+  <!-- Zone C -->
+  <a href="#step-5" aria-label="Step 5, call starts"><rect x="748" y="80" width="368" height="62" rx="8" class="n sv"/>
+  <g class="badge"><circle cx="764" cy="98" r="11" class="b-sv"/><text x="764" y="102">5</text></g>
+  <text x="782" y="102" class="nt">Call starts</text>
+  <text x="762" y="126" class="nl">Campaign (needs telephony) · test call · browser session</text></a>
+
+  <a href="#step-6" aria-label="Step 6, VANI speaks"><rect x="748" y="160" width="368" height="150" rx="8" class="n sv"/>
+  <g class="badge"><circle cx="764" cy="178" r="11" class="b-sv"/><text x="764" y="182">6</text></g>
+  <text x="782" y="182" class="nt">VANI speaks in the seller's persona</text>
+  <rect x="762" y="200" width="100" height="40" rx="6" class="sub"/><text x="812" y="224" class="subt">Saaras STT</text>
+  <rect x="876" y="200" width="132" height="40" rx="6" class="sub"/><text x="942" y="217" class="subt">LLM + prompt</text><text x="942" y="231" class="subt">+ seller variables</text>
+  <rect x="1022" y="200" width="80" height="40" rx="6" class="sub"/><text x="1062" y="217" class="subt">Bulbul v4</text><text x="1062" y="231" class="subt">voice</text>
+  <path d="M862 220 H872" class="ar" marker-end="url(#ah)"/><path d="M1008 220 H1018" class="ar" marker-end="url(#ah)"/>
+  <text x="762" y="264" class="nl">6 agents: Warm, Friendly, Clear, Formal Hinglish,</text>
+  <text x="762" y="280" class="nl">English-led, English Formal · one shared prompt</text>
+  <text x="762" y="300" class="nw sv">Every turn</text></a>
+
+  <a href="#step-7" aria-label="Step 7, detect and switch"><rect x="748" y="330" width="178" height="110" rx="8" class="n sv"/>
+  <g class="badge"><circle cx="764" cy="348" r="11" class="b-sv"/><text x="764" y="352">7</text></g>
+  <text x="782" y="352" class="nt">Detect and switch</text>
+  <text x="762" y="372" class="nl">Python tool on Sarvam</text>
+  <text x="762" y="388" class="nl">LLM guess + lexicon</text>
+  <text x="762" y="404" class="nl">Priority · 2-turn cooldown</text>
+  <text x="762" y="430" class="nw sv">Signal turns · 3–18 ms</text></a>
+
+  <a href="#step-8" aria-label="Step 8, switch language"><rect x="938" y="330" width="178" height="110" rx="8" class="n sv"/>
+  <g class="badge"><circle cx="954" cy="348" r="11" class="b-sv"/><text x="954" y="352">8</text></g>
+  <text x="972" y="352" class="nt">Switch language</text>
+  <text x="952" y="372" class="nl">Seller's language detected</text>
+  <text x="952" y="388" class="nl">Regional voice: Gujarati,</text>
+  <text x="952" y="404" class="nl">Tamil, Bengali and more</text>
+  <text x="952" y="430" class="nw sv">Any turn</text></a>
+
+  <a href="#step-9" aria-label="Step 9, record the result"><rect x="748" y="460" width="178" height="96" rx="8" class="n sv"/>
+  <g class="badge"><circle cx="764" cy="478" r="11" class="b-sv"/><text x="764" y="482">9</text></g>
+  <text x="782" y="482" class="nt">Record the result</text>
+  <text x="762" y="502" class="nl">Outcome, slot, signals,</text>
+  <text x="762" y="518" class="nl">live switch log</text>
+  <text x="762" y="546" class="nw sv">End of call</text></a>
+
+  <a href="#step-10" aria-label="Step 10, board"><rect x="938" y="460" width="178" height="96" rx="8" class="n sv"/>
+  <g class="badge"><circle cx="954" cy="478" r="11" class="b-sv"/><text x="954" y="482">10</text></g>
+  <text x="972" y="482" class="nt">Board</text>
+  <text x="952" y="502" class="nl">VANI · Persona Performance</text>
+  <text x="952" y="518" class="nl">Outcomes by persona agent</text>
+  <text x="952" y="546" class="nw sv">Live</text></a>
+
+  <rect x="748" y="580" width="368" height="98" rx="8" class="strip sv"/>
+  <text x="762" y="602" class="nt">Runs as</text>
+  <text x="762" y="622" class="nl">Hosted by Sarvam · workspace VANI · 6 committed agents</text>
+  <text x="762" y="639" class="nl">Switch tool runs in Sarvam's sandbox, calls nothing outside</text>
+  <text x="762" y="656" class="nl">Needs: a telephony number for campaigns</text>
+
+  <!-- Zone D -->
+  <rect x="1166" y="160" width="88" height="150" rx="8" class="n pp"/>
+  <text x="1210" y="186" class="nt" text-anchor="middle">Seller</text>
+  <text x="1210" y="206" class="nl" text-anchor="middle">on the phone</text>
+  <text x="1210" y="236" class="nl" text-anchor="middle">Hindi,</text>
+  <text x="1210" y="252" class="nl" text-anchor="middle">English,</text>
+  <text x="1210" y="268" class="nl" text-anchor="middle">Gujarati…</text>
+
+  <rect x="1166" y="460" width="88" height="110" rx="8" class="n pp"/>
+  <text x="1210" y="486" class="nt" text-anchor="middle">Sales team</text>
+  <text x="1210" y="508" class="nl" text-anchor="middle">reads board,</text>
+  <text x="1210" y="524" class="nl" text-anchor="middle">reviews calls,</text>
+  <text x="1210" y="540" class="nl" text-anchor="middle">meets seller</text>
+</svg>
+</div>
+<p class="hint">On a phone, scroll the map sideways. The table below has the same steps in full.</p>
+
+<section>
+  <div class="eyebrow">Step by step</div>
+  <h2>Twelve steps, two places to run them</h2>
+  <div class="tablecard">
+  <table>
+    <thead><tr><th>#</th><th>Step</th><th>What it does</th><th>Runs where</th><th>When</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr id="step-1"><td class="num">1</td><td><b>Mine evidence</b></td><td>Compares meeting-fix rates for each choice VANI can make (opening, pace, attempt number, reply after a signal) with 95% confidence and a strength tag. Writes 145 evidence records.</td><td><span class="zonetag im"></span><span class="where">Persona Service</span></td><td>Weekly</td><td><span class="chip build">Needs hosting</span></td></tr>
+      <tr id="step-2"><td class="num">2</td><td><b>Tune signal detector</b></td><td>Checks the Hinglish keyword list against 2,986 audited seller turns and sets how keywords and the LLM combine for each signal (frustration F1 0.77, rush 0.67).</td><td><span class="zonetag im"></span><span class="where">Persona Service</span></td><td>Weekly, with step 1</td><td><span class="chip build">Needs hosting</span></td></tr>
+      <tr id="step-3"><td class="num">3</td><td><b>Generate personas</b></td><td>Applies 23 evidence rules and the manual overrides to every seller: voice, pace, language mix, tone, opening, objection order, switch sensitivity. Each setting carries a reason, an evidence id and a confidence.</td><td><span class="zonetag im"></span><span class="where">Persona Service</span></td><td>Nightly, about 3 min for 149,363 sellers</td><td><span class="chip build">Needs hosting</span></td></tr>
+      <tr id="step-4"><td class="num">4</td><td><b>Route and push</b></td><td>Picks one of six Sarvam agents and fills 17 variables. Uploads the day's sellers to that agent's campaign (1,000 per request) or answers Sarvam's on-start hook. Do-not-call sellers are never sent.</td><td><span class="zonetag im"></span><span class="where">Persona Service → Sarvam API</span></td><td>Before each campaign</td><td><span class="chip build">Needs hosting</span></td></tr>
+      <tr id="step-5"><td class="num">5</td><td><b>Call starts</b></td><td>Sarvam dials from a campaign, places a test call to a verified number, or opens a browser session from the console.</td><td><span class="zonetag sv"></span><span class="where">Sarvam</span></td><td>Per call</td><td><span class="chip live">Live</span> <span class="chip setup">Campaigns need telephony</span></td></tr>
+      <tr id="step-6"><td class="num">6</td><td><b>VANI speaks</b></td><td>Saaras turns the seller's speech into text, the LLM replies from the shared prompt plus this seller's variables, and Bulbul v4 speaks it in the agent's voice.</td><td><span class="zonetag sv"></span><span class="where">Sarvam</span></td><td>Every turn</td><td><span class="chip live">Live</span></td></tr>
+      <tr id="step-7"><td class="num">7</td><td><b>Detect and switch</b></td><td>On a turn that looks like a change, the agent calls the Python tool <code>update_persona_mode</code>. It combines the LLM's guess with the lexicon from step 2, applies the priority order and a two-turn cooldown, returns the mode for the next reply, and adds the switch to the log. It reads the seller's words, not the audio.</td><td><span class="zonetag sv"></span><span class="where">Sarvam sandbox</span></td><td>Signal turns, 3–18 ms</td><td><span class="chip live">Live</span></td></tr>
+      <tr id="step-8"><td class="num">8</td><td><b>Switch language</b></td><td>Sarvam detects the language the seller speaks and moves to it, with a native voice for that language.</td><td><span class="zonetag sv"></span><span class="where">Sarvam</span></td><td>Any turn</td><td><span class="chip live">Live</span></td></tr>
+      <tr id="step-9"><td class="num">9</td><td><b>Record the result</b></td><td>After hang-up, Sarvam extracts the outcome, meeting slot, signals and switch summary. The tool's <code>live_switch_log</code> is attached to the call.</td><td><span class="zonetag sv"></span><span class="where">Sarvam</span></td><td>End of call</td><td><span class="chip live">Live</span></td></tr>
+      <tr id="step-10"><td class="num">10</td><td><b>Board</b></td><td>VANI · Persona Performance shows connected calls, outcome by persona agent, calls with switches and recent calls.</td><td><span class="zonetag sv"></span><span class="where">Sarvam</span></td><td>Always on</td><td><span class="chip live">Live</span></td></tr>
+      <tr id="step-11"><td class="num">11</td><td><b>Store results</b></td><td>Sarvam posts every call to the service's webhook. Results go to the database, and calls with problems go to a review queue.</td><td><span class="zonetag im"></span><span class="where">Persona Service</span></td><td>After every call</td><td><span class="chip build">Needs a public HTTPS address</span></td></tr>
+      <tr id="step-12"><td class="num">12</td><td><b>Manual feed</b></td><td>Your team logs gaps, transcripts and recordings. They outrank automatic evidence in the next night's personas and switch thresholds.</td><td><span class="zonetag data"></span><span class="where">IndiaMART files → Persona Service</span></td><td>Any time</td><td><span class="chip build">Built</span></td></tr>
+      <tr id="step-console"><td class="num">–</td><td><b>Demo console</b></td><td>Pick any seller, see their persona with reasons and evidence, and talk to the routed agent in the browser. The Sarvam key stays on the server.</td><td><span class="zonetag im"></span><span class="where">Persona Service</span></td><td>On demand</td><td><span class="chip build">Needs hosting</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">One call in motion · Warm Hinglish, seller in Noida, 6th attempt</div>
+  <h2>Steps 6 to 9 inside a single call</h2>
+  <div class="call">
+    <div class="turn"><span class="k">Turn 1</span><span class="said">"haan ji, boliye"</span><span class="tool">Step 6 · persona opening</span><span class="reply">Short, acknowledges the earlier calls, offers two slots for tomorrow.</span></div>
+    <div class="turn"><span class="k">Turn 2</span><span class="said">"kya bola? samjha nahi"</span><span class="tool">Step 7 · confusion (LLM + keywords)</span><span class="reply">Apologises, explains in simpler words, checks understanding.</span></div>
+    <div class="turn"><span class="k">Turn 3</span><span class="said">"busy hoon, jaldi bolo"</span><span class="tool">Step 7 · rush (LLM + keywords)</span><span class="reply">One line: tomorrow 10 am or 6 pm?</span></div>
+    <div class="turn"><span class="k">Turn 4</span><span class="said">"shaam chhe baje, dukaan pe"</span><span class="tool">Seller gave a time</span><span class="reply">Accepts at once and confirms day, time and place.</span></div>
+    <div class="turn"><span class="k">Close</span><span class="said">"haan sahi hai"</span><span class="tool">Step 9 · meeting fixed, log saved</span><span class="reply">Repeats the slot, says the executive calls first, thanks once.</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Deployment</div>
+  <h2>Nothing needs to run on a laptop</h2>
+  <div class="deploy">
+    <div class="dc sv"><div class="top"><h3>Sarvam cloud</h3><span class="chip live">Live now</span></div>
+      <ul><li>Six VANI agents, committed and versioned</li><li>Python switch tool in Sarvam's sandbox</li><li>Regional voices, call logs, recordings</li><li>Board: VANI · Persona Performance</li><li>Nothing for IndiaMART to host</li></ul></div>
+    <div class="dc im"><div class="top"><h3>IndiaMART cloud</h3><span class="chip build">To deploy</span></div>
+      <ul><li>Persona Service container (Docker image is ready)</li><li>Scheduler for the nightly and weekly jobs</li><li>Postgres for results, object storage for data and personas</li><li>Sarvam keys in a secret manager</li><li>HTTPS address for webhooks and the on-start hook; allow Sarvam's IP 4.213.167.70</li><li>Console behind company login</li></ul>
+      <p class="note">Suggested: AWS Mumbai (App Runner or ECS) or GCP Mumbai (Cloud Run), whichever IndiaMART already uses.</p></div>
+    <div class="dc setup"><div class="top"><h3>Still to connect</h3><span class="chip setup">Needs setup</span></div>
+      <ul><li>A telephony number on Sarvam (Exotel, Plivo, Twilio or one rented from Sarvam) so campaigns can dial</li><li>Confirm the plan price: ₹30,200 + GST a year</li></ul>
+      <p class="note">Until the service is deployed, steps 1 to 4 and 11 run on a developer machine for testing only.</p></div>
+  </div>
+  <p class="note">Seller data stays in IndiaMART's cloud and Sarvam. The switch tool reads only the call's own variables and calls nothing outside Sarvam.</p>
+</section>
+
+</div>

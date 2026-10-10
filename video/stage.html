@@ -1,0 +1,202 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pirata+One&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+html,body{margin:0;background:#0B1E2D;overflow:hidden}
+svg{display:block}
+</style></head>
+<body>
+<svg id="s" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"></svg>
+<script>
+// Deterministic stage: window.renderAt(t) draws the frame for time t (seconds). Scene timing comes from window.TIMELINE.
+const C = {night:"#0B1E2D", sea:"#123A55", sea2:"#0E2C42", foam:"#5E8FB0", parch:"#EBDDBA", parch2:"#D9C59A", ink:"#2A1C10",
+  gold:"#E0AE4A", straw:"#E7BE62", red:"#B8352B", teal:"#3FA58A", sky:"#F2C58A", white:"#F7F1E3", dim:"#8FA8BA"};
+const F = {title:"'Pirata One', Georgia, serif", body:"'IBM Plex Sans', Arial, sans-serif", mono:"'IBM Plex Mono', monospace"};
+const clamp = (x,a=0,b=1) => Math.max(a, Math.min(b, x));
+const ease = x => 1 - Math.pow(1 - clamp(x), 3);
+const ap = (t, a, d=0.6) => ease((t - a) / d);
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+function T(x, y, s, size, o={}){ return `<text x="${x}" y="${y}" font-family="${o.f||F.body}" font-size="${size}" font-weight="${o.w||400}" fill="${o.c||C.white}" text-anchor="${o.a||"start"}" opacity="${o.o??1}" ${o.ls?`letter-spacing="${o.ls}"`:""}>${esc(s)}</text>`; }
+function parch(x, y, w, h, o=1){ return `<g opacity="${o}"><rect x="${x+8}" y="${y+10}" width="${w}" height="${h}" rx="18" fill="#000" opacity=".28"/>
+  <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="18" fill="${C.parch}"/><rect x="${x+10}" y="${y+10}" width="${w-20}" height="${h-20}" rx="12" fill="none" stroke="${C.parch2}" stroke-width="3" stroke-dasharray="2 8"/></g>`; }
+
+function sea(t, horizon=780, tint=C.sea){
+  let s = `<rect x="0" y="0" width="1920" height="${horizon}" fill="url(#sky)"/>`;
+  s += `<rect x="0" y="${horizon}" width="1920" height="${1080-horizon}" fill="${tint}"/>`;
+  for(let k=0;k<5;k++){ const y = horizon + 30 + k*60, a = 6 + k*3, sp = 0.8 + k*0.25; let d = `M0 ${y}`;
+    for(let x=0;x<=1920;x+=40) d += ` L${x} ${y + Math.sin(x/120 + t*sp + k)*a}`;
+    s += `<path d="${d}" fill="none" stroke="${C.foam}" stroke-width="${2+k*0.6}" opacity="${0.25+k*0.08}"/>`; }
+  return s;
+}
+function stars(t){ let s=""; for(let i=0;i<70;i++){ const x=(i*277)%1920, y=(i*131)%520, tw=0.4+0.6*Math.abs(Math.sin(t*1.3+i)); s+=`<circle cx="${x}" cy="${y}" r="${1+(i%3)*0.6}" fill="#fff" opacity="${tw*0.7}"/>`;} return s; }
+function strawHat(cx, cy, r){ return `<g><ellipse cx="${cx}" cy="${cy+r*0.25}" rx="${r*1.25}" ry="${r*0.32}" fill="${C.straw}" stroke="${C.ink}" stroke-width="3"/>
+  <path d="M${cx-r*0.7} ${cy+r*0.2} Q${cx-r*0.72} ${cy-r*0.75} ${cx} ${cy-r*0.78} Q${cx+r*0.72} ${cy-r*0.75} ${cx+r*0.7} ${cy+r*0.2} Z" fill="${C.straw}" stroke="${C.ink}" stroke-width="3"/>
+  <path d="M${cx-r*0.7} ${cy+r*0.02} Q${cx} ${cy+r*0.16} ${cx+r*0.7} ${cy+r*0.02} L${cx+r*0.7} ${cy+r*0.2} Q${cx} ${cy+r*0.34} ${cx-r*0.7} ${cy+r*0.2} Z" fill="${C.red}"/></g>`; }
+function ship(x, y, k, t){ const bob = Math.sin(t*1.6)*6, rock = Math.sin(t*1.1)*2;
+  return `<g transform="translate(${x} ${y+bob}) rotate(${rock}) scale(${k})">
+    <rect x="-6" y="-330" width="12" height="330" fill="#5A3A22"/>
+    <path d="M-150 -300 Q0 -320 150 -300 L140 -90 Q0 -70 -140 -90 Z" fill="${C.white}" stroke="${C.ink}" stroke-width="4"/>
+    ${strawHat(0, -200, 70)}
+    <path d="M6 -330 L80 -310 L6 -292 Z" fill="${C.red}"/>
+    <path d="M-230 -40 L230 -40 L190 40 Q0 70 -190 40 Z" fill="#7A4B2A" stroke="${C.ink}" stroke-width="4"/>
+    <path d="M-215 -10 L215 -10" stroke="${C.gold}" stroke-width="5"/>
+    ${[ -150,-90,-30,30,90,150 ].map(cx => `<circle cx="${cx}" cy="15" r="9" fill="${C.ink}"/>`).join("")}
+  </g>`; }
+function chip(x, y, label, color, o=1){ const w = label.length*15 + 36; return `<g opacity="${o}"><rect x="${x}" y="${y}" width="${w}" height="44" rx="22" fill="${color}"/>${T(x+w/2, y+30, label, 22, {a:"middle", w:700, c:"#fff", ls:1.5})}</g>`; }
+function bubble(x, y, w, text, who, o, alt){ const lines = wrap(text, Math.floor(w/13)); const h = 30 + lines.length*34;
+  return `<g opacity="${o}" transform="translate(0 ${(1-o)*20})"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="22" fill="${alt?C.teal:C.parch}"/>
+    ${lines.map((l,i) => T(x+24, y+44+i*34, l, 26, {c: alt?"#fff":C.ink, f: F.body})).join("")}
+    ${T(alt?x+w-10:x+10, y-12, who, 20, {c:C.dim, a: alt?"end":"start", w:600, ls:1})}</g>`; }
+function wrap(s, n){ const out=[]; let cur=""; for(const w of s.split(" ")){ if((cur+" "+w).trim().length>n){ out.push(cur.trim()); cur=w } else cur+=" "+w } if(cur.trim()) out.push(cur.trim()); return out; }
+function counter(t, a, d, to){ return Math.round(to * ease((t-a)/d)); }
+const IN = n => n.toLocaleString("en-IN");
+function chapter(lt, label){ return T(80, 110, label, 30, {f:F.title, c:C.gold, o:ap(lt,0.2), ls:2}); }
+
+// ------------------------------------------------------------------ scenes (lt = seconds into scene, D = scene length)
+const SCENES = {
+open(lt, D){ const sx = -400 + 1360*ease(lt/6);
+  return sea(lt) + stars(lt) + `<circle cx="1520" cy="230" r="90" fill="#F3E3B5" opacity=".9"/>` + ship(sx, 930, 0.8, lt)
+    + T(960, 330, "VANI", 230, {f:F.title, a:"middle", c:C.gold, o:ap(lt,1.2,1.2)})
+    + T(960, 420, "The Persona Voyage", 58, {f:F.title, a:"middle", c:C.white, o:ap(lt,2.2,1)})
+    + T(960, 480, "IndiaMART Voice AI Hackathon 2.0  ·  Persona Design  ·  built on Sarvam", 26, {a:"middle", c:C.dim, o:ap(lt,3,1), ls:1}); },
+
+problem(lt, D){ const isl = [260, 620, 980, 1340, 1700];
+  let s = sea(lt, 700, C.sea2) + stars(lt) + chapter(lt, "The problem");
+  isl.forEach((x,i) => { const o = ap(lt, 0.4+i*0.35);
+    s += `<g opacity="${o}"><ellipse cx="${x}" cy="720" rx="120" ry="34" fill="#C9A66B"/><path d="M${x-30} 712 L${x-24} 640 L${x-10} 712 Z" fill="#3E6B4A"/><rect x="${x-60}" y="650" width="70" height="50" fill="#8A5A36"/></g>`;
+    s += `<g opacity="${ap(lt, 2+i*0.4)}"><rect x="${x-150}" y="470" width="300" height="110" rx="20" fill="#9AA7B2"/>${T(x, 515, "Namaste, main IndiaMART", 22, {a:"middle", c:"#233"})}${T(x, 548, "se bol rahi hoon…", 22, {a:"middle", c:"#233"})}</g>`; });
+  s += T(960, 250, "Same voice. Same pitch. Same script.", 64, {f:F.title, a:"middle", o:ap(lt,1)});
+  s += T(960, 330, "for 1,49,363 different sellers", 32, {a:"middle", c:C.dim, o:ap(lt,1.6)});
+  s += `<g opacity="${ap(lt,8)}">${T(960, 930, "11.5%", 110, {f:F.title, a:"middle", c:C.gold})}${T(960, 990, "of answered calls fixed a meeting", 30, {a:"middle", c:C.white})}</g>`;
+  return s; },
+
+idea(lt, D){ const crew = [["Warm","Hinglish",C.straw],["Friendly","Hinglish","#E08A5B"],["Clear","Hinglish","#7FB7A4"],["Formal","Hinglish","#8E9BD6"],["English","led","#D79BC2"],["English","Formal","#B9C27A"]];
+  let s = sea(lt, 760) + stars(lt) + chapter(lt, "The idea") + ship(1600, 860, 0.55, lt);
+  s += T(960, 230, "Give VANI a crew", 84, {f:F.title, a:"middle", c:C.gold, o:ap(lt,0.3)});
+  crew.forEach(([a,b,col],i) => { const x = 330 + i*252, o = ap(lt, 1.6+i*0.35);
+    s += `<g opacity="${o}" transform="translate(0 ${(1-o)*30})"><circle cx="${x}" cy="440" r="86" fill="${col}" stroke="${C.parch}" stroke-width="6"/>${strawHat(x, 420, 44)}
+      ${T(x, 575, a, 30, {a:"middle", w:700})}${T(x, 610, b, 24, {a:"middle", c:C.dim})}</g>`; });
+  s += `<g opacity="${ap(lt,6)}">${T(960, 700, "A persona for every seller, built from their own data", 34, {a:"middle"})}</g>`;
+  s += `<g opacity="${ap(lt,8.6)}">${T(960, 750, "and a change of course the moment the seller changes", 34, {a:"middle", c:C.straw})}</g>`;
+  return s; },
+
+demos(lt, D){ const items = [["1","Warm Hinglish · Noida retailer, 6th call","rush → frustration → meeting fixed: Saturday 5 pm"],
+    ["2","Formal Hinglish · Morbi wholesaler","switches to Gujarati → meeting fixed: Thursday 10 am"],["3","English-led · Chennai seller","confusion → interest → online meeting: Monday 6 pm"]];
+  let s = sea(lt, 760) + stars(lt) + parch(310, 150, 1300, 740);
+  s += T(960, 270, "Call demos", 78, {f:F.title, a:"middle", c:C.ink});
+  s += T(960, 320, "Real calls on Sarvam  ·  insert the recordings here", 28, {a:"middle", c:"#6B5435"});
+  items.forEach(([n,a,b],i) => { const y = 420 + i*150, o = ap(lt, 0.5+i*0.5);
+    s += `<g opacity="${o}"><circle cx="440" cy="${y+20}" r="40" fill="${C.red}"/>${T(440, y+34, n, 40, {f:F.title, a:"middle"})}
+      ${T(510, y+12, a, 34, {c:C.ink, w:700})}${T(510, y+56, b, 28, {c:"#6B5435"})}</g>`; });
+  return s; },
+
+how(lt, D){ return sea(lt) + stars(lt) + ship(960 + lt*40, 820, 0.8, lt) + T(960, 380, "How the voyage works", 96, {f:F.title, a:"middle", c:C.gold, o:ap(lt,0.1,0.8)}); },
+
+map(lt, D){ const pts = [[420,560,"Seller profiles",149363],[960,430,"Past VANI calls",269455],[1500,600,"Audited conversations",278000]];
+  let s = `<rect width="1920" height="1080" fill="${C.night}"/>` + parch(140, 150, 1640, 820) + chapter(lt, "Step 1 · The map");
+  s += `<path d="M420 560 Q690 380 960 430 T1500 600" fill="none" stroke="${C.red}" stroke-width="6" stroke-dasharray="18 14" stroke-dashoffset="${-lt*40}" opacity="${ap(lt,1.2)}"/>`;
+  pts.forEach(([x,y,label,n],i) => { const o = ap(lt, 0.6+i*1.6);
+    s += `<g opacity="${o}"><circle cx="${x}" cy="${y}" r="70" fill="${C.parch2}" stroke="${C.ink}" stroke-width="4"/>
+      ${T(x, y+18, ["👤","📞","🔎"][i], 52, {a:"middle"})}
+      ${T(x, y+140, IN(counter(lt, 0.6+i*1.6, 2, n)) + (i===2?"+":""), 64, {f:F.title, a:"middle", c:C.ink})}
+      ${T(x, y+185, label, 30, {a:"middle", c:"#6B5435", w:600})}</g>`; });
+  s += `<g opacity="${ap(lt,7.5)}">${T(1560, 330, "X", 120, {f:F.title, a:"middle", c:C.red})}${T(1560, 380, "meetings", 26, {a:"middle", c:C.red, w:700})}</g>`;
+  return s; },
+
+evidence(lt, D){ const rows = [["First call","4th+ call",16.3,4.3,"strong · all sellers"],["Slower pitch","Faster pitch",32.1,21.6,"strong · small sellers"],["Offer a slot after interest","No slot",61.0,27.2,"moderate"]];
+  let s = `<rect width="1920" height="1080" fill="${C.night}"/>` + chapter(lt, "Step 2 · What past calls prove");
+  s += T(960, 210, "Meeting-fix rate, A vs B", 54, {f:F.title, a:"middle", c:C.gold, o:ap(lt,0.3)});
+  rows.forEach(([a,b,ra,rb,tag],i) => { const y = 320 + i*200, o = ap(lt, 1+i*2.3), g = ease((lt-1-i*2.3)/1.2);
+    s += `<g opacity="${o}">${T(260, y, a, 32, {w:700})}${T(260, y+70, b, 28, {c:C.dim})}
+      <rect x="640" y="${y-30}" width="${ra*12*g}" height="40" rx="8" fill="${C.straw}"/>${T(660+ra*12*g, y, ra+"%", 32, {w:700, c:C.straw})}
+      <rect x="640" y="${y+40}" width="${rb*12*g}" height="40" rx="8" fill="${C.dim}"/>${T(660+rb*12*g, y+70, rb+"%", 28, {c:C.dim})}
+      ${chip(1500, y-4, tag.toUpperCase(), tag.startsWith("strong")?C.teal:"#8A6A2F")}</g>`; });
+  s += `<g opacity="${ap(lt,9.5)}">${T(960, 990, "145 findings, each with its sample size, 95% confidence and a strength tag", 30, {a:"middle", c:C.white})}</g>`;
+  return s; },
+
+persona(lt, D){ const f = [["Voice","Aditya · male · measured","formal B2B buyer"],["Pace","1.0×","slowing down gave no lift for large sellers"],["Language","Hindi · 10% English","his own calls were all Hindi"],
+    ["Register","aap + sir, formal","1.5 Cr+ sellers convert worse on the casual pitch"],["Opening","Morbi buyer demand","name the seller's own demand"],["Turn length","≤ 30 words","senior owner: crisp, value first"]];
+  let s = `<rect width="1920" height="1080" fill="${C.night}"/>` + chapter(lt, "Step 3 · A persona for every seller");
+  s += parch(170, 160, 1580, 760, ap(lt,0.2));
+  s += `<g opacity="${ap(lt,0.6)}">${T(240, 260, "SELLER 98255184 · MORBI · WHOLESALER · 1.5–5 CR", 24, {c:"#6B5435", w:600, ls:2})}${T(240, 330, "Steady, formal Hindi · large wholesaler", 56, {f:F.title, c:C.ink})}</g>`;
+  f.forEach(([k,v,why],i) => { const x = 240 + (i%3)*500, y = 400 + Math.floor(i/3)*230, o = ap(lt, 1.6+i*0.9);
+    s += `<g opacity="${o}"><rect x="${x}" y="${y}" width="460" height="200" rx="16" fill="${C.parch2}"/>
+      ${T(x+24, y+44, k.toUpperCase(), 20, {c:"#6B5435", w:700, ls:2})}${T(x+24, y+92, v, 32, {c:C.ink, w:700})}
+      ${wrap("why: "+why, 34).map((l,j) => T(x+24, y+136+j*30, l, 22, {c:"#6B5435"})).join("")}</g>`; });
+  s += `<g opacity="${ap(lt,9.5)}">${chip(1310, 190, IN(counter(lt,9.5,1.5,9002)) + " DISTINCT PERSONAS", C.red)}</g>`;
+  return s; },
+
+crew(lt, D){ const r = [["Friendly Hinglish",50403],["Warm Hinglish",35063],["Clear Hinglish",34517],["Formal Hinglish",21745],["English-led",5319],["English Formal",1138],["Do not call",1178]];
+  let s = sea(lt, 1000) + chapter(lt, "Step 4 · Six agents on Sarvam");
+  r.forEach(([n,v],i) => { const y = 230 + i*100, g = ease((lt-0.6-i*0.3)/1); const dnc = n==="Do not call";
+    s += `<g opacity="${ap(lt,0.6+i*0.3)}">${T(560, y+34, n, 32, {a:"end", w:600, c: dnc?C.dim:C.white})}
+      <rect x="600" y="${y}" width="${v/50403*900*g}" height="46" rx="10" fill="${dnc?C.red:C.straw}"/>${T(620+v/50403*900*g, y+34, IN(v), 28, {c:C.dim})}</g>`; });
+  s += `<g opacity="${ap(lt,4)}">${chip(600, 950, "+ 17 PERSONAL DETAILS INTO EVERY CALL", C.teal)}</g>`;
+  return s; },
+
+switch(lt, D){ const turns = [[0.8,"abhi bahut busy hoon, jaldi boliye","RUSH",C.straw,"One line: tomorrow 10 am or 6 pm?"],
+    [5.2,"aap log baar baar call karte ho, pareshan kar diya","FRUSTRATION",C.red,"Sorry for the trouble. When should I call?"],
+    [9.6,"theek hai, Saturday shaam paanch baje aa jaiye","INTEREST",C.teal,"Saturday 5 pm at your shop. Confirmed?"]];
+  let s = `<rect width="1920" height="1080" fill="${C.night}"/>` + chapter(lt, "On the call · live switch");
+  turns.forEach(([a,said,sig,col,reply],i) => { const y = 200 + i*230;
+    s += bubble(120, y, 640, said, "SELLER", ap(lt,a), false);
+    s += `<g opacity="${ap(lt,a+1.2)}"><path d="M790 ${y+50} L880 ${y+50}" stroke="${col}" stroke-width="5"/>${chip(890, y+28, sig, col)}<path d="M${890+sig.length*15+40} ${y+50} L${1130} ${y+50}" stroke="${col}" stroke-width="5"/></g>`;
+    s += bubble(1140, y, 660, reply, "VANI · NEXT TURN", ap(lt,a+2.2), true); });
+  s += `<g opacity="${ap(lt,13.5)}"><rect x="120" y="920" width="1680" height="110" rx="16" fill="#08141E" stroke="${C.dim}" stroke-width="2"/>
+    ${T(150, 965, "switch log", 22, {f:F.mono, c:C.dim})}
+    ${T(150, 1005, "turn 2 rush (llm+keywords) → turn 3 frustration (llm+keywords) → turn 4 interest   ·   update_persona_mode on Sarvam", 24, {f:F.mono, c:C.straw})}</g>`;
+  return s; },
+
+loop(lt, D){ const nodes = [["The call","on Sarvam",960,250],["Result","outcome, slot, switches",1420,540],["Review queue","calls a person should hear",960,830],["Corrections","your team's fixes win",500,540]];
+  let s = sea(lt, 1080, C.sea2) + chapter(lt, "Back to port · the learning loop");
+  const a = (lt*0.9) % (Math.PI*2);
+  s += `<circle cx="960" cy="540" r="300" fill="none" stroke="${C.dim}" stroke-width="3" stroke-dasharray="10 12" opacity="${ap(lt,0.3)}"/>`;
+  s += `<g transform="translate(${960+300*Math.cos(a-Math.PI/2)} ${540+300*Math.sin(a-Math.PI/2)})" opacity="${ap(lt,0.5)}">${strawHat(0,0,26)}</g>`;
+  nodes.forEach(([n,d,x,y],i) => { const o = ap(lt, 0.6+i*1.2);
+    s += `<g opacity="${o}"><rect x="${x-180}" y="${y-60}" width="360" height="120" rx="20" fill="${C.parch}"/>${T(x, y-6, n, 38, {f:F.title, a:"middle", c:C.ink})}${T(x, y+34, d, 22, {a:"middle", c:"#6B5435"})}</g>`; });
+  s += `<g opacity="${ap(lt,5.5)}">${T(960, 555, "tomorrow's personas", 34, {f:F.title, a:"middle", c:C.gold})}</g>`;
+  return s; },
+
+results(lt, D){ const b = [["Frustration",72],["Rush",65],["Confusion",34],["Interest",30]];
+  let s = `<rect width="1920" height="1080" fill="${C.night}"/>` + chapter(lt, "Does it switch at the right moment?");
+  s += T(960, 220, "Switch on the right turn", 64, {f:F.title, a:"middle", c:C.gold, o:ap(lt,0.2)});
+  s += T(960, 275, "the live tool replayed on 290 audited calls", 28, {a:"middle", c:C.dim, o:ap(lt,0.6)});
+  b.forEach(([n,v],i) => { const y = 380 + i*130, g = ease((lt-1-i*0.6)/1.4);
+    s += `<g opacity="${ap(lt,1+i*0.6)}">${T(620, y+44, n, 38, {a:"end", w:600})}<rect x="660" y="${y}" width="900" height="60" rx="12" fill="#152B3B"/>
+      <rect x="660" y="${y}" width="${9*v*g}" height="60" rx="12" fill="${i<2?C.straw:C.dim}"/>${T(680+9*v*g, y+44, Math.round(v*g)+"%", 38, {w:700, c:i<2?C.straw:C.dim})}</g>`; });
+  s += `<g opacity="${ap(lt,7)}">${chip(820, 930, "ZERO FLIP-FLOPPING", C.teal)}</g>`;
+  return s; },
+
+thumb(lt, D){ const t = 2.2;
+  let s = sea(t, 700) + stars(t) + `<circle cx="1640" cy="190" r="110" fill="#F3E3B5"/>`;
+  s += `<g transform="translate(1390 900) scale(1.55) rotate(-4)">${ship(0, 0, 1, t)}</g>`;
+  s += `<rect x="0" y="0" width="1100" height="1080" fill="url(#fadeL)"/>`;
+  s += T(88, 140, "VANI", 92, {f:F.title, c:C.red}) + T(300, 130, "INDIAMART  ·  VOICE AI HACKATHON 2.0", 30, {w:700, c:C.straw, ls:3});
+  s += T(80, 410, "1 BOT,", 250, {f:F.title, c:C.white});
+  s += T(80, 650, "9,002", 250, {f:F.title, c:C.gold});
+  s += T(90, 760, "PERSONAS", 120, {f:F.title, c:C.gold, ls:6});
+  s += chip(92, 830, "RUSH", C.straw) + T(230, 863, "→", 40, {w:700, c:C.white}) + chip(282, 830, "FRUSTRATION", C.red) + T(532, 863, "→", 40, {w:700, c:C.white}) + chip(584, 830, "MEETING FIXED", C.teal);
+  s += `<rect x="92" y="930" width="560" height="78" rx="39" fill="#08141E" stroke="${C.gold}" stroke-width="3"/>` + T(372, 982, "live switch, built on Sarvam", 34, {a:"middle", w:600, c:C.white});
+  return s; },
+
+close(lt, D){ const sun = 600 - 80*ease(lt/D);
+  return `<defs></defs>` + `<rect width="1920" height="780" fill="url(#dawn)"/><circle cx="1380" cy="${sun+120}" r="130" fill="#F7D28A"/>` + sea(lt, 780, C.sea).replace(/<rect x="0" y="0"[^>]*\/>/, "")
+    + ship(960 - 200*ease(lt/D), 840, 0.6 - 0.15*ease(lt/D), lt)
+    + T(960, 240, "One seller, one persona.", 84, {f:F.title, a:"middle", c:C.night, o:ap(lt,0.3)})
+    + T(960, 320, "The right crew member for every call.", 44, {f:F.title, a:"middle", c:"#4A2F1A", o:ap(lt,1.5)})
+    + T(960, 1010, "VANI  ·  built on Sarvam  ·  IndiaMART Voice AI Hackathon 2.0", 28, {a:"middle", c:C.white, o:ap(lt,3)}); },
+};
+
+const DEFS = `<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#07131D"/><stop offset="1" stop-color="#1B4766"/></linearGradient>
+  <linearGradient id="fadeL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#07131D" stop-opacity=".92"/><stop offset=".75" stop-color="#07131D" stop-opacity=".55"/><stop offset="1" stop-color="#07131D" stop-opacity="0"/></linearGradient>
+  <linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C98E"/><stop offset=".7" stop-color="#E9906A"/><stop offset="1" stop-color="#B9604F"/></linearGradient></defs>`;
+
+window.renderScene = function(id, lt){ document.getElementById("s").innerHTML = DEFS + SCENES[id](lt, 10); };
+window.renderAt = function(t){
+  const tl = window.TIMELINE; let sc = tl[tl.length-1];
+  for(const x of tl){ if(t >= x.start && t < x.start + x.dur){ sc = x; break } }
+  const lt = t - sc.start, fade = Math.min(clamp(lt/0.45), clamp((sc.dur - lt)/0.45));
+  document.getElementById("s").innerHTML = DEFS + `<g opacity="${fade}">${SCENES[sc.id](lt, sc.dur)}</g>`;
+};
+</script>
+</body></html>

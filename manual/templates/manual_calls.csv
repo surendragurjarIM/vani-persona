@@ -1,0 +1,2 @@
+call_id,fk_glusr_usr_id,call_date,source,recording_url_or_file,transcript_file,outcome,reviewer,notes
+M-0001,127142815,2026-10-10,transcript,,manual/inbox/transcripts/M-0001.csv,Not Interested,qa_team,"Example row: seller was busy, VANI repeated pitch"
